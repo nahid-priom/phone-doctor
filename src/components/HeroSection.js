@@ -61,13 +61,13 @@ const HeroSection = () => {
           <div className="items-center gap-x-3 space-y-3 sm:flex sm:space-y-0">
             <a
               href="#"
-              className="block py-2 px-4 text-center text-white font-medium bg-[#92220f] duration-150 hover:bg-gray-900 active:bg-indigo-700 rounded-lg shadow-lg hover:shadow-none"
+              className="block py-2 px-4 text-center text-white font-medium bg-orange-500 duration-150 hover:bg-gray-900 active:bg-indigo-700 rounded-lg shadow-lg hover:shadow-none"
             >
               Our Services
             </a>
             <a
               href="contact.html"
-              className="flex items-center justify-center gap-x-2 py-2 px-4 bg-white text-black hover:text-gray-500 font-medium duration-150 active:bg-gray-100 border rounded-lg md:inline-flex"
+              className="flex items-center justify-center gap-x-2 py-2 px-4 bg-white  text-black hover:text-white hover:bg-orange-500 font-medium duration-150 active:bg-gray-100 border rounded-lg md:inline-flex"
             >
               Contact
               <svg
@@ -86,14 +86,14 @@ const HeroSection = () => {
           </div>
         </div>
 
-        {/* Visa Image */}
+    
         <div
           ref={imageRef}
-          className="flex-none md:mt-0 md:max-w-xl opacity-0 transform translate-x-20 transition-all duration-1000"
+          className="flex-none my-6 md:mt-0 md:max-w-xl opacity-0 transform translate-x-20 transition-all duration-1000"
         >
           <img
             src="https://miro.medium.com/v2/resize:fit:1400/1*F7sTt3Ee5gEdLyyhHdZZRg.jpeg"
-            className="rounded-2xl"
+            className="lg:rounded-2xl"
             alt="Visa Image"
           />
         </div>

@@ -38,7 +38,7 @@ const Navbar = () => {
             <span className="hidden md:block">Mon-Fri: 9:00 AM - 6:00 PM</span>
             <a href="tel:+1234567890" className="flex items-center space-x-2">
               <FontAwesomeIcon icon={faPhoneAlt} className="text-lg" />
-              <span>Call Now: +1 234 567 890</span>
+              <span className="text-base lg:text-xl font-bold">Call Now: +1 234 567 890</span>
             </a>
           </div>
         </div>

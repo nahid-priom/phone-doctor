@@ -1,6 +1,17 @@
 import React from 'react';
+import { motion, useAnimation } from 'framer-motion';
+import { useInView } from 'react-intersection-observer';
 
 const CategorySection = () => {
+  const controls = useAnimation();
+  const [ref, inView] = useInView({ triggerOnce: false, threshold: 0.2 });
+
+  React.useEffect(() => {
+    if (inView) {
+      controls.start('visible');
+    }
+  }, [controls, inView]);
+
   const categories = [
     {
       title: 'iPhone Repair',
@@ -25,22 +36,42 @@ const CategorySection = () => {
   ];
 
   return (
-    <section id="categorySection" className="py-16 bg-gray-50">
+    <section ref={ref} id="categorySection" className="py-16 bg-orange-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Title and Description */}
-        <div className="text-center mb-12">
+        <motion.div
+          initial="hidden"
+          animate={controls}
+          variants={{
+            hidden: { opacity: 0, y: -50 },
+            visible: { opacity: 1, y: 0 },
+          }}
+          transition={{ duration: 0.5 }}
+          className="text-center mb-12"
+        >
           <h2 className="text-4xl font-extrabold text-gray-900">
-          What we can fix for you
+            What we can fix for you
           </h2>
           <p className="mt-4 text-lg text-gray-600">
             We specialize in high-quality repairs for all major brands. Choose your device category below to learn more about our services.
           </p>
-        </div>
+        </motion.div>
 
         {/* Category Cards */}
         <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
           {categories.map((category, index) => (
-            <div key={index} className="relative bg-white shadow-md rounded-xl p-6 text-center">
+            <motion.div
+              key={index}
+              className="relative bg-white shadow-md rounded-xl p-6 text-center"
+              initial="hidden"
+              animate={controls}
+              variants={{
+                hidden: { opacity: 0, y: 50 },
+                visible: { opacity: 1, y: 0 },
+              }}
+              transition={{ duration: 0.5, delay: index * 0.2 }}
+              whileHover={{ scale: 1.05 }}
+            >
               <img
                 src={category.icon}
                 alt={category.title}
@@ -52,7 +83,7 @@ const CategorySection = () => {
               <p className="mt-4 text-base text-gray-600">
                 {category.description}
               </p>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>
