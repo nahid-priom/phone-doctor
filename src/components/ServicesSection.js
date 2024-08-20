@@ -56,7 +56,7 @@ const OurServices = () => {
   }, [controls, inView]);
 
   return (
-    <section ref={ref} className="bg-gray-100 px-4 py-12">
+    <section ref={ref} className="bg-orange-50  px-4 py-12">
       <motion.div
         initial="hidden"
         animate={controls}
@@ -68,7 +68,7 @@ const OurServices = () => {
         className="text-center mb-12"
       >
         <h2 className="text-4xl font-extrabold text-gray-900">
-          What we can fix for you
+          Our Services
         </h2>
         <p className="mt-4 text-lg text-gray-600">
           We specialize in high-quality repairs for all major brands. Choose
@@ -76,7 +76,7 @@ const OurServices = () => {
         </p>
       </motion.div>
 
-      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {services.map((service, index) => (
           <motion.div
             key={index}

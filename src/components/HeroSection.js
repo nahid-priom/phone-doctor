@@ -1,7 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import ServicesSection from './ServicesSection';
 
-// HeroSection Component
 const HeroSection = () => {
   const leftContentRef = useRef(null);
   const imageRef = useRef(null);
@@ -10,8 +8,10 @@ const HeroSection = () => {
     const handleScrollAnimation = (entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          entry.target.style.transform = 'translateX(0)';
-          entry.target.style.opacity = '1';
+          setTimeout(() => {
+            entry.target.style.transform = 'translateX(0)';
+            entry.target.style.opacity = '1';
+          }, 2000); // Delay the animation by 2 seconds
         }
       });
     };
@@ -42,8 +42,8 @@ const HeroSection = () => {
   }, []);
 
   return (
-    <section className="relative py-10 lg:pt-20 pb-6 lg:pb-32">
-      <div className="max-w-7xl mx-auto text-gray-600 gap-x-12 items-center justify-between overflow-hidden md:flex ">
+    <section className="relative bg-orange-50 py-10 lg:pt-20 pb-6 lg:pb-32">
+      <div className="max-w-7xl mx-auto text-gray-600 gap-x-12 items-center justify-between overflow-hidden md:flex">
         {/* Left Content */}
         <div
           ref={leftContentRef}
@@ -61,7 +61,7 @@ const HeroSection = () => {
           <div className="items-center gap-x-3 space-y-3 sm:flex sm:space-y-0">
             <a
               href="#"
-              className="block py-2 px-4 text-center text-white font-medium bg-orange-500 duration-150 hover:bg-gray-900 active:bg-indigo-700 rounded-lg shadow-lg hover:shadow-none"
+              className="block py-2 px-4 text-center text-white font-medium bg-orange-600 duration-150 hover:bg-gray-900 rounded-lg shadow-lg hover:shadow-none"
             >
               Our Services
             </a>
@@ -86,7 +86,7 @@ const HeroSection = () => {
           </div>
         </div>
 
-    
+        {/* Image Content */}
         <div
           ref={imageRef}
           className="flex-none my-6 md:mt-0 md:max-w-xl opacity-0 transform translate-x-20 transition-all duration-1000"
@@ -98,11 +98,6 @@ const HeroSection = () => {
           />
         </div>
       </div>
-
-      {/* Services Section (Absolute Positioning) */}
-      {/* <div className="hidden lg:block absolute left-0 right-0 bottom-[-280px] z-10">
-        <ServicesSection />
-      </div> */}
     </section>
   );
 };

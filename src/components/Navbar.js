@@ -19,7 +19,7 @@ const Navbar = () => {
   return (
     <section className="bg-primary">
       {/* Top Header */}
-      <div className="bg-orange-500 py-2">
+      <div className="bg-orange-600 py-2">
         <div className="max-w-7xl mx-auto px-4 lg:px-0 flex justify-between items-center">
           {/* Social Icons */}
           <div className="flex space-x-4">
