@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBars, faTimes } from "@fortawesome/free-solid-svg-icons";
+import { faBars, faTimes, faPhoneAlt } from "@fortawesome/free-solid-svg-icons";
+import { faFacebook, faTwitter, faInstagram } from "@fortawesome/free-brands-svg-icons";
+
 import logo from "../assets/logo.png"; // Ensure the path is correct
 
 export const navLinks = [
@@ -15,8 +17,35 @@ const Navbar = () => {
   const [toggle, setToggle] = useState(false);
 
   return (
-    <section className=" bg-primary">
-      <nav className=" max-w-7xl px-4 lg:px-0 mx-auto flex py-6 justify-between items-center navbar">
+    <section className="bg-primary">
+      {/* Top Header */}
+      <div className="bg-orange-500 py-2">
+        <div className="max-w-7xl mx-auto px-4 lg:px-0 flex justify-between items-center">
+          {/* Social Icons */}
+          <div className="flex space-x-4">
+            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">
+              <FontAwesomeIcon icon={faFacebook} className="text-white text-lg" />
+            </a>
+            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">
+              <FontAwesomeIcon icon={faTwitter} className="text-white text-lg" />
+            </a>
+            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">
+              <FontAwesomeIcon icon={faInstagram} className="text-white text-lg" />
+            </a>
+          </div>
+          {/* Opening Time and Call Now */}
+          <div className="flex space-x-8 items-center text-white text-sm">
+            <span className="hidden md:block">Mon-Fri: 9:00 AM - 6:00 PM</span>
+            <a href="tel:+1234567890" className="flex items-center space-x-2">
+              <FontAwesomeIcon icon={faPhoneAlt} className="text-lg" />
+              <span>Call Now: +1 234 567 890</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      {/* Navigation Bar */}
+      <nav className="max-w-7xl px-4 lg:px-0 mx-auto flex py-6 justify-between items-center navbar">
         {/* Logo */}
         <img src={logo} alt="Logo" className="w-[160px] h-[60px]" />
 
@@ -49,9 +78,8 @@ const Navbar = () => {
           />
 
           {/* Sidebar */}
-          {/* Sidebar */}
           <div
-            className={`fixed top-0 right-0 h-1/2 w-[250px] rounded-bl-2xl bg-black p-6 z-50 transition-transform duration-300 ${
+            className={`fixed top-0 right-0 h-full w-[250px] rounded-bl-2xl bg-black p-6 z-50 transition-transform duration-300 ${
               toggle ? "translate-x-0" : "translate-x-full"
             }`}
           >
