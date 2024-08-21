@@ -8,6 +8,7 @@ import Service from './pages/Service';
 const App = () => (
   <Router>
     <Routes>
+      <Route path="/" element={<Home />} />
       <Route path="/home" element={<Home />} />
       <Route path="/blog" element={<Blog />} />
 

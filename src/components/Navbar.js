@@ -88,7 +88,7 @@ const Navbar = () => {
       {/* Navigation Bar */}
       <nav className="max-w-7xl px-8 lg:px-0 mx-auto flex py-6 justify-between items-center navbar">
         {/* Logo */}
-        <Link to={"/home"}>
+        <Link to={"/"}>
           <img src={logo} alt="Logo" className="w-[130px] h-[50px]" />
         </Link>
 
