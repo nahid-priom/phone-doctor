@@ -45,9 +45,9 @@ const Navbar = () => {
       </div>
 
       {/* Navigation Bar */}
-      <nav className="max-w-7xl px-4 lg:px-0 mx-auto flex py-6 justify-between items-center navbar">
+      <nav className="max-w-7xl px-8 lg:px-0 mx-auto flex py-6 justify-between items-center navbar">
         {/* Logo */}
-        <img src={logo} alt="Logo" className="w-[160px] h-[60px]" />
+        <img src={logo} alt="Logo" className="w-[130px] h-[50px]" />
 
         {/* Desktop Navigation */}
         <ul className="list-none sm:flex hidden justify-end items-center flex-1">

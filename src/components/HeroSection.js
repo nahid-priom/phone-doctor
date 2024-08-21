@@ -50,15 +50,15 @@ const HeroSection = () => {
           className="flex-none space-y-5 px-4 sm:max-w-lg md:px-0 lg:max-w-xl opacity-0 transform -translate-x-20 transition-all duration-1000"
         >
           <h1 className="text-base text-center md:text-start text-black font-medium">
-            Do you have problems with your device? Find a Solution Here
+            Do you have problems with your device?<br></br><span className='text-orange-600 text-lg font-bold'>Find a Solution Here!!</span> 
           </h1>
-          <h2 className="text-4xl text-center md:text-start text-gray-800 font-extrabold md:text-5xl">
+          <h2 className="text-3xl px-2 lg:px-0 lg:text-4xl text-center md:text-start text-gray-800 font-extrabold md:text-5xl">
             EXPERT PHONE REPAIR & CRACK SCREEN SOLUTIONS
           </h2>
-          <p className="text-center md:text-start">
+          <p className="text-center md:text-start px-2 lg:px-0">
             Experience top-quality repairs with premium parts, all at an affordable price and delivered with fast, reliable service.
           </p>
-          <div className="items-center gap-x-3 space-y-3 sm:flex sm:space-y-0">
+          <div className="items-center gap-x-3  justify-center lg:justify-start flex  sm:space-y-0">
             <a
               href="#"
               className="block py-2 px-4 text-center text-white font-medium bg-orange-600 duration-150 hover:bg-gray-900 rounded-lg shadow-lg hover:shadow-none"
