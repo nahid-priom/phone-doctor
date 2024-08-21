@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
 
 const HeroSection = () => {
   const leftContentRef = useRef(null);
@@ -8,10 +9,8 @@ const HeroSection = () => {
     const handleScrollAnimation = (entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          setTimeout(() => {
-            entry.target.style.transform = 'translateX(0)';
-            entry.target.style.opacity = '1';
-          }, 2000); // Delay the animation by 2 seconds
+          entry.target.style.transform = 'translateX(0)';
+          entry.target.style.opacity = '1';
         }
       });
     };
@@ -58,16 +57,16 @@ const HeroSection = () => {
           <p className="text-center md:text-start px-2 lg:px-0">
             Experience top-quality repairs with premium parts, all at an affordable price and delivered with fast, reliable service.
           </p>
-          <div className="items-center gap-x-3  justify-center lg:justify-start flex  sm:space-y-0">
-            <a
-              href="#"
+          <div className="items-center gap-x-3 justify-center lg:justify-start flex sm:space-y-0">
+            <Link
+              to="/services"
               className="block py-2 px-4 text-center text-white font-medium bg-orange-600 duration-150 hover:bg-gray-900 rounded-lg shadow-lg hover:shadow-none"
             >
               Our Services
-            </a>
-            <a
-              href="contact.html"
-              className="flex items-center justify-center gap-x-2 py-2 px-4 bg-white  text-black hover:text-white hover:bg-orange-500 font-medium duration-150 active:bg-gray-100 border rounded-lg md:inline-flex"
+            </Link>
+            <Link
+              to="/contact"
+              className="flex items-center justify-center gap-x-2 py-2 px-4 bg-white text-black hover:text-white hover:bg-orange-500 font-medium duration-150 active:bg-gray-100 border rounded-lg md:inline-flex"
             >
               Contact
               <svg
@@ -82,7 +81,7 @@ const HeroSection = () => {
                   clipRule="evenodd"
                 />
               </svg>
-            </a>
+            </Link>
           </div>
         </div>
 
@@ -94,7 +93,7 @@ const HeroSection = () => {
           <img
             src="https://miro.medium.com/v2/resize:fit:1400/1*F7sTt3Ee5gEdLyyhHdZZRg.jpeg"
             className="lg:rounded-2xl"
-            alt="Visa Image"
+            alt="Visa "
           />
         </div>
       </div>

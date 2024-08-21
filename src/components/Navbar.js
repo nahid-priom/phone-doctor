@@ -1,19 +1,37 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faTimes, faPhoneAlt } from "@fortawesome/free-solid-svg-icons";
-import { faFacebook, faTwitter, faInstagram } from "@fortawesome/free-brands-svg-icons";
+import {
+  faFacebook,
+  faTwitter,
+  faInstagram,
+} from "@fortawesome/free-brands-svg-icons";
 
 import logo from "../assets/logo.png"; // Ensure the path is correct
 
 export const navLinks = [
   { id: "home", title: "Home" },
-  { id: "services", title: "Services" },
+  { id: "service", title: "Services" },
   { id: "about", title: "About" },
   { id: "blog", title: "Blogs" },
 ];
 
 const Navbar = () => {
-  const [active, setActive] = useState("Home");
+  const location = useLocation(); // Get the current path
+  const [active, setActive] = useState("");
+
+  useEffect(() => {
+    // Update the active state based on the current path
+    const currentPath = location.pathname.split("/")[1]; // Get the path without the leading "/"
+    const currentNav = navLinks.find((nav) => nav.id === currentPath);
+    if (currentNav) {
+      setActive(currentNav.title);
+    } else {
+      setActive("Home"); // Default to Home if the path doesn't match any navLinks
+    }
+  }, [location]);
+
   const [toggle, setToggle] = useState(false);
 
   return (
@@ -23,23 +41,46 @@ const Navbar = () => {
         <div className="max-w-7xl mx-auto px-4 lg:px-0 flex justify-between items-center">
           {/* Social Icons */}
           <div className="flex space-x-4">
-            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">
-              <FontAwesomeIcon icon={faFacebook} className="text-white text-lg" />
-            </a>
-            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">
-              <FontAwesomeIcon icon={faTwitter} className="text-white text-lg" />
-            </a>
-            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">
-              <FontAwesomeIcon icon={faInstagram} className="text-white text-lg" />
-            </a>
+            <Link
+              to="https://facebook.com"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <FontAwesomeIcon
+                icon={faFacebook}
+                className="text-white text-lg"
+              />
+            </Link>
+            <Link
+              to="https://twitter.com"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <FontAwesomeIcon
+                icon={faTwitter}
+                className="text-white text-lg"
+              />
+            </Link>
+            <Link
+              to="https://instagram.com"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <FontAwesomeIcon
+                icon={faInstagram}
+                className="text-white text-lg"
+              />
+            </Link>
           </div>
           {/* Opening Time and Call Now */}
           <div className="flex space-x-8 items-center text-white text-sm">
             <span className="hidden md:block">Mon-Fri: 9:00 AM - 6:00 PM</span>
-            <a href="tel:+1234567890" className="flex items-center space-x-2">
+            <Link to="tel:+1234567890" className="flex items-center space-x-2">
               <FontAwesomeIcon icon={faPhoneAlt} className="text-lg" />
-              <span className="text-base lg:text-xl font-bold">Call Now: +1 234 567 890</span>
-            </a>
+              <span className="text-base lg:text-xl font-bold">
+                Call Now: +1 234 567 890
+              </span>
+            </Link>
           </div>
         </div>
       </div>
@@ -47,7 +88,9 @@ const Navbar = () => {
       {/* Navigation Bar */}
       <nav className="max-w-7xl px-8 lg:px-0 mx-auto flex py-6 justify-between items-center navbar">
         {/* Logo */}
-        <img src={logo} alt="Logo" className="w-[130px] h-[50px]" />
+        <Link to={"/home"}>
+          <img src={logo} alt="Logo" className="w-[130px] h-[50px]" />
+        </Link>
 
         {/* Desktop Navigation */}
         <ul className="list-none sm:flex hidden justify-end items-center flex-1">
@@ -59,12 +102,12 @@ const Navbar = () => {
               } ${index === navLinks.length - 1 ? "mr-0" : "mr-10"}`}
               onClick={() => setActive(nav.title)}
             >
-              <a className="text-lg relative" href={`#${nav.id}`}>
+              <Link className="text-lg relative" to={`/${nav.id}`}>
                 {nav.title}
                 {active === nav.title && (
                   <span className="absolute bottom-[-2px] left-0 w-full h-[2px] bg-orange-500"></span>
                 )}
-              </a>
+              </Link>
             </li>
           ))}
         </ul>
@@ -105,12 +148,12 @@ const Navbar = () => {
                     setToggle(false); // Close the sidebar after clicking a link
                   }}
                 >
-                  <a href={`#${nav.id}`} className="relative text-xl">
+                  <Link to={`/${nav.id}`} className="relative text-xl">
                     {nav.title}
                     {active === nav.title && (
                       <span className="absolute -bottom-2 left-0 w-full h-[3px] bg-white"></span>
                     )}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
