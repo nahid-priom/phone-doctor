@@ -38,7 +38,7 @@ const services = [
   {
     title: "Water Damage Repair",
     image:
-      "https://allgsmtips.com/wp-content/uploads/2014/07/water-damaged-smartphone.jpeg",
+      "https://repairexpress.com/wp-content/uploads/2023/09/MicrosoftTeams-image-30.jpg",
     description: "Get your device repaired from water damage.",
     rating: 4.4,
     reviews: 110,
