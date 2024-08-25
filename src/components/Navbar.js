@@ -1,3 +1,5 @@
+// Updated Navbar Component
+
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -14,10 +16,18 @@ import {
 } from "@fortawesome/free-brands-svg-icons";
 
 import logo from "../assets/logo.png";
-import iphoneImage from "../assets/category/iphone.png"; // Replace with correct image paths
+import iphoneImage from "../assets/category/iphone.png"; 
 import samsungImage from "../assets/category/samsung.png";
 import ipadImage from "../assets/category/ipad.png";
 import androidImage from "../assets/category/android.png";
+
+// Define subcategories
+const subcategories = {
+  iPhone: ["iPhone 15 Series", "iPhone 14 Series","iPhone 13 Series", "iPhone 12 Series"],
+  Samsung: ["Samsung A Series", "Samsung S Series", "Samsung Note Series", "Samsung Fold Series"],
+  iPad: ["iPad Pro", "iPad Air"],
+  "Other Android": ["Google Pixel", "OnePlus", "LG", "Motorolla"]
+};
 
 export const navLinks = [
   { id: "home", title: "Home" },
@@ -134,10 +144,12 @@ const Navbar = () => {
                   {categories.map((category) => (
                     <li
                       key={category.name}
-                      className="flex hover:bg-orange-600 border-b border-orange-400 p-4 hover:text-white  items-center py-2"
+                      className="relative hover:bg-orange-600 border-b border-orange-400 p-4 hover:text-white items-center py-2"
+                      onMouseEnter={() => setDropdownOpen(category.name)}
+                      onMouseLeave={() => setDropdownOpen(false)}
                     >
                       <Link
-                        to={`/services/${category.name.toLowerCase()}`} // Assuming you want to link to a specific route for each category
+                        to={`/services/${category.name.toLowerCase()}`}
                         className="flex items-center w-full"
                       >
                         <img
@@ -149,6 +161,24 @@ const Navbar = () => {
                           {category.name}
                         </span>
                       </Link>
+                      {/* Subcategory Dropdown */}
+                      {dropdownOpen === category.name && (
+                        <ul className="absolute left-full top-0 w-48 bg-white shadow-lg rounded-md z-20">
+                          {subcategories[category.name].map((subcategory) => (
+                            <li
+                              key={subcategory}
+                              className="hover:bg-orange-600 px-4 py-2 hover:text-white border-b border-orange-400"
+                            >
+                              <Link
+                                to={`/services/${category.name.toLowerCase()}/${subcategory.toLowerCase().replace(/\s+/g, '-')}`} // Subcategory route
+                                className="text-black hover:text-white"
+                              >
+                                {subcategory}
+                              </Link>
+                            </li>
+                          ))}
+                        </ul>
+                      )}
                     </li>
                   ))}
                 </ul>
@@ -164,7 +194,7 @@ const Navbar = () => {
         </Link>
 
         {/* Mobile Navigation */}
-        <div className="sm:hidden flex  justify-end items-center">
+        <div className="sm:hidden flex justify-end items-center">
           <FontAwesomeIcon
             icon={toggle ? faTimes : faBars}
             className="w-[28px] h-[28px] text-white cursor-pointer"
@@ -214,11 +244,14 @@ const Navbar = () => {
                     )}
                   </Link>
                   {nav.id === "service" && serviceDropdownOpen && (
-                    <ul className="ml-4 bg-white p-2 rounded-xl  hover:bg-orange-500 mt-2">
+                    <ul className="ml-4 bg-white p-2 rounded-xl hover:bg-orange-500 mt-2">
                       {categories.map((category) => (
                         <li
                           key={category.name}
                           className="flex items-center py-2 border-b border-orange-400"
+                          onClick={() =>
+                            setServiceDropdownOpen(category.name)
+                          }
                         >
                           <img
                             src={category.image}
@@ -228,6 +261,24 @@ const Navbar = () => {
                           <span className="text-black">{category.name}</span>
                         </li>
                       ))}
+                      {serviceDropdownOpen &&
+                        subcategories[serviceDropdownOpen].map(
+                          (subcategory) => (
+                            <li
+                              key={subcategory}
+                              className="pl-8 text-black hover:text-white"
+                            >
+                              <Link
+                                to={`/services/${serviceDropdownOpen.toLowerCase()}/${subcategory
+                                  .toLowerCase()
+                                  .replace(/\s+/g, "-")}`} // Subcategory route
+                                onClick={() => setToggle(false)}
+                              >
+                                {subcategory}
+                              </Link>
+                            </li>
+                          )
+                        )}
                     </ul>
                   )}
                 </li>

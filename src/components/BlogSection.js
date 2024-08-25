@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const BlogSection = () => {
   const blogs = [
@@ -36,9 +37,9 @@ const BlogSection = () => {
               <h3 className="text-xl font-semibold mb-2">{blog.title}</h3>
               <p className="text-gray-700 mb-4 flex-grow">{blog.description}</p>
               <div className="mt-auto">
-                <a href={blog.link} className="inline-block bg-orange-500 text-white py-2 px-4 rounded-lg hover:bg-orange-600">
+              <Link to={`/blog/${blog.id}`} className="inline-block bg-orange-500 text-white py-2 px-4 rounded-lg hover:bg-orange-600">
                   Read More
-                </a>
+                </Link>
               </div>
             </div>
           </div>

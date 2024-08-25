@@ -4,6 +4,8 @@ import Home from './pages/Home';
 import Blog from './pages/Blog';
 import About from './pages/About';
 import Service from './pages/Service';
+import BlogDetails from './components/BlogDetails';
+import Subcategory from './components/Subcategory';
 
 const App = () => (
   <Router>
@@ -15,6 +17,12 @@ const App = () => (
       <Route path="/about" element={<About />} />
 
       <Route path="/service" element={<Service />} />
+      <Route path="/blog/:id" element={<BlogDetails />} />
+      <Route path="/services/:category/:subcategory" element={<Subcategory />} />\
+      <Route path="/services/:category" component={Subcategory} />
+
+
+    
 
 
       
