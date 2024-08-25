@@ -13,20 +13,10 @@ const App = () => (
       <Route path="/" element={<Home />} />
       <Route path="/home" element={<Home />} />
       <Route path="/blog" element={<Blog />} />
-
       <Route path="/about" element={<About />} />
-
       <Route path="/service" element={<Service />} />
       <Route path="/blog/:id" element={<BlogDetails />} />
-      <Route path="/services/:category/:subcategory" element={<Subcategory />} />\
-      <Route path="/services/:category" component={Subcategory} />
-
-
-    
-
-
-      
-      
+      <Route path="/services/:category" element={<Subcategory />} />
     </Routes>
   </Router>
 );
