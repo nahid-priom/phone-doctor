@@ -23,8 +23,8 @@ const BlogDetails = () => {
 
       **Conclusion:**
       Making an informed choice will save you time, money, and stress in the long run.`,
-      image:
-        "https://www.viranitelecom.com/wp-content/uploads/2022/02/How-to-Start-Your-Own-Mobile-Service-Center-business-in-India-from-Basic.png",
+      image: "https://forumstatic.oneplusmobile.com/opforum-gl/upload/image/front/thread/20230421/2804543055891549901/1313779506120491009/1313779506120491009.png",
+
       author: "John Doe",
       publishedAt: "2024-08-20T10:30:00Z",
     },
