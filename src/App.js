@@ -8,9 +8,11 @@ import BlogDetails from './components/BlogDetails';
 import Subcategory from './components/Subcategory';
 import ProductDetails from './components/ProductDetails';
 import Appointment from './components/Appoinment';
+import ScrollToTop from './components/ScrollToTop';
 
 const App = () => (
   <Router>
+    <ScrollToTop />
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/home" element={<Home />} />
