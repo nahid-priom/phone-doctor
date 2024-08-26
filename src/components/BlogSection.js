@@ -27,7 +27,7 @@ const BlogSection = () => {
   ];
 
   return (
-    <div className="max-w-7xl mx-auto p-8 bg-white">
+    <div className="max-w-7xl mx-auto p-8 pt-32 lg:pt-44 bg-white">
       <h2 className="text-3xl font-bold mb-8 text-center">Blog Posts</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {blogs.map((blog) => (

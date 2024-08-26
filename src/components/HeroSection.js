@@ -41,12 +41,12 @@ const HeroSection = () => {
   }, []);
 
   return (
-    <section className="relative bg-orange-50 py-10 lg:pt-20 pb-6 lg:pb-32">
+    <section className="relative pt-32 lg:pt-44 bg-orange-50 py-10  lg:pb-32">
       <div className="max-w-7xl mx-auto text-gray-600 gap-x-12 items-center justify-between overflow-hidden md:flex">
         {/* Left Content */}
         <div
           ref={leftContentRef}
-          className="flex-none space-y-5 px-4 sm:max-w-lg md:px-0 lg:max-w-xl opacity-0 transform -translate-x-20 transition-all duration-1000"
+          className="flex-none space-y-5 px-4  sm:max-w-lg md:px-0 lg:max-w-xl opacity-0 transform -translate-x-20 transition-all duration-1000"
         >
           <h1 className="text-base text-center md:text-start text-black font-medium">
             Do you have problems with your device?<br></br><span className='text-orange-600 text-lg font-bold'>Find a Solution Here!!</span> 

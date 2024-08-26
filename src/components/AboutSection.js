@@ -3,7 +3,7 @@ import mobileRepairImage from '../assets/mobile-repair-shop.jpg';
 
 const AboutSection = () => {
   return (
-    <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between py-8 bg-white">
+    <div className="max-w-7xl pt-28 lg:pt-44 mx-auto flex flex-col md:flex-row items-center justify-between py-8 bg-white">
       <div className="about-text w-full md:w-1/2 p-4">
         <h2 className="text-3xl font-bold mb-4">About Us</h2>
         <p className="text-lg mb-4">

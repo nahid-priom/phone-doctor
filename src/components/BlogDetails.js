@@ -101,12 +101,12 @@ const BlogDetails = () => {
   return (
     <div>
       <Navbar />
-      <div className="blog-details-container py-12 px-4 md:px-8 lg:px-16 bg-gray-50">
+      <div className="blog-details-container pt-28 lg:pt-44 py-12 px-4 md:px-8 lg:px-16 bg-gray-50">
         <div className="max-w-4xl mx-auto bg-white shadow-lg rounded-lg overflow-hidden">
           <img
             src={blog.image}
             alt={blog.title}
-            className="w-full h-96 object-cover mb-8"
+            className="w-full h-96 object-cover lg:mb-8"
           />
           <div className="p-6 md:p-8">
             <h1 className="text-4xl font-bold text-gray-800 mb-4">
