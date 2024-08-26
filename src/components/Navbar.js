@@ -72,7 +72,7 @@ const Navbar = () => {
           navbarShadow ? "shadow-lg" : ""
         }`}
       >
-        <div className="bg-orange-600 py-1">
+        <div className="bg-orange-600 py-1 pt-2">
         <div className="max-w-7xl mx-auto px-4 lg:px-0 flex justify-between items-center">
           <div className="flex space-x-4">
             <Link to="https://facebook.com" target="_blank" rel="noopener noreferrer">

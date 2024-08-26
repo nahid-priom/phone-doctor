@@ -6,6 +6,8 @@ import About from './pages/About';
 import Service from './pages/Service';
 import BlogDetails from './components/BlogDetails';
 import Subcategory from './components/Subcategory';
+import ProductDetails from './components/ProductDetails';
+import Appointment from './components/Appoinment';
 
 const App = () => (
   <Router>
@@ -17,6 +19,8 @@ const App = () => (
       <Route path="/service" element={<Service />} />
       <Route path="/blog/:id" element={<BlogDetails />} />
       <Route path="/services/:category" element={<Subcategory />} />
+      <Route path="/product/:category/:model" element={<ProductDetails />} />
+      <Route path="/appointment/:model" element={<Appointment />} /> 
     </Routes>
   </Router>
 );

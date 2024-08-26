@@ -1,5 +1,5 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import Navbar from './Navbar';
 import Footer from './Footer';
 
@@ -241,7 +241,7 @@ const Subcategory = () => {
       <Navbar />
 
       {/* Main Content */}
-      <div className="container pt-32 lg:pt-44 mx-auto p-6">
+      <div className="container pt-32  mx-auto p-6">
   {/* Header Section */}
   <div className="bg-gradient-to-r from-orange-500 to-orange-600 p-2 lg:p-6 rounded-lg shadow-lg mb-2 lg:mb-8">
     <h1 className="text-xl lg:text-4xl font-bold text-white text-center lg:mb-4">
@@ -259,7 +259,7 @@ const Subcategory = () => {
     Object.entries(seriesData).map(([series, models]) => (
       <div key={series} className="mb-10">
         {/* Series Title */}
-        <div className="flex items-center justify-center mb-4">
+        <div className="flex items-center justify-center ">
         <h2 className="text-3xl py-2 font-semibold text-orange-600 underline decoration-2 decoration-orange-400 mb-4 text-center">{series}</h2>
 
 
@@ -267,27 +267,30 @@ const Subcategory = () => {
 
      {/* Card Grid for Models in the Series */}
 <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-x-2 gap-y-8">
-  {models.map((model) => (
-    <div
-      key={model.name}
-      className="bg-white flex flex-col items-center shadow-lg rounded-lg overflow-hidden transform transition duration-300 hover:scale-105 hover:shadow-xl"
-    >
-      <img
-        src={model.image}
-        alt={model.name}
-        className="w-36 h-36 object-contain"
-      />
-      <div className="p-4">
-        <h3 className="text-sm lg:text-base font-semibold text-gray-800 text-center">{model.name}</h3>
-        <div className="mt-2 flex justify-center">
-          {/* Example button or icon (e.g., a heart or cart icon) */}
-          <button className="bg-orange-500 text-sm lg:text-base font-bold text-white px-2 py-1 rounded-full hover:bg-orange-600 transition duration-200">
-            View Details
-          </button>
-        </div>
+{models.map((model) => (
+  <div
+    key={model.name}
+    className="bg-white flex flex-col items-center shadow-lg rounded-lg overflow-hidden transform transition duration-300 hover:scale-105 hover:shadow-xl"
+  >
+    <img
+      src={model.image}
+      alt={model.name}
+      className="w-36 h-36 object-contain"
+    />
+    <div className="p-4">
+      <h3 className="text-sm lg:text-base font-semibold text-gray-800 text-center">{model.name}</h3>
+      <div className="mt-2 flex justify-center">
+        {/* Update the button to a Link component */}
+        <Link
+          to={`/product/${formattedCategory}/${encodeURIComponent(model.name)}`} // Navigate to the product details page
+          className="bg-orange-500 text-sm lg:text-base font-bold text-white px-2 py-1 rounded-full hover:bg-orange-600 transition duration-200"
+        >
+          View Details
+        </Link>
       </div>
     </div>
-  ))}
+  </div>
+))}
 </div>
 
       </div>

@@ -6,7 +6,7 @@ const BlogSection = () => {
     {
       id: 1,
       title: 'How to Choose the Right Mobile Repair Service',
-      image: "https://www.viranitelecom.com/wp-content/uploads/2022/02/How-to-Start-Your-Own-Mobile-Service-Center-business-in-India-from-Basic.png",
+      image: "https://forumstatic.oneplusmobile.com/opforum-gl/upload/image/front/thread/20230421/2804543055891549901/1313779506120491009/1313779506120491009.png",
       description: 'Choosing the right mobile repair service can be daunting. This guide will help you find the best service for your needs.',
       link: '/blog/choose-right-service' 
     },
