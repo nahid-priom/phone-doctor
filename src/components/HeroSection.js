@@ -59,7 +59,7 @@ const HeroSection = () => {
           </p>
           <div className="items-center gap-x-3 justify-center lg:justify-start flex sm:space-y-0">
             <Link
-              to="/services"
+              to="/service"
               className="block py-2 px-4 text-center text-white font-medium bg-orange-600 duration-150 hover:bg-gray-900 rounded-lg shadow-lg hover:shadow-none"
             >
               Our Services

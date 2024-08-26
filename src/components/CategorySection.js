@@ -1,10 +1,12 @@
 import React from 'react';
 import { motion, useAnimation } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
+import { useNavigate } from 'react-router-dom';
 
 const CategorySection = () => {
   const controls = useAnimation();
   const [ref, inView] = useInView({ triggerOnce: false, threshold: 0.2 });
+  const navigate = useNavigate(); // Initialize navigate hook
 
   React.useEffect(() => {
     if (inView) {
@@ -17,26 +19,30 @@ const CategorySection = () => {
       title: 'iPhone Repair',
       description: 'Expert repairs for all iPhone models.',
       icon: 'https://fdn2.gsmarena.com/vv/pics/apple/apple-iphone-14-pro-max-1.jpg',
+      path: '/services/iphone', // Add path to navigate
     },
     {
       title: 'Samsung Repair',
       description: 'Quality service for Samsung devices.',
       icon: 'https://fdn2.gsmarena.com/vv/pics/samsung/samsung-galaxy-s10-1.jpg',
+      path: '/services/samsung', // Add path to navigate
     },
     {
       title: 'iPad Repair',
       description: 'Reliable iPad repairs and services.',
       icon: 'https://thumbs.dreamstime.com/b/ipad-mini-galati-romania-january-powered-new-chip-bit-architecture-delivers-killer-performance-%C3%A2%E2%82%AC-up-to-four-39440725.jpg',
+      path: '/services/ipad', // Add path to navigate
     },
     {
       title: 'Other Android Repair',
       description: 'We fix all other Android devices.',
       icon: 'https://fdn2.gsmarena.com/vv/pics/lg/lg-velvet-2.jpg',
+      path: '/services/other-android', // Add path to navigate
     },
   ];
 
   return (
-    <section ref={ref} id="categorySection" className="py-16  bg-orange-100">
+    <section ref={ref} id="categorySection" className="py-16 bg-orange-100">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Title and Description */}
         <motion.div
@@ -62,7 +68,7 @@ const CategorySection = () => {
           {categories.map((category, index) => (
             <motion.div
               key={index}
-              className="relative bg-white shadow-md rounded-xl p-6 text-center"
+              className="relative bg-white shadow-md rounded-xl p-6 text-center cursor-pointer"
               initial="hidden"
               animate={controls}
               variants={{
@@ -71,6 +77,7 @@ const CategorySection = () => {
               }}
               transition={{ duration: 0.5, delay: index * 0.2 }}
               whileHover={{ scale: 1.05 }}
+              onClick={() => navigate(category.path)} // Navigate on click
             >
               <img
                 src={category.icon}

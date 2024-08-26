@@ -1,6 +1,7 @@
 import React from "react";
 import { motion, useAnimation } from "framer-motion";
 import { useInView } from "react-intersection-observer";
+import { Link } from "react-router-dom";
 
 const services = [
   {
@@ -78,6 +79,8 @@ const OurServices = () => {
 
       <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {services.map((service, index) => (
+          <Link to ="/service">
+
           <motion.div
             key={index}
             className="p-6 bg-white border rounded-lg shadow-md"
@@ -119,6 +122,7 @@ const OurServices = () => {
               </div>
             </div>
           </motion.div>
+          </Link>
         ))}
       </div>
     </section>

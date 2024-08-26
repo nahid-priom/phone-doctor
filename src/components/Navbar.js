@@ -133,7 +133,7 @@ const Navbar = () => {
               </li>
             ))}
           </ul>
-          <Link to="/repair" className="bg-orange-600 text-white px-4 py-1 rounded-md text-lg font-bold hover:bg-orange-600">
+          <Link to="/service" className="bg-orange-600 text-white px-4 py-1 rounded-md text-lg font-bold hover:bg-orange-600">
             Repair Now
           </Link>
 
