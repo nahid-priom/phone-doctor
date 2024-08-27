@@ -266,8 +266,8 @@ const phoneData = {
     ],
   },
 };
-const Subcategory = () => {
-  const { category } = useParams(); // Extract the category from the URL parameters
+const ChildCategory = () => {
+  const { category, series } = useParams(); // Extract the category and series from the URL parameters
 
   // Create a map of possible variations
   const formattedCategoryMap = {
@@ -278,7 +278,8 @@ const Subcategory = () => {
   // Use the formatted map to get the correct category key
   const formattedCategory = formattedCategoryMap[category.toLowerCase()];
 
-  const seriesData = phoneData[formattedCategory] || {}; // Fetch series data based on the formatted category
+  const seriesData =
+    phoneData[formattedCategory][decodeURIComponent(series)] || []; // Fetch series data based on the formatted category and series
 
   return (
     <>
@@ -287,78 +288,52 @@ const Subcategory = () => {
       <div className="container pt-32 mx-auto p-6">
         <div className="bg-gradient-to-r from-orange-500 to-orange-600 p-2 lg:p-6 rounded-lg shadow-lg mb-2 lg:mb-8">
           <h1 className="text-xl lg:text-4xl font-bold text-white text-center lg:mb-4">
-            {`${formattedCategory} Models`}
+            {`${formattedCategory} ${decodeURIComponent(series)} Models`}
           </h1>
           <p className="text-white hidden lg:block text-center max-w-xl mx-auto">
-            Explore the latest models and series of {formattedCategory}. Find
-            your perfect match with our detailed listings and high-quality
-            images.
+            Browse through all models in the {series} of {formattedCategory}.
           </p>
         </div>
 
-        {Object.keys(seriesData).length === 0 ? (
-          <p className="text-center text-gray-500">
-            No models available for this category.
-          </p>
-        ) : (
-          Object.entries(seriesData).map(([series, models]) => (
-            <div key={series} className="mb-10">
-              <div className="flex items-center justify-center">
-                <h2 className="text-3xl py-2 font-semibold text-orange-600 underline decoration-2 decoration-orange-400 mb-4 text-center">
-                  {series}
-                </h2>
-              </div>
-
-              <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-x-2 gap-y-8">
-                {models.map((model) => (
-                  <div
-                    key={model.name}
-                    className="bg-white flex flex-col items-center shadow-lg rounded-lg overflow-hidden transform transition duration-300 hover:scale-105 hover:shadow-xl"
-                  >
+        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-x-2 gap-y-8">
+          {seriesData.length === 0 ? (
+            <p className="text-center text-gray-500">
+              No models available for this series.
+            </p>
+          ) : (
+            seriesData.map((model) => (
+              <div
+                key={model.name}
+                className="bg-white flex flex-col items-center shadow-lg rounded-lg overflow-hidden transform transition duration-300 hover:scale-105 hover:shadow-xl"
+              >
+                <Link
+                  to={`/product/${formattedCategory}/${encodeURIComponent(
+                    model.name
+                  )}`}
+                >
+                  <img
+                    src={model.image}
+                    alt={model.name}
+                    className="w-36 h-36 object-contain"
+                  />
+                  <div className="p-4 flex flex-col items-center gap-2">
+                    <h3 className="text-sm lg:text-base font-semibold text-gray-800 text-center">
+                      {model.name}
+                    </h3>
                     <Link
                       to={`/product/${formattedCategory}/${encodeURIComponent(
                         model.name
                       )}`}
+                      className="bg-orange-500 text-sm lg:text-base font-bold text-white px-2 py-1 rounded-full hover:bg-orange-600 transition duration-200"
                     >
-                      <img
-                        src={model.image}
-                        alt={model.name}
-                        className="w-36 h-36 object-contain"
-                      />
-                      <div className="p-4">
-                        <h3 className="text-sm lg:text-base font-semibold text-gray-800 text-center">
-                          {model.name}
-                        </h3>
-                        <div className="mt-2 flex justify-center">
-                          <Link
-                            to={`/product/${formattedCategory}/${encodeURIComponent(
-                              model.name
-                            )}`}
-                            className="bg-orange-500 text-sm lg:text-base font-bold text-white px-2 py-1 rounded-full hover:bg-orange-600 transition duration-200"
-                          >
-                            View Details
-                          </Link>
-                        </div>
-                      </div>
+                      View Details
                     </Link>
                   </div>
-                ))}
-              </div>
-
-              {/* View More Button */}
-              <div className="flex justify-center  lg:justify-end mt-4">
-                <Link
-                  to={`/child-category/${category}/${encodeURIComponent(
-                    series
-                  )}`}
-                  className="text-orange-500 font-bold px-4 py-2 rounded-full hover:text-white underline hover:bg-orange-600 transition duration-200"
-                >
-                  View More ...
                 </Link>
               </div>
-            </div>
-          ))
-        )}
+            ))
+          )}
+        </div>
       </div>
 
       <Footer />
@@ -366,4 +341,4 @@ const Subcategory = () => {
   );
 };
 
-export default Subcategory;
+export default ChildCategory;

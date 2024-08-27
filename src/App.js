@@ -8,6 +8,7 @@ import BlogDetails from './components/BlogDetails';
 import Subcategory from './components/Subcategory';
 import ProductDetails from './components/ProductDetails';
 import Appointment from './components/Appoinment';
+import ChildCategory from './components/ChildCategory'; // Import the new ChildCategory component
 import ScrollToTop from './components/ScrollToTop';
 
 const App = () => (
@@ -22,7 +23,9 @@ const App = () => (
       <Route path="/blog/:id" element={<BlogDetails />} />
       <Route path="/services/:category" element={<Subcategory />} />
       <Route path="/product/:category/:model" element={<ProductDetails />} />
-      <Route path="/appointment/:model" element={<Appointment />} /> 
+      <Route path="/appointment/:model" element={<Appointment />} />
+      <Route path="/child-category/:category/:series" element={<ChildCategory />} /> 
+      
     </Routes>
   </Router>
 );
