@@ -68,14 +68,14 @@ const HeroSection = () => {
           className="flex-none space-y-5 px-4 sm:max-w-lg md:px-0 lg:max-w-xl opacity-0 transform -translate-x-20 transition-all duration-1000"
         >
           <h1 className="text-base text-center md:text-start text-orange-600 font-medium">
-            {heroContent.subtitle}
+          Do you have problems with your device?<br></br><span className='text-orange-600 text-lg font-bold'>Find a Solution Here!!</span> 
            
           </h1>
           <h2 className="text-3xl px-2 lg:px-0 lg:text-4xl text-center md:text-start text-gray-800 font-extrabold md:text-5xl">
-            {heroContent.title}
+          EXPERT PHONE REPAIR & CRACK SCREEN SOLUTIONS
           </h2>
           <p className="text-center md:text-start px-2 lg:px-0">
-            {heroContent.description}
+          Experience top-quality repairs with premium parts, all at an affordable price and delivered with fast, reliable service.
           </p>
           <div className="items-center gap-x-3 justify-center lg:justify-start flex sm:space-y-0">
             <Link
@@ -111,7 +111,8 @@ const HeroSection = () => {
           className="flex-none my-6 md:mt-0 md:max-w-xl opacity-0 transform translate-x-20 transition-all duration-1000"
         >
           <img
-            src={heroContent.imageUrl}
+            // src={heroContent.imageUrl}
+            src='https://miro.medium.com/v2/resize:fit:1400/1*F7sTt3Ee5gEdLyyhHdZZRg.jpeg'
             className="lg:rounded-2xl"
             alt="Hero"
           />
