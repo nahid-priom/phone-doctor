@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faTimes, faPhoneAlt, faChevronDown } from "@fortawesome/free-solid-svg-icons";
 import { faFacebook, faTwitter, faInstagram } from "@fortawesome/free-brands-svg-icons";
 
-import logo from "../assets/logo.png";
+import logo from "../assets/logo.jpeg";
 import iphoneImage from "../assets/category/iphone.png"; 
 import samsungImage from "../assets/category/samsung.png";
 import ipadImage from "../assets/category/ipad.png";
@@ -22,6 +22,7 @@ export const navLinks = [
   { id: "service", title: "Services" },
   { id: "about", title: "About" },
   { id: "blog", title: "Blogs" },
+  { id: "contact", title: "Contact" },
 ];
 
 const categories = [
@@ -62,17 +63,17 @@ const Navbar = () => {
   }, [location]);
 
   return (
-    <section className="bg-primary">
+    <section className="bg-white">
       
       
 
       {/* Main Navbar */}
       <nav
-        className={`fixed top-0 left-0 right-0 z-50 bg-primary transition-shadow ${
+        className={`fixed top-0 left-0 right-0 z-50 bg-white transition-shadow ${
           navbarShadow ? "shadow-lg" : ""
         }`}
       >
-        <div className="bg-orange-600 py-1 pt-2">
+        <div className="bg-red-600 py-1 pt-2">
         <div className="max-w-7xl mx-auto px-4 lg:px-0 flex justify-between items-center">
           <div className="flex space-x-4">
             <Link to="https://facebook.com" target="_blank" rel="noopener noreferrer">
@@ -96,7 +97,7 @@ const Navbar = () => {
       </div>
         <div className="max-w-7xl px-4 lg:px-0 mx-auto flex py-3 justify-between items-center">
           <Link to={"/"}>
-            <img src={logo} alt="Logo" className="w-[130px] h-[50px]" />
+            <img src={logo} alt="Logo" className="w-[150px] h-[60px]" />
           </Link>
 
           <ul className="list-none sm:flex hidden justify-center items-center">
@@ -104,7 +105,7 @@ const Navbar = () => {
               <li
                 key={nav.id}
                 className={`font-poppins font-normal cursor-pointer text-[16px] relative ${
-                  active === nav.title ? "text-orange-500" : "text-dimWhite"
+                  active === nav.title ? "text-red-500" : "text-black"
                 } ${index === navLinks.length - 1 ? "mr-0" : "mr-10"}`}
                 onMouseEnter={() => nav.id === "service" && setServiceDropdownOpen(true)}
                 onMouseLeave={() => nav.id === "service" && setServiceDropdownOpen(false)}
@@ -113,14 +114,14 @@ const Navbar = () => {
                 <Link className="text-lg relative" to={`/${nav.id}`}>
                   {nav.title}
                   {nav.id === "service" && <FontAwesomeIcon icon={faChevronDown} className="ml-2" />}
-                  {active === nav.title && <span className="absolute bottom-[-2px] left-0 w-full h-[2px] bg-orange-600"></span>}
+                  {active === nav.title && <span className="absolute bottom-[-2px] left-0 w-full h-[2px] bg-red-600"></span>}
                 </Link>
                 {nav.id === "service" && serviceDropdownOpen && (
                   <ul className="absolute top-full left-0 w-48 bg-white shadow-lg rounded-md z-10">
                     {categories.map((category) => (
                       <li
                         key={category.name}
-                        className="relative hover:bg-orange-600 border-b border-orange-400 p-4 hover:text-white items-center py-2"
+                        className="relative hover:bg-red-600 border-b border-red-400 p-4 hover:text-white items-center py-2"
                       >
                         <Link to={`/services/${category.name.toLowerCase()}`} className="flex items-center w-full">
                           <img src={category.image} alt={category.name} className="w-8 h-8 mr-2" />
@@ -133,7 +134,7 @@ const Navbar = () => {
               </li>
             ))}
           </ul>
-          <Link to="/service" className="bg-orange-600 text-white px-4 py-1 rounded-md text-lg font-bold hover:bg-orange-600">
+          <Link to="/service" className="bg-red-600 text-white px-4 py-1 rounded-md text-lg font-bold hover:bg-red-600">
             Repair Now
           </Link>
 
@@ -141,7 +142,7 @@ const Navbar = () => {
           <div className="sm:hidden flex justify-end items-center">
             <FontAwesomeIcon
               icon={toggle ? faTimes : faBars}
-              className="w-[28px] h-[28px] pr-4 text-white cursor-pointer"
+              className="w-[28px] h-[28px] pr-4 text-black cursor-pointer"
               onClick={() => setToggle((prev) => !prev)}
             />
             <div
@@ -161,7 +162,7 @@ const Navbar = () => {
                   <li
                     key={nav.id}
                     className={`font-poppins font-medium cursor-pointer text-[18px] relative ${
-                      active === nav.title ? "text-orange-500" : "text-dimWhite"
+                      active === nav.title ? "text-red-500" : "text-dimWhite"
                     }`}
                     onClick={() => {
                       if (nav.id === "service") {
@@ -186,11 +187,11 @@ const Navbar = () => {
                       )}
                     </Link>
                     {nav.id === "service" && serviceDropdownOpen && (
-                      <ul className="ml-4 bg-white p-2 rounded-xl hover:bg-orange-500 mt-2">
+                      <ul className="ml-4 bg-white p-2 rounded-xl hover:bg-red-500 mt-2">
                         {categories.map((category) => (
                           <li
                             key={category.name}
-                            className="flex items-center py-2 border-b border-orange-400 cursor-pointer"
+                            className="flex items-center py-2 border-b border-red-400 cursor-pointer"
                           >
                             <Link
                               to={`/services/${category.name.toLowerCase()}`}

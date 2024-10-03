@@ -33,9 +33,9 @@ const ProductDetails = () => {
       <Navbar />
 
       {/* Main Content */}
-      <div className="container pt-32 mx-auto p-6">
+      <div className="max-w-7xl pt-32 mx-auto p-6">
         {/* Header Section */}
-        <div className="bg-gradient-to-r from-orange-500 to-orange-600 p-2 lg:p-6 rounded-lg shadow-lg mb-2 lg:mb-8">
+        <div className="bg-gradient-to-r from-red-500 to-red-600 p-2 lg:p-6 rounded-lg shadow-lg mb-2 lg:mb-8">
           <h1 className="text-xl lg:text-4xl font-bold text-white text-center lg:mb-4">
             {model} Repair Services
           </h1>
@@ -60,14 +60,14 @@ const ProductDetails = () => {
             {repairOptions.map((option) => (
               <div
                 key={option.type}
-                className="bg-orange-100 flex flex-col items-center shadow-lg rounded-lg p-6 transform transition duration-300 hover:scale-105 hover:shadow-xl"
+                className="bg-red-100 flex flex-col items-center shadow-lg rounded-lg p-6 transform transition duration-300 hover:scale-105 hover:shadow-xl"
               >
                 <div className="text-4xl mb-4">{option.icon}</div>
                 <h3 className="text-base font-semibold text-gray-800 text-center">
                   {option.type}
                 </h3>
                 <button
-                  className="mt-4 bg-orange-500 text-white text-base px-4 py-2 rounded-full hover:bg-orange-600 transition duration-200"
+                  className="mt-4 bg-red-500 text-white text-base px-4 py-2 rounded-full hover:bg-red-600 transition duration-200"
                   onClick={() =>
                     (window.location.href = `/appointment/${model}`)
                   } // Updated navigation

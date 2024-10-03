@@ -4,13 +4,15 @@ import Home from './pages/Home';
 import Blog from './pages/Blog';
 import About from './pages/About';
 import Service from './pages/Service';
+import Contact from './pages/Contact';
+
 import BlogDetails from './components/BlogDetails';
 import Subcategory from './components/Subcategory';
 import ProductDetails from './components/ProductDetails';
 import Appointment from './components/Appoinment';
 import ChildCategory from './components/ChildCategory'; // Import the new ChildCategory component
 import ScrollToTop from './components/ScrollToTop';
-import AdminPanel from './components/AdminPanel';
+
 
 const App = () => (
   <Router>
@@ -19,6 +21,8 @@ const App = () => (
       <Route path="/" element={<Home />} />
       <Route path="/home" element={<Home />} />
       <Route path="/blog" element={<Blog />} />
+      <Route path="/contact" element={<Contact />} />
+
       <Route path="/about" element={<About />} />
       <Route path="/service" element={<Service />} />
       <Route path="/blog/:id" element={<BlogDetails />} />
@@ -26,7 +30,7 @@ const App = () => (
       <Route path="/product/:category/:model" element={<ProductDetails />} />
       <Route path="/appointment/:model" element={<Appointment />} />
       <Route path="/child-category/:category/:series" element={<ChildCategory />} /> 
-      <Route path="/admin" element = {<AdminPanel />} />
+     
       
     </Routes>
   </Router>

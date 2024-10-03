@@ -120,7 +120,7 @@ const BlogDetails = () => {
                 alt={blog.author}
                 className="w-8 h-8 rounded-full mr-2"
               />
-              By <span className="font-medium mx-2 text-orange-800">{blog.author}</span> |{" "}
+              By <span className="font-medium mx-2 text-red-800">{blog.author}</span> |{" "}
               {formatDateToUS(blog.publishedAt)}
             </div>
             <div className="border-t border-gray-300 mt-4 mb-8"></div>

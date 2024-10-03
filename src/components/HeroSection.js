@@ -63,13 +63,13 @@ const HeroSection = () => {
   }, [loading]);
 
   return (
-    <section className="relative bg-orange-50 py-10 pt-36 lg:pt-44 pb-6 lg:pb-32">
+    <section className="relative bg-red-50 py-10 pt-36 lg:pt-44 pb-6 lg:pb-32">
       <div className="max-w-7xl mx-auto text-gray-600 gap-x-12 items-center justify-between overflow-hidden md:flex">
         {/* Show Preloader while loading */}
         {loading ? (
           <div className="flex justify-center items-start w-full h-screen">
-            <div className="spinner-border animate-spin inline-block w-8 h-8 border-4 rounded-full text-orange-600"></div>
-            <p className="ml-4 text-orange-600">Loading...</p>
+            <div className="spinner-border animate-spin inline-block w-8 h-8 border-4 rounded-full text-red-600"></div>
+            <p className="ml-4 text-red-600">Loading...</p>
           </div>
         ) : (
           <>
@@ -82,7 +82,7 @@ const HeroSection = () => {
                 <>
                   <h1 className="text-base text-center md:text-start text-black font-medium">
                     Do you have problems with your device?<br />
-                    <span className="text-orange-600 text-lg font-bold">Find a Solution Here!!</span>
+                    <span className="text-red-600 text-lg font-bold">Find a Solution Here!!</span>
                   </h1>
                   <h2 className="text-3xl px-2 lg:px-0 lg:text-4xl text-center md:text-start text-gray-800 font-extrabold md:text-5xl">
                     {sliderData.title_one}
@@ -93,13 +93,13 @@ const HeroSection = () => {
               <div className="items-center gap-x-3 justify-center lg:justify-start flex sm:space-y-0">
                 <Link
                   to="/service"
-                  className="block py-2 px-4 text-center text-white font-medium bg-orange-600 duration-150 hover:bg-gray-900 rounded-lg shadow-lg hover:shadow-none"
+                  className="block py-2 px-4 text-center text-white font-medium bg-red-600 duration-150 hover:bg-gray-900 rounded-lg shadow-lg hover:shadow-none"
                 >
                   Our Services
                 </Link>
                 <Link
                   to="/contact"
-                  className="flex items-center justify-center gap-x-2 py-2 px-4 bg-white text-black hover:text-white hover:bg-orange-500 font-medium duration-150 active:bg-gray-100 border rounded-lg md:inline-flex"
+                  className="flex items-center justify-center gap-x-2 py-2 px-4 bg-white text-black hover:text-white hover:bg-red-500 font-medium duration-150 active:bg-gray-100 border rounded-lg md:inline-flex"
                 >
                   Contact
                   <svg

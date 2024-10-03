@@ -57,7 +57,7 @@ const OurServices = () => {
   }, [controls, inView]);
 
   return (
-    <section ref={ref} className="bg-orange-50  px-4 py-12">
+    <section ref={ref} className="bg-red-50  px-4 py-12">
       <motion.div
         initial="hidden"
         animate={controls}
@@ -79,7 +79,7 @@ const OurServices = () => {
 
       <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {services.map((service, index) => (
-          <Link to ="/service">
+          <Link to ="/contact">
 
           <motion.div
             key={index}

@@ -1,48 +1,59 @@
-import React from 'react';
-import { motion, useAnimation } from 'framer-motion';
-import { useInView } from 'react-intersection-observer';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import { motion, useAnimation } from "framer-motion";
+import { useInView } from "react-intersection-observer";
+import { useNavigate } from "react-router-dom";
+import axios from "axios"; // Import axios for API calls
 
 const CategorySection = () => {
   const controls = useAnimation();
   const [ref, inView] = useInView({ triggerOnce: false, threshold: 0.2 });
   const navigate = useNavigate(); // Initialize navigate hook
 
-  React.useEffect(() => {
+  const [categories, setCategories] = useState([]); // State to store fetched categories
+  const [loading, setLoading] = useState(true); // State for loading indicator
+
+  // Fetch categories from the API
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const response = await axios.get(
+          "https://phonespotbackend.blacktechcorp.com/api"
+        ); // Replace with your API URL
+        const fetchedCategories = response.data.feateuredCategories.map(
+          (item) => ({
+            title: item.category.name,
+            description: item.category.short_description,
+            image: item.category.image,
+            path: `/services/${item.category.slug}`, // Construct path using the slug
+          })
+        );
+        setCategories(fetchedCategories); // Set fetched categories
+        setLoading(false); // Set loading to false
+      } catch (error) {
+        console.error("Error fetching categories:", error);
+        setLoading(false); // Even if error occurs, stop loading
+      }
+    };
+
+    fetchCategories(); // Call the API
+  }, []);
+
+  // Start animation when the section is in view
+  useEffect(() => {
     if (inView) {
-      controls.start('visible');
+      controls.start("visible");
     }
   }, [controls, inView]);
 
-  const categories = [
-    {
-      title: 'iPhone Repair',
-      description: 'Expert repairs for all iPhone models.',
-      icon: 'https://fdn2.gsmarena.com/vv/pics/apple/apple-iphone-14-pro-max-1.jpg',
-      path: '/services/iphone', // Add path to navigate
-    },
-    {
-      title: 'Samsung Repair',
-      description: 'Quality service for Samsung devices.',
-      icon: 'https://fdn2.gsmarena.com/vv/pics/samsung/samsung-galaxy-s10-1.jpg',
-      path: '/services/samsung', // Add path to navigate
-    },
-    {
-      title: 'iPad Repair',
-      description: 'Reliable iPad repairs and services.',
-      icon: 'https://thumbs.dreamstime.com/b/ipad-mini-galati-romania-january-powered-new-chip-bit-architecture-delivers-killer-performance-%C3%A2%E2%82%AC-up-to-four-39440725.jpg',
-      path: '/services/ipad', // Add path to navigate
-    },
-    {
-      title: 'Other Android Repair',
-      description: 'We fix all other Android devices.',
-      icon: 'https://fdn2.gsmarena.com/vv/pics/lg/lg-velvet-2.jpg',
-      path: '/services/other-android', // Add path to navigate
-    },
-  ];
+  if (loading) {
+    return <div className="flex pt-20 justify-center items-start w-full h-screen">
+    <div className="spinner-border animate-spin inline-block w-8 h-8 border-4 rounded-full text-red-600"></div>
+    <p className="ml-4 text-red-600">Loading...</p>
+  </div>; 
+  }
 
   return (
-    <section ref={ref} id="categorySection" className="py-16 bg-orange-100">
+    <section ref={ref} id="categorySection" className="py-16 bg-red-100">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Title and Description */}
         <motion.div
@@ -59,7 +70,8 @@ const CategorySection = () => {
             What we can fix for you
           </h2>
           <p className="mt-4 text-lg text-gray-600">
-            We specialize in high-quality repairs for all major brands. Choose your device category below to learn more about our services.
+            We specialize in high-quality repairs for all major brands. Choose
+            your device category below to learn more about our services.
           </p>
         </motion.div>
 
@@ -77,10 +89,10 @@ const CategorySection = () => {
               }}
               transition={{ duration: 0.5, delay: index * 0.2 }}
               whileHover={{ scale: 1.05 }}
-              onClick={() => navigate(category.path)} // Navigate on click
+              onClick={() => navigate(category.path)}
             >
               <img
-                src={category.icon}
+                src={`https://phonespotbackend.blacktechcorp.com/${category.image}`}
                 alt={category.title}
                 className="w-32 h-32 mx-auto mb-6"
               />

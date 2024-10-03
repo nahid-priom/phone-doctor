@@ -284,8 +284,8 @@ const Subcategory = () => {
     <>
       <Navbar />
 
-      <div className="container pt-32 mx-auto p-6">
-        <div className="bg-gradient-to-r from-orange-500 to-orange-600 p-2 lg:p-6 rounded-lg shadow-lg mb-2 lg:mb-8">
+      <div className="max-w-7xl pt-32 mx-auto p-6">
+        <div className="bg-gradient-to-r from-red-500 to-red-600 p-2 lg:p-6 rounded-lg shadow-lg mb-2 lg:mb-8">
           <h1 className="text-xl lg:text-4xl font-bold text-white text-center lg:mb-4">
             {`${formattedCategory} Models`}
           </h1>
@@ -304,7 +304,7 @@ const Subcategory = () => {
           Object.entries(seriesData).map(([series, models]) => (
             <div key={series} className="mb-10">
               <div className="flex items-center justify-center">
-                <h2 className="text-3xl py-2 font-semibold text-orange-600 underline decoration-2 decoration-orange-400 mb-4 text-center">
+                <h2 className="text-3xl py-2 font-semibold text-red-600 underline decoration-2 decoration-red-400 mb-4 text-center">
                   {series}
                 </h2>
               </div>
@@ -334,7 +334,7 @@ const Subcategory = () => {
                             to={`/product/${formattedCategory}/${encodeURIComponent(
                               model.name
                             )}`}
-                            className="bg-orange-500 text-sm lg:text-base font-bold text-white px-2 py-1 rounded-full hover:bg-orange-600 transition duration-200"
+                            className="bg-red-500 text-sm lg:text-base font-bold text-white px-2 py-1 rounded-full hover:bg-red-600 transition duration-200"
                           >
                             View Details
                           </Link>
@@ -351,7 +351,7 @@ const Subcategory = () => {
                   to={`/child-category/${category}/${encodeURIComponent(
                     series
                   )}`}
-                  className="text-orange-500 font-bold px-4 py-2 rounded-full hover:text-white underline hover:bg-orange-600 transition duration-200"
+                  className="text-red-500 font-bold px-4 py-2 rounded-full hover:text-white underline hover:bg-red-600 transition duration-200"
                 >
                   View More ...
                 </Link>

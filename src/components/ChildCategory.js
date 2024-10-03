@@ -285,8 +285,8 @@ const ChildCategory = () => {
     <>
       <Navbar />
 
-      <div className="container pt-32 mx-auto p-6">
-        <div className="bg-gradient-to-r from-orange-500 to-orange-600 p-2 lg:p-6 rounded-lg shadow-lg mb-2 lg:mb-8">
+      <div className="max-w-7xl pt-32 mx-auto p-6">
+        <div className="bg-gradient-to-r from-red-500 to-red-600 p-2 lg:p-6 rounded-lg shadow-lg mb-2 lg:mb-8">
           <h1 className="text-xl lg:text-4xl font-bold text-white text-center lg:mb-4">
             {`${formattedCategory} ${decodeURIComponent(series)} Models`}
           </h1>
@@ -324,7 +324,7 @@ const ChildCategory = () => {
                       to={`/product/${formattedCategory}/${encodeURIComponent(
                         model.name
                       )}`}
-                      className="bg-orange-500 text-sm lg:text-base font-bold text-white px-2 py-1 rounded-full hover:bg-orange-600 transition duration-200"
+                      className="bg-red-500 text-sm lg:text-base font-bold text-white px-2 py-1 rounded-full hover:bg-red-600 transition duration-200"
                     >
                       View Details
                     </Link>
