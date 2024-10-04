@@ -97,7 +97,7 @@ const Navbar = () => {
       </div>
         <div className="max-w-7xl px-4 lg:px-0 mx-auto flex py-3 justify-between items-center">
           <Link to={"/"}>
-            <img src={logo} alt="Logo" className="w-[150px] h-[60px]" />
+            <img src={logo} alt="Logo" className="w-[120px] h-[60px] lg:w-[140px] lg:h-[70px]" />
           </Link>
 
           <ul className="list-none sm:flex hidden justify-center items-center">

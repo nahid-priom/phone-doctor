@@ -306,11 +306,7 @@ const ChildCategory = () => {
                 key={model.name}
                 className="bg-white flex flex-col items-center shadow-lg rounded-lg overflow-hidden transform transition duration-300 hover:scale-105 hover:shadow-xl"
               >
-                <Link
-                  to={`/product/${formattedCategory}/${encodeURIComponent(
-                    model.name
-                  )}`}
-                >
+                <Link to={`/product/${formattedCategory}/${model.name}`}>
                   <img
                     src={model.image}
                     alt={model.name}
@@ -320,10 +316,7 @@ const ChildCategory = () => {
                     <h3 className="text-sm lg:text-base font-semibold text-gray-800 text-center">
                       {model.name}
                     </h3>
-                    <Link
-                      to={`/product/${formattedCategory}/${encodeURIComponent(
-                        model.name
-                      )}`}
+                    <Link to={`/product/${formattedCategory}/${model.name}`}
                       className="bg-red-500 text-sm lg:text-base font-bold text-white px-2 py-1 rounded-full hover:bg-red-600 transition duration-200"
                     >
                       View Details
