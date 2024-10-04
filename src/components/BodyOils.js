@@ -76,7 +76,7 @@ const BodyOils = () => {
   return (
     <main>
       {/* Hero Section */}
-      <section className="py-10 lg:pt-44 bg-red-50 pt-20 pb-6 lg:pb-32">
+      <section className="py-10 lg:pt-44 bg-red-50 pt-36 pb-6 lg:pb-32">
         <div id="animatedDiv" className="max-w-7xl mx-auto  gap-x-12 items-center justify-between overflow-hidden md:flex md:px-8">
           <div className="flex-none space-y-5 px-4 sm:max-w-lg md:px-0 lg:max-w-xl">
             <h2 className="text-4xl text-center md:text-start font-extrabold md:text-5xl">
