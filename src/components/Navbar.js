@@ -23,6 +23,7 @@ export const navLinks = [
   { id: "about", title: "About" },
   { id: "blog", title: "Blogs" },
   { id: "contact", title: "Contact" },
+  {id: "bodyoils", title: "Body Oils"}
 ];
 
 const categories = [

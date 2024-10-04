@@ -1,18 +1,18 @@
 import React from 'react'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
+import BodyOils from '../components/BodyOils'
 
-import Contact from '../components/Contact'
 
-const contact = () => {
+const bodyOils = () => {
   return (
     <div>
         <Navbar/>
-        <Contact/>
+        <BodyOils />
         <Footer/>
       
     </div>
   )
 }
 
-export default contact
+export default bodyOils

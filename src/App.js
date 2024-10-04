@@ -12,6 +12,7 @@ import ProductDetails from './components/ProductDetails';
 import Appointment from './components/Appoinment';
 import ChildCategory from './components/ChildCategory'; // Import the new ChildCategory component
 import ScrollToTop from './components/ScrollToTop';
+import BodyOils from './pages/BodyOils';
 
 
 const App = () => (
@@ -22,6 +23,8 @@ const App = () => (
       <Route path="/home" element={<Home />} />
       <Route path="/blog" element={<Blog />} />
       <Route path="/contact" element={<Contact />} />
+      <Route path="/bodyoils" element={<BodyOils />} />
+
 
       <Route path="/about" element={<About />} />
       <Route path="/service" element={<Service />} />
