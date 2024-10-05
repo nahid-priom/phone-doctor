@@ -10,32 +10,44 @@ const CategorySection = () => {
   const navigate = useNavigate(); // Initialize navigate hook
 
   const [categories, setCategories] = useState([]); // State to store fetched categories
-  const [loading, setLoading] = useState(true); // State for loading indicator
+  const [isLoading, setIsLoading] = useState(true); // Loading state to show loading indicator if needed
 
-  // Fetch categories from the API
+  // Fetch categories from the API or cache
   useEffect(() => {
     const fetchCategories = async () => {
-      try {
-        const response = await axios.get(
-          "https://phonespotbackend.blacktechcorp.com/api"
-        ); // Replace with your API URL
-        const fetchedCategories = response.data.feateuredCategories.map(
-          (item) => ({
-            title: item.category.name,
-            description: item.category.short_description,
-            image: item.category.image,
-            path: `/services/${item.category.slug}`, // Construct path using the slug
-          })
-        );
-        setCategories(fetchedCategories); // Set fetched categories
-        setLoading(false); // Set loading to false
-      } catch (error) {
-        console.error("Error fetching categories:", error);
-        setLoading(false); // Even if error occurs, stop loading
+      const cachedCategories = localStorage.getItem("categories");
+
+      if (cachedCategories) {
+        // If categories are found in localStorage, use them
+        setCategories(JSON.parse(cachedCategories));
+        setIsLoading(false);
+      } else {
+        try {
+          const response = await axios.get(
+            "https://phonespotbackend.blacktechcorp.com/api"
+          ); // Replace with your API URL
+
+          const fetchedCategories = response.data.feateuredCategories.map(
+            (item) => ({
+              title: item.category.name,
+              description: item.category.short_description,
+              image: item.category.image,
+              path: `/services/${item.category.slug}`, // Construct path using the slug
+            })
+          );
+
+          // Save the fetched categories in localStorage
+          localStorage.setItem("categories", JSON.stringify(fetchedCategories));
+          setCategories(fetchedCategories); // Set fetched categories
+          setIsLoading(false);
+        } catch (error) {
+          console.error("Error fetching categories:", error);
+          setIsLoading(false);
+        }
       }
     };
 
-    fetchCategories(); // Call the API
+    fetchCategories(); // Call the function to fetch categories or load from cache
   }, []);
 
   // Start animation when the section is in view
@@ -45,11 +57,13 @@ const CategorySection = () => {
     }
   }, [controls, inView]);
 
-  if (loading) {
-    return <div className="flex pt-20 justify-center items-start w-full h-screen">
-    <div className="spinner-border animate-spin inline-block w-8 h-8 border-4 rounded-full text-red-600"></div>
-    <p className="ml-4 text-red-600">Loading...</p>
-  </div>; 
+  // If data is still loading, you can show a loading indicator
+  if (isLoading) {
+    return (
+      <section className="py-16 bg-red-100 text-center">
+        <p>Loading categories...</p>
+      </section>
+    );
   }
 
   return (

@@ -89,9 +89,9 @@ const Navbar = () => {
           </div>
           <div className="flex space-x-12 justify-center items-center text-white text-sm">
             <span className="hidden md:block">Mon-Fri: 9:00 AM - 6:00 PM</span>
-            <Link to="tel:+1234567890" className="flex items-center space-x-2">
+            <Link to="tel:+1(240)-696-5671" className="flex items-center space-x-2">
               <FontAwesomeIcon icon={faPhoneAlt} className="text-xl font-bold animate-bounce" />
-              <span className="text-base lg:text-xl font-bold">+1 234 567 890</span>
+              <span className="text-base lg:text-xl font-bold">+1 (240)-696-5671</span>
             </Link>
           </div>
         </div>

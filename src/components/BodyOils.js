@@ -86,7 +86,7 @@ const BodyOils = () => {
               You can find Over 300 Imported Body Oils and Premium Incense inside Phone Spot. Whether you are looking for specific body oil, essential oil, or Burner Oils, you can find it all inside Phone Spot.
             </p>
             <div className="items-center gap-x-3 space-y-3 sm:flex sm:space-y-0">
-              <Link to="/contact" className="flex items-center bg-gradient-to-r from-red-700 to-orange-700 text-white justify-center gap-x-2 py-2 px-4 bg-white text-black hover:text-gray-500 font-medium duration-150 active:bg-gray-100 border rounded-lg md:inline-flex">
+              <Link to="/contact" className="flex items-center bg-red-600 justify-center gap-x-2 py-2 px-4 text-white hover:text-gray-500 font-medium duration-150 active:bg-gray-100 border rounded-lg md:inline-flex">
                 Call Now
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-5 h-5">
                   <path

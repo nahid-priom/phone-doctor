@@ -1,63 +1,51 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { motion, useAnimation } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { Link } from "react-router-dom";
-
-const services = [
-  {
-    title: "Battery Replacement",
-    image:
-      "https://static.vecteezy.com/system/resources/previews/001/900/934/non_2x/the-technician-holding-a-screwdriver-a-mobile-phone-repair-closeup-inside-cell-phone-with-a-fixing-battery-from-a-broken-service-shop-center-on-wood-table-smartphone-repairs-maintenance-concept-free-photo.jpg",
-    description: "Get your battery replaced quickly and efficiently.",
-    rating: 4.5,
-    reviews: 120,
-  },
-  {
-    title: "Screen Repair",
-    image:
-      "https://howtostartanllc.com/images/business-ideas/business-idea-images/screen-repair-business.jpg",
-    description: "Fix cracked or broken screens with ease.",
-    rating: 4.2,
-    reviews: 98,
-  },
-  {
-    title: "Speaker Repair",
-    image:
-      "https://miro.medium.com/v2/resize:fit:1024/0*BnOXWqAOkxmpmLBO.png",
-    description: "Repair or replace faulty speakers.",
-    rating: 4.7,
-    reviews: 145,
-  },
-  {
-    title: "Charger Port Repair",
-    image:
-      "https://e3.365dm.com/22/10/2048x1152/skynews-iphone-usbc-eu-european-union_5944232.jpg",
-    description: "Fix your faulty charging port.",
-    rating: 4.4,
-    reviews: 110,
-  },
-  {
-    title: "Water Damage Repair",
-    image:
-      "https://repairexpress.com/wp-content/uploads/2023/09/MicrosoftTeams-image-30.jpg",
-    description: "Get your device repaired from water damage.",
-    rating: 4.4,
-    reviews: 110,
-  },
-];
+import axios from "axios";
 
 const OurServices = () => {
   const controls = useAnimation();
   const [ref, inView] = useInView({ triggerOnce: false, threshold: 0.2 });
+  
+  // State to store services from API or localStorage
+  const [services, setServices] = useState([]);
+  const [error, setError] = useState("");
 
-  React.useEffect(() => {
+  useEffect(() => {
+    const localData = localStorage.getItem("services");
+    
+    // Check if services data is available in localStorage
+    if (localData) {
+      setServices(JSON.parse(localData)); // Use data from localStorage
+    } else {
+      // If not in localStorage, fetch from the API
+      axios.get("https://phonespotbackend.blacktechcorp.com/api")
+        .then(response => {
+          const fetchedServices = response.data.products;
+          setServices(fetchedServices); // Set fetched data to state
+          localStorage.setItem("services", JSON.stringify(fetchedServices)); // Store data in localStorage
+        })
+        .catch(error => {
+          console.error("Error fetching services:", error);
+          setError("Failed to load services.");
+        });
+    }
+  }, []); // Empty dependency array to run only once on mount
+
+  // Scroll animation when the section comes into view
+  useEffect(() => {
     if (inView) {
       controls.start("visible");
     }
   }, [controls, inView]);
 
+  if (error) {
+    return <div className="text-center text-red-500">{error}</div>;
+  }
+
   return (
-    <section ref={ref} className="bg-red-50  px-4 py-12">
+    <section ref={ref} className="bg-red-50 px-4 py-12">
       <motion.div
         initial="hidden"
         animate={controls}
@@ -68,18 +56,15 @@ const OurServices = () => {
         transition={{ duration: 0.5 }}
         className="text-center mb-12"
       >
-        <h2 className="text-4xl font-extrabold text-gray-900">
-          Our Services
-        </h2>
+        <h2 className="text-4xl font-extrabold text-gray-900">Our Services</h2>
         <p className="mt-4 text-lg text-gray-600">
-          We specialize in high-quality repairs for all major brands. Choose
-          your device category below to learn more about our services.
+          We specialize in high-quality repairs for all major brands. Choose your device category below to learn more about our services.
         </p>
       </motion.div>
 
       <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {services.map((service, index) => (
-          <Link to="/contact" key={index}>  {/* Adding the key prop here */}
+          <Link to={"/contact"} key={service.id}>  {/* Dynamically set the link to each service */}
             <motion.div
               className="p-6 bg-white border rounded-lg shadow-md"
               initial="hidden"
@@ -92,14 +77,14 @@ const OurServices = () => {
               whileHover={{ scale: 1.05 }}
             >
               <img
-                src={service.image}
-                alt={service.title}
+                src={`https://phonespotbackend.blacktechcorp.com/${service.thumb_image}`}  // Use thumb_image from API
+                alt={service.name}
                 className="w-full h-60 object-cover object-center rounded-lg mb-4"
               />
               <h3 className="text-xl font-medium text-gray-800">
-                {service.title}
+                {service.name} {/* Use service name */}
               </h3>
-              <p className="text-gray-600">{service.description}</p>
+              <p className="text-gray-600">{service.short_description}</p> {/* Use short description */}
               <div className="mt-4 flex items-center">
                 <div className="text-yellow-400">
                   <svg
@@ -116,7 +101,7 @@ const OurServices = () => {
                   </svg>
                 </div>
                 <div className="ml-1 text-gray-600">
-                  {service.rating} ({service.reviews} reviews)
+                  5 (124 reviews) {/* Use rating and reviews */}
                 </div>
               </div>
             </motion.div>

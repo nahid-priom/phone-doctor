@@ -3,93 +3,92 @@ import { Link } from 'react-router-dom';
 
 const HeroSection = () => {
   const [sliderData, setSliderData] = useState(null); // State to store the slider data
-  const [loading, setLoading] = useState(true); // State to track loading
   const leftContentRef = useRef(null);
   const imageRef = useRef(null);
 
-  // Fetch slider data from the API
+  // Fetch slider data from the API or localStorage
   useEffect(() => {
     const fetchSliderData = async () => {
-      try {
-        const response = await fetch('https://phonespotbackend.blacktechcorp.com/api');
-        const data = await response.json();
-        setSliderData(data.slider);
-        setLoading(false); // Data has loaded, set loading to false
-      } catch (error) {
-        console.error('Error fetching slider data:', error);
-        setLoading(false); // Stop loading even if there's an error
+      const cachedSliderData = localStorage.getItem('sliderData');
+      
+      // If cached data is available, use it
+      if (cachedSliderData) {
+        setSliderData(JSON.parse(cachedSliderData));
+        
+      } else {
+        try {
+          const response = await fetch('https://phonespotbackend.blacktechcorp.com/api');
+          const data = await response.json();
+          setSliderData(data.slider);
+          
+          // Cache the fetched data
+          localStorage.setItem('sliderData', JSON.stringify(data.slider));
+          
+        } catch (error) {
+          console.error('Error fetching slider data:', error);
+         
+        }
       }
     };
 
     fetchSliderData();
   }, []);
 
-  // Add scroll animation for content when it enters view
   useEffect(() => {
-    if (!loading) {
-      const handleScrollAnimation = (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.style.transform = 'translateX(0)';
-            entry.target.style.opacity = '1';
-          }
-        });
-      };
-
-      const observer = new IntersectionObserver(handleScrollAnimation, {
-        threshold: 0.5,
+    const handleScrollAnimation = (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.style.transform = 'translateX(0)';
+          entry.target.style.opacity = '1';
+        }
       });
-
-      const leftContentElement = leftContentRef.current;
-      const imageElement = imageRef.current;
-
-      if (leftContentElement) {
-        observer.observe(leftContentElement);
-      }
-
-      if (imageElement) {
-        observer.observe(imageElement);
-      }
-
-      return () => {
-        if (leftContentElement) {
-          observer.unobserve(leftContentElement);
-        }
-        if (imageElement) {
-          observer.unobserve(imageElement);
-        }
-      };
+    };
+  
+    const observer = new IntersectionObserver(handleScrollAnimation, {
+      threshold: 0.5,
+    });
+  
+    const leftContentElement = leftContentRef.current;
+    const imageElement = imageRef.current;
+  
+    if (leftContentElement) {
+      observer.observe(leftContentElement);
     }
-  }, [loading]);
+  
+    if (imageElement) {
+      observer.observe(imageElement);
+    }
+  
+    return () => {
+      if (leftContentElement) {
+        observer.unobserve(leftContentElement);
+      }
+      if (imageElement) {
+        observer.unobserve(imageElement);
+      }
+    };
+  }, []); // No dependencies needed
+  
 
   return (
     <section className="relative bg-red-50 py-10 pt-36 lg:pt-44 pb-6 lg:pb-32">
       <div className="max-w-7xl mx-auto text-gray-600 gap-x-12 items-center justify-between overflow-hidden md:flex">
-        {/* Show Preloader while loading */}
-        {loading ? (
-          <div className="flex justify-center items-start w-full h-screen">
-            <div className="spinner-border animate-spin inline-block w-8 h-8 border-4 rounded-full text-red-600"></div>
-            <p className="ml-4 text-red-600">Loading...</p>
-          </div>
-        ) : (
+        
+        
           <>
             {/* Left Content */}
             <div
               ref={leftContentRef}
               className="flex-none space-y-5 px-4 sm:max-w-lg md:px-0 lg:max-w-xl opacity-0 transform -translate-x-20 transition-all duration-1000"
             >
-              {sliderData && (
-                <>
-                  <h1 className="text-base text-center md:text-start text-black font-medium">
-                    Do you have problems with your device?<br />
-                    <span className="text-red-600 text-lg font-bold">Find a Solution Here!!</span>
-                  </h1>
-                  <h2 className="text-3xl px-2 lg:px-0 lg:text-4xl text-center md:text-start text-gray-800 font-extrabold md:text-5xl">
-                    {sliderData.title_one}
-                  </h2>
-                  <p className="text-center md:text-start px-2 lg:px-0">{sliderData.title_two}</p>
-                </>
-              )}
+              <h1 className="text-base text-center md:text-start text-black font-medium">
+                Do you have problems with your device?<br />
+                <span className="text-red-600 text-lg font-bold">Find a Solution Here!!</span>
+              </h1>
+              <h2 className="text-3xl px-2 lg:px-0 lg:text-4xl text-center md:text-start text-gray-800 font-extrabold md:text-5xl">
+                {sliderData?.title_one}
+              </h2>
+              <p className="text-center md:text-start px-2 lg:px-0">{sliderData?.title_two}</p>
               <div className="items-center gap-x-3 justify-center lg:justify-start flex sm:space-y-0">
                 <Link
                   to="/service"
@@ -132,7 +131,7 @@ const HeroSection = () => {
               )}
             </div>
           </>
-        )}
+       
       </div>
     </section>
   );

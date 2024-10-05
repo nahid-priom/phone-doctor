@@ -33,7 +33,7 @@ const Contact = () => {
   };
 
   return (
-    <section className="bg-red-50 py-10 px-4 pt-32 lg:pt-36 lg:px-0">
+    <section className="bg-red-50 py-10 px-4 pt-32 lg:pt-44 lg:px-0">
       <div className="max-w-4xl mx-auto">
         <h1 className="text-3xl font-bold text-center text-gray-800 mb-8">
           Contact Us
