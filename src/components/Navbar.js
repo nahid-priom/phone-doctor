@@ -3,12 +3,10 @@ import { Link, useLocation } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faTimes, faPhoneAlt, faChevronDown } from "@fortawesome/free-solid-svg-icons";
 import { faFacebook, faTwitter, faInstagram } from "@fortawesome/free-brands-svg-icons";
+import axios from "axios";
 
 import logo from "../assets/logo.jpeg";
-import iphoneImage from "../assets/category/iphone.png"; 
-import samsungImage from "../assets/category/samsung.png";
-import ipadImage from "../assets/category/ipad.png";
-import androidImage from "../assets/category/android.png";
+
 
 // const subcategories = {
 //   iPhone: ["iPhone 15 Series", "iPhone 14 Series","iPhone 13 Series", "iPhone 12 Series"],
@@ -26,19 +24,43 @@ export const navLinks = [
   {id: "bodyoils", title: "Body Oils"}
 ];
 
-const categories = [
-  { name: "iPhone", image: iphoneImage },
-  { name: "Samsung", image: samsungImage },
-  { name: "iPad", image: ipadImage },
-  { name: "Other Android", image: androidImage },
-];
+// const categories = [
+//   { name: "iPhone", image: iphoneImage },
+//   { name: "Samsung", image: samsungImage },
+//   { name: "iPad", image: ipadImage },
+//   { name: "Other Android", image: androidImage },
+// ];
 
 const Navbar = () => {
+  const [categories, setCategories] = useState([]);
   const location = useLocation();
   const [active, setActive] = useState("");
   const [toggle, setToggle] = useState(false);
   const [serviceDropdownOpen, setServiceDropdownOpen] = useState(false);
   const [navbarShadow, setNavbarShadow] = useState(false);
+
+   // Fetch categories when the component is mounted
+   useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const response = await axios.get("https://phonespotbackend.blacktechcorp.com/api");
+
+        // Map the fetched categories to match the structure you need
+        const fetchedCategories = response.data.categories.map((category) => ({
+          name: category.name,
+          image: `https://phonespotbackend.blacktechcorp.com/${category.image}`, // Construct the image URL
+        }));
+
+        setCategories(fetchedCategories); // Set the categories in state
+       
+      } catch (error) {
+        console.error("Error fetching categories:", error);
+      
+      }
+    };
+
+    fetchCategories(); // Call the function to fetch categories
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {

@@ -4,35 +4,41 @@ import { useInView } from "react-intersection-observer";
 import { useNavigate } from "react-router-dom";
 import axios from "axios"; // Import axios for API calls
 
-const CategorySection = () => {
-  const controls = useAnimation(); // Controls for animations
-  const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.2 }); // Intersection Observer for triggering animations
-  const navigate = useNavigate(); // Hook for navigation
+const FeaturedCategorySection = () => {
+  const controls = useAnimation();
+  const [ref, inView] = useInView({ triggerOnce: false, threshold: 0.2 });
+  const navigate = useNavigate(); // Initialize navigate hook
 
-  const [categories, setCategories] = useState([]); // State to store categories
-  const [isLoading, setIsLoading] = useState(true); // Loading state
+  const [categories, setCategories] = useState([]); // State to store fetched categories
+  const [isLoading, setIsLoading] = useState(true); // Loading state to show loading indicator if needed
 
-  // Fetch categories from the API or from localStorage cache
+  // Fetch categories from the API or cache
   useEffect(() => {
     const fetchCategories = async () => {
       const cachedCategories = localStorage.getItem("categories");
 
       if (cachedCategories) {
-        setCategories(JSON.parse(cachedCategories)); // Use cached categories if available
+        // If categories are found in localStorage, use them
+        setCategories(JSON.parse(cachedCategories));
         setIsLoading(false);
       } else {
         try {
-          const response = await axios.get("https://phonespotbackend.blacktechcorp.com/api");
+          const response = await axios.get(
+            "https://phonespotbackend.blacktechcorp.com/api"
+          ); // Replace with your API URL
 
-          const fetchedCategories = response.data.categories.map((category) => ({
-            title: category.name,                        // Use category name
-            description: category.short_description,     // Use short description
-            image: category.image,                       // Use category image
-            path: `/services/${category.slug}`,          // Construct the path using slug
-          }));
+          const fetchedCategories = response.data.feateuredCategories.map(
+            (item) => ({
+              title: item.category.name,
+              description: item.category.short_description,
+              image: item.category.image,
+              path: `/services/${item.category.slug}`, // Construct path using the slug
+            })
+          );
 
-          localStorage.setItem("categories", JSON.stringify(fetchedCategories)); // Cache categories
-          setCategories(fetchedCategories); // Set categories
+          // Save the fetched categories in localStorage
+          localStorage.setItem("categories", JSON.stringify(fetchedCategories));
+          setCategories(fetchedCategories); // Set fetched categories
           setIsLoading(false);
         } catch (error) {
           console.error("Error fetching categories:", error);
@@ -41,7 +47,7 @@ const CategorySection = () => {
       }
     };
 
-    fetchCategories(); // Call the fetch function on component mount
+    fetchCategories(); // Call the function to fetch categories or load from cache
   }, []);
 
   // Start animation when the section is in view
@@ -51,7 +57,7 @@ const CategorySection = () => {
     }
   }, [controls, inView]);
 
-  // Loading indicator while categories are being fetched
+  // If data is still loading, you can show a loading indicator
   if (isLoading) {
     return (
       <section className="py-16 bg-red-100 text-center">
@@ -118,4 +124,4 @@ const CategorySection = () => {
   );
 };
 
-export default CategorySection;
+export default FeaturedCategorySection;

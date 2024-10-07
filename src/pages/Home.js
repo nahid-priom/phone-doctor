@@ -1,6 +1,6 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
-import CategorySection from "../components/CategorySection";
+
 import HeroSection from "../components/HeroSection";
 import Navbar from "../components/Navbar";
 import RecentWorkSection from "../components/RecentWork";
@@ -10,6 +10,7 @@ import Footer from "../components/Footer";
 // import Preloader from "../components/Preloader";
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import FeaturedCategorySection from '../components/FeaturedCategorySection';
 
 const Home = () => {
   return (
@@ -23,7 +24,7 @@ const Home = () => {
       {/* <Preloader /> */}
       <Navbar />
       <HeroSection />
-      <CategorySection />
+      <FeaturedCategorySection />
       <ServiceSection />
       <RecentWorkSection />
       <ClientTestimonials />
