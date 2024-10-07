@@ -8,13 +8,6 @@ import axios from "axios";
 import logo from "../assets/logo.jpeg";
 
 
-// const subcategories = {
-//   iPhone: ["iPhone 15 Series", "iPhone 14 Series","iPhone 13 Series", "iPhone 12 Series"],
-//   Samsung: ["Samsung A Series", "Samsung S Series", "Samsung Note Series", "Samsung Fold Series"],
-//   iPad: ["iPad Pro", "iPad Air"],
-//   "Other Android": ["Google Pixel", "OnePlus", "LG", "Motorolla"]
-// };
-
 export const navLinks = [
   { id: "home", title: "Home" },
   { id: "service", title: "Services" },
@@ -24,12 +17,7 @@ export const navLinks = [
   {id: "bodyoils", title: "Body Oils"}
 ];
 
-// const categories = [
-//   { name: "iPhone", image: iphoneImage },
-//   { name: "Samsung", image: samsungImage },
-//   { name: "iPad", image: ipadImage },
-//   { name: "Other Android", image: androidImage },
-// ];
+
 
 const Navbar = () => {
   const [categories, setCategories] = useState([]);
