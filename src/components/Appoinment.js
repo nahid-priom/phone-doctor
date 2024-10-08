@@ -4,7 +4,11 @@ import Navbar from "./Navbar";
 import Footer from "./Footer";
 
 const Appointment = () => {
-  const { model } = useParams(); // Get the phone model from the URL parameters
+  const { model, service } = useParams(); // Get the phone model and service from the URL parameters
+
+  // Utility function to capitalize model and service names
+  const capitalizeWords = (str) =>
+    str.replace(/\b\w/g, (char) => char.toUpperCase());
 
   // State to handle form inputs
   const [formData, setFormData] = useState({
@@ -14,6 +18,7 @@ const Appointment = () => {
     address: "",
     appointmentDate: "",
     appointmentTime: "",
+    phoneIssue: "",
   });
 
   // State to control the visibility of the thank you modal
@@ -21,10 +26,11 @@ const Appointment = () => {
 
   // Handle form input changes
   const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
   };
 
   // Handle form submission
@@ -47,112 +53,62 @@ const Appointment = () => {
     <>
       <Navbar />
 
-      <div className="max-w-7xl pt-32 mx-auto p-6">
+      <div className="max-w-3xl pt-32 mx-auto p-6">
         {/* Header Section */}
         <div className="bg-gradient-to-r from-red-500 to-red-600 p-2 lg:p-6 rounded-lg shadow-lg mb-2 lg:mb-8">
-          <h1 className="text-xl lg:text-4xl font-bold text-white text-center lg:mb-4">
-            Book Appointment for {model} Repair
-          </h1>
+        <h1 className="text-xl lg:text-4xl font-bold text-white text-center lg:mb-4 flex flex-col gap-2">
+  <span>
+    Book Appointment for <span className="text-yellow-200">{capitalizeWords(model)}</span>
+  </span>
+  <span className="text-2xl lg:text-5xl text-yellow-300 font-extrabold">
+    {capitalizeWords(service)}
+  </span>
+</h1>
+
         </div>
 
-        <div className="flex flex-col lg:flex-row items-center lg:items-start gap-6">
-          {/* Left Side - Image */}
-          <div className="hidden lg:block lg:flex-shrink-0">
-            <img
-              src={`https://adminapi.applegadgetsbd.com/storage/media/large/iPhone-15-Plus-(2)-(6)-5363.jpg`} // Replace with dynamic image URL if available
-              alt={`${model} Repair`}
-              className="w-full max-w-sm rounded-lg shadow-md"
-            />
-          </div>
-
-          {/* Right Side - Appointment Form */}
-          <div className="w-full lg:flex-grow">
-            <form
-              onSubmit={handleSubmit}
-              className="bg-white shadow-lg rounded-lg p-6 space-y-4"
-            >
-              <div>
-                <label className="block text-gray-700">Name</label>
-                <input
-                  type="text"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleChange}
-                  className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500"
-                  required
-                />
-              </div>
-
-              <div>
-                <label className="block text-gray-700">Email</label>
-                <input
-                  type="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500"
-                  required
-                />
-              </div>
-
-              <div>
-                <label className="block text-gray-700">Phone Number</label>
-                <input
-                  type="tel"
-                  name="phone"
-                  value={formData.phone}
-                  onChange={handleChange}
-                  className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500"
-                  required
-                />
-              </div>
-
-              <div>
-                <label className="block text-gray-700">Address</label>
+        {/* Appointment Form */}
+        <form onSubmit={handleSubmit} className="bg-white shadow-lg rounded-lg p-6 space-y-4">
+          {[
+            { label: "Name", type: "text", name: "name" },
+            { label: "Email", type: "email", name: "email" },
+            { label: "Phone Number", type: "tel", name: "phone" },
+            { label: "Address", type: "textarea", name: "address" },
+            { label: "Phone Issue", type: "textarea", name: "phoneIssue", placeholder: "Describe the issue you're facing with your phone" },
+            { label: "Appointment Date", type: "date", name: "appointmentDate" },
+            { label: "Appointment Time", type: "time", name: "appointmentTime" },
+          ].map((input) => (
+            <div key={input.name}>
+              <label className="block text-gray-700">{input.label}</label>
+              {input.type === "textarea" ? (
                 <textarea
-                  name="address"
-                  value={formData.address}
+                  name={input.name}
+                  value={formData[input.name]}
                   onChange={handleChange}
                   className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500"
+                  placeholder={input.placeholder}
                   required
                 />
-              </div>
-
-              {/* Date Picker */}
-              <div>
-                <label className="block text-gray-700">Appointment Date</label>
+              ) : (
                 <input
-                  type="date"
-                  name="appointmentDate"
-                  value={formData.appointmentDate}
+                  type={input.type}
+                  name={input.name}
+                  value={formData[input.name]}
                   onChange={handleChange}
                   className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500"
                   required
                 />
-              </div>
+              )}
+            </div>
+          ))}
 
-              {/* Time Picker */}
-              <div>
-                <label className="block text-gray-700">Appointment Time</label>
-                <input
-                  type="time"
-                  name="appointmentTime"
-                  value={formData.appointmentTime}
-                  onChange={handleChange}
-                  className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500"
-                  required
-                />
-              </div>
-
-              <button
-                type="submit"
-                className="w-full bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition duration-200"
-              >
-                Submit
-              </button>
-            </form>
-          </div>
-        </div>
+          <button
+            type="submit"
+            className="w-full bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition duration-200"
+          >
+            Submit
+          </button>
+        </form>
       </div>
 
       {/* Thank You Modal */}
@@ -161,7 +117,9 @@ const Appointment = () => {
           <div className="bg-white p-6 rounded-lg shadow-lg flex flex-col items-center">
             <div className="text-4xl text-green-500 mb-4">✔</div>
             <h2 className="text-xl font-bold">Thank You!</h2>
-            <p className="mt-2">Your appointment has been booked successfully.</p>
+            <p className="mt-2">
+              Your appointment for {capitalizeWords(model)} {capitalizeWords(service)} repair has been booked successfully.
+            </p>
           </div>
         </div>
       )}

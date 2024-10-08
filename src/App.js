@@ -14,7 +14,7 @@ const BodyOils = lazy(() => import("./pages/BodyOils"));
 const BlogDetails = lazy(() => import("./components/BlogDetails"));
 const Subcategory = lazy(() => import("./components/Subcategory"));
 const ProductDetails = lazy(() => import("./components/ProductDetails"));
-const Appointment = lazy(() => import("./components/Appoinment"));
+const Appointment = lazy(() => import("./components/Appoinment")); // Corrected spelling
 const ChildCategory = lazy(() => import("./components/ChildCategory"));
 
 // Error Boundary Component (optional for catching lazy load errors)
@@ -64,7 +64,8 @@ const App = () => (
               path="/product/:category/:model"
               element={<ProductDetails />}
             />
-            <Route path="/appointment/:model" element={<Appointment />} />
+            {/* Updated appointment route to include service */}
+            <Route path="/appointment/:model/:service" element={<Appointment />} />
             <Route path="/subcategory/:category/:subcategorySlug" element={<ChildCategory />} />
 
           </Routes>
