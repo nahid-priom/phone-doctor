@@ -11,7 +11,7 @@ const Subcategory = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const cacheExpiry = 24 * 60 * 60 * 1000; // Cache expiry time (24 hours)
+    const cacheExpiry = 24 * 60 * 60 * 1000;
     
     const fetchSubcategories = async () => {
       setLoading(true);
@@ -83,7 +83,7 @@ const Subcategory = () => {
                   className="bg-white flex flex-col items-center shadow-lg rounded-lg overflow-hidden transform transition duration-300 hover:scale-105 hover:shadow-xl"
                 >
                   {/* Link to the ChildCategory page when a subcategory is clicked */}
-                  <Link to={`/subcategory/${category}/${encodeURIComponent(subcategory.slug)}`}>
+                  <Link to={`/subcategory/${category}/${subcategory.slug}`}>
                     <img
                       src={`https://phonespotbackend.blacktechcorp.com/${subcategory.image}`}
                       alt={subcategory.name}

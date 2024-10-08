@@ -5,23 +5,43 @@ import Footer from "./Footer";
 import axios from "axios";
 
 const ChildCategory = () => {
-  const { category, series } = useParams(); // Extract the category and series from the URL parameters
+  const { category, subcategorySlug } = useParams(); // Extract the category and subcategory from the URL parameters
   const [childCategories, setChildCategories] = useState([]);
-  const [formattedCategory, setFormattedCategory] = useState("");
+  const [formattedSubcategory, setFormattedSubcategory] = useState("");
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    const cacheExpiry = 24 * 60 * 60 * 1000; // Cache expiry time (24 hours)
+
     const fetchChildCategories = async () => {
       setLoading(true);
+
+      // Check if data is in local storage
+      const cachedData = localStorage.getItem(`childcategories_${subcategorySlug}`);
+      const cachedTime = localStorage.getItem(`childcategories_time_${subcategorySlug}`);
+
+      if (cachedData && cachedTime && (Date.now() - cachedTime < cacheExpiry)) {
+        // Use cached data if it's not expired
+        setChildCategories(JSON.parse(cachedData));
+        setFormattedSubcategory(subcategorySlug.replace(/-/g, " ").toUpperCase());
+        setLoading(false);
+        return;
+      }
+
       try {
-        // Fetch child categories for the selected subcategory (series)
+        // Fetch child categories for the selected subcategory from the API
         const childCategoryRes = await axios.get(
-          `https://phonespotbackend.blacktechcorp.com/api/category/childcategory/${series}`
+          `https://phonespotbackend.blacktechcorp.com/api/category/childcategory/${subcategorySlug}`
         );
         const childCategoriesData = childCategoryRes.data.categories || [];
 
+        // Save the data to state
         setChildCategories(childCategoriesData);
-        setFormattedCategory(category.charAt(0).toUpperCase() + category.slice(1)); // Format the category name
+        setFormattedSubcategory(subcategorySlug.replace(/-/g, " ").toUpperCase());
+
+        // Cache the data in local storage
+        localStorage.setItem(`childcategories_${subcategorySlug}`, JSON.stringify(childCategoriesData));
+        localStorage.setItem(`childcategories_time_${subcategorySlug}`, Date.now());
       } catch (error) {
         console.error("Error fetching child categories:", error);
       } finally {
@@ -30,7 +50,7 @@ const ChildCategory = () => {
     };
 
     fetchChildCategories();
-  }, [category, series]);
+  }, [subcategorySlug]);
 
   return (
     <>
@@ -39,10 +59,10 @@ const ChildCategory = () => {
       <div className="max-w-7xl pt-32 mx-auto p-6">
         <div className="bg-gradient-to-r from-red-500 to-red-600 p-2 lg:p-6 rounded-lg shadow-lg mb-2 lg:mb-8">
           <h1 className="text-xl lg:text-4xl font-bold text-white text-center lg:mb-4">
-            {`${formattedCategory} ${decodeURIComponent(series)} Models`}
+            {`${formattedSubcategory} Models`}
           </h1>
           <p className="text-white hidden lg:block text-center max-w-xl mx-auto">
-            Browse through all models in the {series} of {formattedCategory}.
+            Browse through all available models in the {formattedSubcategory} series.
           </p>
         </div>
 
@@ -63,9 +83,9 @@ const ChildCategory = () => {
                   key={model.name}
                   className="bg-white flex flex-col items-center shadow-lg rounded-lg overflow-hidden transform transition duration-300 hover:scale-105 hover:shadow-xl"
                 >
-                  <Link to={`/product/${formattedCategory}/${encodeURIComponent(model.name)}`}>
+                  <Link to={`/product/${category}/${encodeURIComponent(model.slug)}`}>
                     <img
-                      src={model.image}
+                      src={`https://phonespotbackend.blacktechcorp.com/${model.image}`}
                       alt={model.name}
                       className="w-36 h-36 object-contain"
                     />
@@ -74,7 +94,7 @@ const ChildCategory = () => {
                         {model.name}
                       </h3>
                       <Link
-                        to={`/product/${formattedCategory}/${encodeURIComponent(model.name)}`}
+                        to={`/product/${category}/${encodeURIComponent(model.slug)}`}
                         className="bg-red-500 text-sm lg:text-base font-bold text-white px-2 py-1 rounded-full hover:bg-red-600 transition duration-200"
                       >
                         View Details

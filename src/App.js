@@ -58,15 +58,15 @@ const App = () => (
             {/* Dynamic Routes */}
             <Route path="/blog/:id" element={<BlogDetails />} />
             <Route path="/services/:category" element={<Subcategory />} />
+            <Route path="/service/:category" element={<Subcategory />} />
+
             <Route
               path="/product/:category/:model"
               element={<ProductDetails />}
             />
             <Route path="/appointment/:model" element={<Appointment />} />
-            <Route
-              path="/child-category/:category/:series"
-              element={<ChildCategory />}
-            />
+            <Route path="/subcategory/:category/:subcategorySlug" element={<ChildCategory />} />
+
           </Routes>
         </ErrorBoundary>
       </Suspense>

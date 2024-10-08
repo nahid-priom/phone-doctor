@@ -27,28 +27,28 @@ const Navbar = () => {
   const [serviceDropdownOpen, setServiceDropdownOpen] = useState(false);
   const [navbarShadow, setNavbarShadow] = useState(false);
 
-   // Fetch categories when the component is mounted
-   useEffect(() => {
+  useEffect(() => {
     const fetchCategories = async () => {
       try {
         const response = await axios.get("https://phonespotbackend.blacktechcorp.com/api");
-
-        // Map the fetched categories to match the structure you need
+  
+        // Map the fetched categories to match the structure you need, including 'slug'
         const fetchedCategories = response.data.categories.map((category) => ({
           name: category.name,
+          slug: category.slug, // Include the slug here
           image: `https://phonespotbackend.blacktechcorp.com/${category.image}`, // Construct the image URL
+          shortDescription: category.short_description, // Optional: include other properties if needed
         }));
-
+  
         setCategories(fetchedCategories); // Set the categories in state
-       
       } catch (error) {
         console.error("Error fetching categories:", error);
-      
       }
     };
-
+  
     fetchCategories(); // Call the function to fetch categories
   }, []);
+  
 
   useEffect(() => {
     const handleScroll = () => {
@@ -134,7 +134,7 @@ const Navbar = () => {
                         key={category.name}
                         className="relative hover:bg-red-600 border-b border-red-400 p-4 hover:text-white items-center py-2"
                       >
-                        <Link to={`/services/${category.name.toLowerCase()}`} className="flex items-center w-full">
+                        <Link to={`/services/${category.slug}`} className="flex items-center w-full">
                           <img src={category.image} alt={category.name} className="w-8 h-8 mr-2" />
                           <span className="text-black hover:text-white w-full p-1 rounded">{category.name}</span>
                         </Link>

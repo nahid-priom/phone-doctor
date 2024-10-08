@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { motion, useAnimation } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { useNavigate } from "react-router-dom";
-import axios from "axios"; // Import axios for API calls
+import axios from "axios"; 
 
 const CategorySection = () => {
   const controls = useAnimation(); // Controls for animations
@@ -10,39 +10,41 @@ const CategorySection = () => {
   const navigate = useNavigate(); // Hook for navigation
 
   const [categories, setCategories] = useState([]); // State to store categories
-  const [isLoading, setIsLoading] = useState(true); // Loading state
-
-  // Fetch categories from the API or from localStorage cache
+  
+  console.log(categories) 
   useEffect(() => {
     const fetchCategories = async () => {
-      const cachedCategories = localStorage.getItem("categories");
-
-      if (cachedCategories) {
-        setCategories(JSON.parse(cachedCategories)); // Use cached categories if available
-        setIsLoading(false);
+      const cachedData = localStorage.getItem("cachedCategories"); // Use a different key name
+  
+      if (cachedData) {
+        // If cached data exists, use it
+        setCategories(JSON.parse(cachedData)); // Assuming categories are already set
       } else {
         try {
           const response = await axios.get("https://phonespotbackend.blacktechcorp.com/api");
-
+  
+          // Map the fetched categories to match the structure you need, including 'slug'
           const fetchedCategories = response.data.categories.map((category) => ({
-            title: category.name,                        // Use category name
-            description: category.short_description,     // Use short description
-            image: category.image,                       // Use category image
-            path: `/services/${category.slug}`,          // Construct the path using slug
+            name: category.name,
+            slug: `/services/${category.slug}`, // Include the slug here
+            image: `https://phonespotbackend.blacktechcorp.com/${category.image}`, // Construct the image URL
+            shortDescription: category.short_description,
+             // Optional: include other properties if needed
           }));
-
-          localStorage.setItem("categories", JSON.stringify(fetchedCategories)); // Cache categories
-          setCategories(fetchedCategories); // Set categories
-          setIsLoading(false);
+  
+          // Cache the fetched categories in localStorage
+          localStorage.setItem("cachedCategories", JSON.stringify(fetchedCategories));
+          setCategories(fetchedCategories); // Set the categories in state
         } catch (error) {
           console.error("Error fetching categories:", error);
-          setIsLoading(false);
         }
       }
     };
-
-    fetchCategories(); // Call the fetch function on component mount
+  
+    fetchCategories(); // Call the function to fetch categories
   }, []);
+  
+  
 
   // Start animation when the section is in view
   useEffect(() => {
@@ -51,14 +53,6 @@ const CategorySection = () => {
     }
   }, [controls, inView]);
 
-  // Loading indicator while categories are being fetched
-  if (isLoading) {
-    return (
-      <section className="py-16 bg-red-100 text-center">
-        <p>Loading categories...</p>
-      </section>
-    );
-  }
 
   return (
     <section ref={ref} id="categorySection" className="py-16 bg-red-100">
@@ -87,30 +81,31 @@ const CategorySection = () => {
         <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
           {categories.map((category, index) => (
             <motion.div
-              key={index}
-              className="relative bg-white shadow-md rounded-xl p-6 text-center cursor-pointer"
-              initial="hidden"
-              animate={controls}
-              variants={{
-                hidden: { opacity: 0, y: 50 },
-                visible: { opacity: 1, y: 0 },
-              }}
-              transition={{ duration: 0.5, delay: index * 0.2 }}
-              whileHover={{ scale: 1.05 }}
-              onClick={() => navigate(category.path)}
-            >
-              <img
-                src={`https://phonespotbackend.blacktechcorp.com/${category.image}`}
-                alt={category.title}
-                className="w-32 h-32 mx-auto mb-6"
-              />
-              <h3 className="text-xl font-semibold text-gray-900">
-                {category.title}
-              </h3>
-              <p className="mt-4 text-base text-gray-600">
-                {category.description}
-              </p>
-            </motion.div>
+            key={index}
+            className="relative bg-white shadow-md rounded-xl p-6 text-center cursor-pointer"
+            initial="hidden"
+            animate={controls}
+            variants={{
+              hidden: { opacity: 0, y: 50 },
+              visible: { opacity: 1, y: 0 },
+            }}
+            transition={{ duration: 0.5, delay: index * 0.2 }}
+            whileHover={{ scale: 1.05 }}
+            onClick={() => navigate(category.slug)}
+          >
+            <img
+              src={category.image} // Use the full URL directly here
+              alt={category.title}
+              className="w-32 h-32 mx-auto mb-6"
+            />
+            <h3 className="text-xl font-semibold text-gray-900">
+              {category.name}
+            </h3>
+            <p className="mt-4 text-base text-gray-600">
+              {category.description}
+            </p>
+          </motion.div>
+          
           ))}
         </div>
       </div>

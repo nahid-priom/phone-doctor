@@ -9,17 +9,17 @@ const FeaturedCategorySection = () => {
   const [ref, inView] = useInView({ triggerOnce: false, threshold: 0.2 });
   const navigate = useNavigate(); // Initialize navigate hook
 
-  const [categories, setCategories] = useState([]); // State to store fetched categories
+  const [featuredCategories, setFeaturedCategories] = useState([]); // State to store fetched categories
   const [isLoading, setIsLoading] = useState(true); // Loading state to show loading indicator if needed
 
   // Fetch categories from the API or cache
   useEffect(() => {
     const fetchCategories = async () => {
-      const cachedCategories = localStorage.getItem("categories");
+      const cachedCategories = localStorage.getItem("featured-categories");
 
       if (cachedCategories) {
         // If categories are found in localStorage, use them
-        setCategories(JSON.parse(cachedCategories));
+        setFeaturedCategories(JSON.parse(cachedCategories));
         setIsLoading(false);
       } else {
         try {
@@ -37,8 +37,8 @@ const FeaturedCategorySection = () => {
           );
 
           // Save the fetched categories in localStorage
-          localStorage.setItem("categories", JSON.stringify(fetchedCategories));
-          setCategories(fetchedCategories); // Set fetched categories
+          localStorage.setItem("featured-categories", JSON.stringify(fetchedCategories));
+          setFeaturedCategories(fetchedCategories); // Set fetched categories
           setIsLoading(false);
         } catch (error) {
           console.error("Error fetching categories:", error);
@@ -91,7 +91,7 @@ const FeaturedCategorySection = () => {
 
         {/* Category Cards */}
         <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
-          {categories.map((category, index) => (
+          {featuredCategories.map((category, index) => (
             <motion.div
               key={index}
               className="relative bg-white shadow-md rounded-xl p-6 text-center cursor-pointer"
