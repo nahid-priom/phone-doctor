@@ -9,38 +9,44 @@ const ChildCategory = () => {
   const [childCategories, setChildCategories] = useState([]);
   const [formattedSubcategory, setFormattedSubcategory] = useState("");
   const [loading, setLoading] = useState(true);
-
   useEffect(() => {
     const cacheExpiry = 24 * 60 * 60 * 1000; // Cache expiry time (24 hours)
-
+  
     const fetchChildCategories = async () => {
       setLoading(true);
-
+  
       // Check if data is in local storage
       const cachedData = localStorage.getItem(`childcategories_${subcategorySlug}`);
       const cachedTime = localStorage.getItem(`childcategories_time_${subcategorySlug}`);
-
+  
       if (cachedData && cachedTime && (Date.now() - cachedTime < cacheExpiry)) {
         // Use cached data if it's not expired
-        setChildCategories(JSON.parse(cachedData));
+        const cachedChildCategories = JSON.parse(cachedData);
+  
+        // Sort by serial before setting the state
+        const sortedChildCategories = cachedChildCategories.sort((a, b) => a.serial - b.serial);
+        setChildCategories(sortedChildCategories);
         setFormattedSubcategory(subcategorySlug.replace(/-/g, " ").toUpperCase());
         setLoading(false);
         return;
       }
-
+  
       try {
         // Fetch child categories for the selected subcategory from the API
         const childCategoryRes = await axios.get(
           `https://phonespotbackend.blacktechcorp.com/api/category/childcategory/${subcategorySlug}`
         );
         const childCategoriesData = childCategoryRes.data.categories || [];
-
-        // Save the data to state
-        setChildCategories(childCategoriesData);
+  
+        // Sort the child categories by serial
+        const sortedChildCategories = childCategoriesData.sort((a, b) => a.serial - b.serial);
+  
+        // Save the sorted data to state
+        setChildCategories(sortedChildCategories);
         setFormattedSubcategory(subcategorySlug.replace(/-/g, " ").toUpperCase());
-
-        // Cache the data in local storage
-        localStorage.setItem(`childcategories_${subcategorySlug}`, JSON.stringify(childCategoriesData));
+  
+        // Cache the sorted data in local storage
+        localStorage.setItem(`childcategories_${subcategorySlug}`, JSON.stringify(sortedChildCategories));
         localStorage.setItem(`childcategories_time_${subcategorySlug}`, Date.now());
       } catch (error) {
         console.error("Error fetching child categories:", error);
@@ -48,9 +54,10 @@ const ChildCategory = () => {
         setLoading(false);
       }
     };
-
+  
     fetchChildCategories();
   }, [subcategorySlug]);
+  
 
   return (
     <>

@@ -12,7 +12,7 @@ const Subcategory = () => {
 
   useEffect(() => {
     const cacheExpiry = 24 * 60 * 60 * 1000;
-    
+  
     const fetchSubcategories = async () => {
       setLoading(true);
   
@@ -22,7 +22,11 @@ const Subcategory = () => {
   
       if (cachedData && cachedTime && (Date.now() - cachedTime < cacheExpiry)) {
         // Use cached data if it's not expired
-        setSubcategories(JSON.parse(cachedData));
+        const cachedSubcategories = JSON.parse(cachedData);
+        
+        // Sort by serial before setting the state
+        const sortedSubcategories = cachedSubcategories.sort((a, b) => a.serial - b.serial);
+        setSubcategories(sortedSubcategories);
         setFormattedCategory(category.charAt(0).toUpperCase() + category.slice(1));
         setLoading(false);
         return;
@@ -35,12 +39,15 @@ const Subcategory = () => {
         );
         const subcategoryData = subcategoryRes.data.categories || [];
   
-        // Save the data to state
-        setSubcategories(subcategoryData);
+        // Sort the subcategories by serial
+        const sortedSubcategories = subcategoryData.sort((a, b) => a.serial - b.serial);
+  
+        // Save the sorted data to state
+        setSubcategories(sortedSubcategories);
         setFormattedCategory(category.charAt(0).toUpperCase() + category.slice(1));
   
-        // Cache the data in local storage
-        localStorage.setItem(`subcategories_${category}`, JSON.stringify(subcategoryData));
+        // Cache the sorted data in local storage
+        localStorage.setItem(`subcategories_${category}`, JSON.stringify(sortedSubcategories));
         localStorage.setItem(`subcategories_time_${category}`, Date.now());
       } catch (error) {
         console.error("Error fetching subcategories:", error);
@@ -51,6 +58,7 @@ const Subcategory = () => {
   
     fetchSubcategories();
   }, [category]);
+  
   
 
   return (
@@ -87,7 +95,7 @@ const Subcategory = () => {
                     <img
                       src={`https://phonespotbackend.blacktechcorp.com/${subcategory.image}`}
                       alt={subcategory.name}
-                      className="w-36 h-36 object-contain"
+                      className="w-full flex justify-center h-36 object-contain"
                     />
                     <div className="p-4 flex flex-col items-center gap-2">
                       <h3 className="text-sm lg:text-base font-semibold text-gray-800 text-center">
