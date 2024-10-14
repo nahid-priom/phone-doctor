@@ -134,7 +134,7 @@ const Navbar = () => {
                         key={category.name}
                         className="relative hover:bg-red-600 border-b border-red-400 p-4 hover:text-white items-center py-2"
                       >
-                        <Link to={`/services/${category.slug}`} className="flex items-center w-full">
+                        <Link to={`/service/${category.slug}`} className="flex items-center w-full">
                           <img src={category.image} alt={category.name} className="w-8 h-8 mr-2" />
                           <span className="text-black hover:text-white w-full p-1 rounded">{category.name}</span>
                         </Link>
@@ -205,7 +205,7 @@ const Navbar = () => {
                             className="flex items-center py-2 border-b border-red-400 cursor-pointer"
                           >
                             <Link
-                              to={`/services/${category.name.toLowerCase()}`}
+                              to={`/services/${category.slug}`}
                               className="flex items-center w-full"
                               onClick={() => {
                                 setToggle(false);

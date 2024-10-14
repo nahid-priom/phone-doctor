@@ -11,7 +11,7 @@ const Subcategory = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const cacheExpiry = 24 * 60 * 60 * 1000;
+    const cacheExpiry =  60 * 60 * 1000;
   
     const fetchSubcategories = async () => {
       setLoading(true);
@@ -88,16 +88,16 @@ const Subcategory = () => {
               subcategories.map((subcategory) => (
                 <div
                   key={subcategory.name}
-                  className="bg-white flex flex-col items-center shadow-lg rounded-lg overflow-hidden transform transition duration-300 hover:scale-105 hover:shadow-xl"
+                  className="bg-white p-4 flex flex-col items-center shadow-lg rounded-lg overflow-hidden transform transition duration-300 hover:scale-105 hover:shadow-xl"
                 >
                   {/* Link to the ChildCategory page when a subcategory is clicked */}
                   <Link to={`/subcategory/${category}/${subcategory.slug}`}>
                     <img
                       src={`https://phonespotbackend.blacktechcorp.com/${subcategory.image}`}
                       alt={subcategory.name}
-                      className="w-full flex justify-center h-36 object-contain"
+                      className="w-full my-3 flex justify-center h-36 object-contain"
                     />
-                    <div className="p-4 flex flex-col items-center gap-2">
+                    <div className=" flex flex-col items-center gap-2">
                       <h3 className="text-sm lg:text-base font-semibold text-gray-800 text-center">
                         {subcategory.name}
                       </h3>
