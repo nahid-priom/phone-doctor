@@ -67,7 +67,7 @@ const FeaturedCategorySection = () => {
   }
 
   return (
-    <section ref={ref} id="categorySection" className="py-16 bg-red-100">
+    <section ref={ref} id="featured-categorySection" className="py-16 bg-red-100">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Title and Description */}
         <motion.div
