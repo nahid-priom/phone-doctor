@@ -58,7 +58,7 @@ const Appointment = () => {
         <div className="bg-gradient-to-r from-red-500 to-red-600 p-2 lg:p-6 rounded-lg shadow-lg mb-2 lg:mb-8">
         <h1 className="text-xl lg:text-4xl font-bold text-white text-center lg:mb-4 flex flex-col gap-2">
   <span>
-    Book Appointment for <span className="text-yellow-200">{capitalizeWords(model)}</span>
+    Book Appointment for <br/> <span className="text-yellow-200">{capitalizeWords(model)}</span>
   </span>
   <span className="text-2xl lg:text-5xl text-yellow-300 font-extrabold">
     {capitalizeWords(service)}
@@ -117,7 +117,7 @@ const Appointment = () => {
           <div className="bg-white p-6 rounded-lg shadow-lg flex flex-col items-center">
             <div className="text-4xl text-green-500 mb-4">✔</div>
             <h2 className="text-xl font-bold">Thank You!</h2>
-            <p className="mt-2">
+            <p className="mt-2 text-center">
               Your appointment for {capitalizeWords(model)} {capitalizeWords(service)} repair has been booked successfully.
             </p>
           </div>

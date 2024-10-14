@@ -29,12 +29,14 @@ const ProductDetails = () => {
       {/* Main Content */}
       <div className="max-w-7xl pt-32 mx-auto p-6">
         {/* Header Section */}
-        <div className="bg-gradient-to-r from-red-500 to-red-600 p-2 lg:p-6 rounded-lg shadow-lg mb-2 lg:mb-8">
-          <h1 className="text-xl lg:text-4xl font-bold text-white text-center lg:mb-4">
-            {capitalizeWords(model)} Repair Services
+        <div className="bg-gradient-to-r from-red-500 to-red-600 p-2 lg:p-6 rounded-lg shadow-lg mb-4 lg:mb-8">
+          <h1 className="text-xl lg:text-4xl font-bold text-center lg:mb-4">
+            <span className="text-yellow-400 lg:text-4xl text-2xl mr-2 font-extrabold">{capitalizeWords(model)}</span>
+            <span className="text-white lg:text-3xl"> Repair Services</span>
           </h1>
           <p className="text-white hidden lg:block text-center max-w-xl mx-auto">
-            Choose from a range of repair services for your {model}.
+            Choose from a range of repair services for your{" "}
+            <span className="text-yellow-400">{model}</span>.
           </p>
         </div>
 
