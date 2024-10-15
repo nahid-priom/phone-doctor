@@ -1,14 +1,18 @@
 import React, { useState } from 'react';
+import axios from 'axios'; // Import axios
 
 const Contact = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     phone: '',
-    phoneModel: '', // New field for Phone Model
-    phoneIssue: '', // New field for Phone Issue
+    phoneModel: '', // Phone Model
+    phoneIssue: '', // Phone Issue
     message: '',
   });
+
+  const [loading, setLoading] = useState(false); // Loading state
+  
 
   const handleChange = (e) => {
     setFormData({
@@ -17,32 +21,69 @@ const Contact = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle form submission logic here (e.g., sending data to API or email)
-    console.log(formData);
-    // Optionally, reset the form after submission
-    setFormData({
-      name: '',
-      email: '',
-      phone: '',
-      phoneModel: '', // Reset new field
-      phoneIssue: '', // Reset new field
-      message: '',
-    });
+    setLoading(true);
+   
+
+    try {
+      const response = await axios.post(
+        'https://phonespotbackend.blacktechcorp.com/api/message', // API endpoint
+        {
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+          phone_model: formData.phoneModel, // Mapping to API key
+          phone_issue: formData.phoneIssue, // Mapping to API key
+          address: '', // You can add an address field if needed
+          subject: 'Contact Form Inquiry', // You can customize the subject
+          message: formData.message,
+        },
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      );
+
+      if (response.status === 200) {
+       
+       
+        setFormData({
+          name: '',
+          email: '',
+          phone: '',
+          phoneModel: '',
+          phoneIssue: '',
+          message: '',
+        });
+
+        // Automatically close modal after 2 seconds
+        setTimeout(() => {
+          
+        }, 2000);
+      }
+    } catch (error) {
+    
+      
+      
+    } finally {
+      setLoading(false);
+    }
+    
   };
 
   return (
     <section className="bg-red-50 py-10 px-4 pt-32 lg:pt-44 lg:px-0">
       <div className="max-w-4xl mx-auto">
-        <h1 className="text-3xl font-bold text-center text-gray-800 mb-8">
-          Contact Us
-        </h1>
+        <h1 className="text-3xl font-bold text-center text-gray-800 mb-8">Contact Us</h1>
         <p className="text-center text-gray-600 mb-6">
           We would love to hear from you! Fill out the form below and we will get back to you shortly.
         </p>
 
         <div className="bg-white shadow-md rounded-lg p-6 lg:p-10">
+         
+
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>
               <label className="block text-gray-700 font-semibold mb-2" htmlFor="name">
@@ -92,7 +133,6 @@ const Contact = () => {
               />
             </div>
 
-            {/* New Field for Phone Model */}
             <div>
               <label className="block text-gray-700 font-semibold mb-2" htmlFor="phoneModel">
                 Phone Model
@@ -109,7 +149,6 @@ const Contact = () => {
               />
             </div>
 
-            {/* New Field for Phone Issue */}
             <div>
               <label className="block text-gray-700 font-semibold mb-2" htmlFor="phoneIssue">
                 Phone Issue
@@ -146,8 +185,9 @@ const Contact = () => {
               <button
                 type="submit"
                 className="w-full py-3 bg-red-600 text-white font-semibold rounded-lg shadow-lg hover:bg-red-700 transition duration-300"
+                disabled={loading}
               >
-                Send Message
+                {loading ? 'Sending...' : 'Send Message'}
               </button>
             </div>
           </form>
