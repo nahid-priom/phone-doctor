@@ -1,14 +1,14 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
     <div className="lg:pt-16 bg-red-600">
-     
       <div className="px-4 pt-12 mx-auto sm:max-w-xl md:max-w-full lg:max-w-7xl rounded-t-xl md:px-24 lg:px-8">
         <div className="grid gap-16 row-gap-10 mb-8 lg:grid-cols-6">
           <div className="md:max-w-md lg:col-span-2">
-            <a
-              href="/"
+            <Link
+              to="/"
               aria-label="Go home"
               title="Company"
               className="text-white inline-flex items-center"
@@ -29,181 +29,129 @@ const Footer = () => {
                 <rect x="14" y="11" width="7" height="12"></rect>
               </svg>
               <span className="ml-2 text-xl font-bold tracking-wide text-gray-100 uppercase">
-                Mobile Repair Shop
+                Phone Repair Spot
               </span>
-            </a>
+            </Link>
             <div className="mt-4 lg:max-w-sm">
               <p className="text-sm text-white">
-                Your trusted partner in navigating the exciting journey of
-                studying abroad! Our expert team is dedicated to guiding
-                students like you through the complex process of obtaining
-                student visas, ensuring a smooth transition to your dream
-                educational goals.
+                Your trusted partner for all your mobile repair needs! Our
+                expert team is committed to providing fast, reliable service,
+                ensuring your phone is back in perfect working condition.
+                Whether it's a screen replacement, battery issue, or any other
+                repair, we're here to help you stay connected.
               </p>
             </div>
           </div>
-          <div className="grid grid-cols-2 gap-5 row-gap-8 lg:col-span-4 md:grid-cols-4">
+          <div className="grid grid-cols-2 gap-5 row-gap-8 lg:col-span-4 md:grid-cols-3">
             <div>
               <p className="font-semibold tracking-wide text-white">Category</p>
               <ul className="mt-2 space-y-2">
                 <li>
-                  <a
-                    href="/"
+                  <Link
+                    to="/service/iphone"
                     className="transition-colors duration-300 text-white hover:text-gray-900"
                   >
-                    News
-                  </a>
+                    iPhone
+                  </Link>
                 </li>
                 <li>
-                  <a
-                    href="/"
+                  <Link
+                    to="/service/samsung"
                     className="transition-colors duration-300 text-white hover:text-gray-900"
                   >
-                    World
-                  </a>
+                    Samsung
+                  </Link>
                 </li>
                 <li>
-                  <a
-                    href="/"
+                  <Link
+                    to="/service/ipad"
                     className="transition-colors duration-300 text-white hover:text-gray-900"
                   >
-                    Games
-                  </a>
+                    iPad
+                  </Link>
                 </li>
                 <li>
-                  <a
-                    href="/"
+                  <Link
+                    to="/service/other-android"
                     className="transition-colors duration-300 text-white hover:text-gray-900"
                   >
-                    References
-                  </a>
+                    Other Android
+                  </Link>
                 </li>
               </ul>
             </div>
             <div>
-              <p className="font-semibold tracking-wide text-white">Cherry</p>
+              <p className="font-semibold tracking-wide text-white">Services</p>
               <ul className="mt-2 space-y-2">
                 <li>
-                  <a
-                    href="/"
+                  <Link
+                    to="/contact"
                     className="transition-colors duration-300 text-white hover:text-gray-900"
                   >
-                    Web
-                  </a>
+                    Screen Repair
+                  </Link>
                 </li>
                 <li>
-                  <a
-                    href="/"
+                  <Link
+                    to="/contact"
                     className="transition-colors duration-300 text-white hover:text-gray-900"
                   >
-                    eCommerce
-                  </a>
+                    Battery Replacement
+                  </Link>
                 </li>
                 <li>
-                  <a
-                    href="/"
+                  <Link
+                    to="/contact"
                     className="transition-colors duration-300 text-white hover:text-gray-900"
                   >
-                    Business
-                  </a>
+                    Water Damage Repair
+                  </Link>
                 </li>
                 <li>
-                  <a
-                    href="/"
+                  <Link
+                    to="/contact"
                     className="transition-colors duration-300 text-white hover:text-gray-900"
                   >
-                    Entertainment
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="/"
-                    className="transition-colors duration-300 text-white hover:text-gray-900"
-                  >
-                    Portfolio
-                  </a>
+                    Charging Issues
+                  </Link>
                 </li>
               </ul>
             </div>
-            <div>
-              <p className="font-semibold tracking-wide text-white">Apples</p>
-              <ul className="mt-2 space-y-2">
-                <li>
-                  <a
-                    href="/"
-                    className="transition-colors duration-300 text-white hover:text-gray-900"
-                  >
-                    Media
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="/"
-                    className="transition-colors duration-300 text-white hover:text-gray-900"
-                  >
-                    Brochure
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="/"
-                    className="transition-colors duration-300 text-white hover:text-gray-900"
-                  >
-                    Nonprofit
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="/"
-                    className="transition-colors duration-300 text-white hover:text-gray-900"
-                  >
-                    Educational
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="/"
-                    className="transition-colors duration-300 text-white hover:text-gray-900"
-                  >
-                    Projects
-                  </a>
-                </li>
-              </ul>
-            </div>
+
             <div>
               <p className="font-semibold tracking-wide text-white">Business</p>
               <ul className="mt-2 space-y-2">
                 <li>
-                  <a
-                    href="/"
+                  <Link
+                    to="/blog"
                     className="transition-colors duration-300 text-white hover:text-gray-900"
                   >
-                    Infopreneur
-                  </a>
+                    Blogs
+                  </Link>
                 </li>
                 <li>
-                  <a
-                    href="/"
+                  <Link
+                    to="/about"
                     className="transition-colors duration-300 text-white hover:text-gray-900"
                   >
-                    Personal
-                  </a>
+                    About
+                  </Link>
                 </li>
                 <li>
-                  <a
-                    href="/"
+                  <Link
+                    to="/contact"
                     className="transition-colors duration-300 text-white hover:text-gray-900"
                   >
-                    Wiki
-                  </a>
+                    Contact
+                  </Link>
                 </li>
                 <li>
-                  <a
-                    href="/"
+                  <Link
+                    to="/"
                     className="transition-colors duration-300 text-white hover:text-gray-900"
                   >
-                    Forum
-                  </a>
+                    Body Oils
+                  </Link>
                 </li>
               </ul>
             </div>
@@ -214,8 +162,8 @@ const Footer = () => {
             © Copyright 2024 Blacktech Consultancy. All rights reserved.
           </p>
           <div className="flex items-center mt-4 space-x-4 sm:mt-0">
-            <a
-              href="/"
+            <Link
+              to="/"
               className="transition-colors duration-300 text-white hover:text-gray-900"
             >
               <svg viewBox="0 0 24 24" fill="currentColor" className="h-5">
@@ -227,9 +175,9 @@ const Footer = () => {
                   c0-0.2,0-0.4,0-0.6C22.5,6.4,23.3,5.5,24,4.6z"
                 ></path>
               </svg>
-            </a>
-            <a
-              href="/"
+            </Link>
+            <Link
+              to="/"
               className="transition-colors duration-300 text-white hover:text-gray-900"
             >
               <svg viewBox="0 0 30 30" fill="currentColor" className="h-6">
@@ -240,9 +188,9 @@ const Footer = () => {
                   c0-0.552,0.448-1,1-1s1,0.448,1,1C23,8.552,22.552,9,22,9z"
                 ></path>
               </svg>
-            </a>
-            <a
-              href="/"
+            </Link>
+            <Link
+              to="/"
               className="transition-colors duration-300 text-white hover:text-gray-900"
             >
               <svg viewBox="0 0 24 24" fill="currentColor" className="h-5">
@@ -252,7 +200,7 @@ const Footer = () => {
                   c1.105,0,2-0.895,2-2V2C24,0.895,23.105,0,22,0z"
                 ></path>
               </svg>
-            </a>
+            </Link>
           </div>
         </div>
       </div>

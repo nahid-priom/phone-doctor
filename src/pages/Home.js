@@ -10,7 +10,8 @@ import Footer from "../components/Footer";
 // import Preloader from "../components/Preloader";
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import FeaturedCategorySection from '../components/FeaturedCategorySection';
+// import FeaturedCategorySection from '../components/FeaturedCategorySection';
+import CategorySection from '../components/CategorySection';
 
 const Home = () => {
   return (
@@ -24,7 +25,7 @@ const Home = () => {
       {/* <Preloader /> */}
       <Navbar />
       <HeroSection />
-      <FeaturedCategorySection />
+      <CategorySection />
       <ServiceSection />
       <RecentWorkSection />
       <ClientTestimonials />
