@@ -9,7 +9,7 @@ import logo from "../assets/logo.jpeg";
 
 
 export const navLinks = [
-  { id: "home", title: "Home" },
+ 
   { id: "service", title: "Services" },
   { id: "about", title: "About" },
   { id: "blog", title: "Blogs" },

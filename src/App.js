@@ -56,7 +56,8 @@ const App = () => (
             <Route path="/service" element={<Service />} />
 
             {/* Dynamic Routes */}
-            <Route path="/blog/:id" element={<BlogDetails />} />
+            <Route path="/blog/:slug" element={<BlogDetails />} />
+
             <Route path="/services/:category" element={<Subcategory />} />
             <Route path="/service/:category" element={<Subcategory />} />
 

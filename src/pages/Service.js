@@ -8,7 +8,7 @@ const Service = () => {
   return (
     <div>
        <Helmet>
-        <title>Phone Spot Repair - Home</title>
+        <title>Phone Spot Repair - Service</title>
         <meta name="description" content="Welcome to the Phone Repair Center. We offer high-quality phone repair services for iPhones, Samsung, and other smartphones. Quick and reliable services." />
       </Helmet>
       <Navbar/>
