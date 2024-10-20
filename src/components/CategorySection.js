@@ -108,7 +108,7 @@ const CategorySection = () => {
               >
                 <img
                   src={category.image} // Use the full URL directly here
-                  alt={category.title}
+                  alt={category.name}
                   className="w-32 h-32 mx-auto mb-6"
                 />
                 <h3 className="text-xl font-semibold text-gray-900">
