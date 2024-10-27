@@ -3,7 +3,7 @@ import { Link, useParams } from "react-router-dom";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 
-// Define the repair options for mobile devices
+// Define the repair options for each category
 const mobileRepairOptions = [
   { type: "Screen Repair", icon: "🔧" },
   { type: "Camera Repair", icon: "📷" },
@@ -13,15 +13,22 @@ const mobileRepairOptions = [
   { type: "Water Damage Repair", icon: "💧" },
 ];
 
-// Define the repair options for computers
 const computerRepairOptions = [
   { type: "Broken Screen Repair", icon: "💻" },
   { type: "Battery Fix", icon: "🔋" },
   { type: "Computer Virus Removal", icon: "🛡️" },
 ];
 
+const gamingConsoleRepairOptions = [
+  { type: "PS5 Problem You Don't Know?", icon: "❓" },
+  { type: "PS5 Wifi Issue", icon: "📶" },
+  { type: "PS5 HDMI Port Issue", icon: "🔌" },
+  { type: "PS5 Hard Drive Issue", icon: "💽" },
+  { type: "PS5 Controller Issue", icon: "🎮" },
+  { type: "PS5 Cleaning", icon: "🧼" },
+];
+
 const ProductDetails = () => {
-  // Destructure category and model from the URL parameters
   const { category, model } = useParams(); 
 
   // Utility function for title case
@@ -29,20 +36,21 @@ const ProductDetails = () => {
     return str.replace(/\b\w/g, (char) => char.toUpperCase());
   };
 
-  // Check if the category is "computer" by inspecting the category parameter from the URL
-  const isComputerCategory = category.toLowerCase() === "computer";
-  
   // Determine the appropriate repair options based on the category
-  const repairOptions = isComputerCategory ? computerRepairOptions : mobileRepairOptions;
+  let repairOptions;
+  if (category.toLowerCase() === "computer") {
+    repairOptions = computerRepairOptions;
+  } else if (category.toLowerCase() === "gaming-console") {
+    repairOptions = gamingConsoleRepairOptions;
+  } else {
+    repairOptions = mobileRepairOptions;
+  }
 
   return (
     <>
-      {/* Navbar Component */}
       <Navbar />
 
-      {/* Main Content */}
       <div className="max-w-7xl pt-32 mx-auto p-6">
-        {/* Header Section */}
         <div className="bg-gradient-to-r from-red-500 to-red-600 p-2 lg:p-6 rounded-lg shadow-lg mb-4 lg:mb-8">
           <h1 className="text-xl lg:text-4xl font-bold text-center lg:mb-4">
             <span className="text-yellow-400 lg:text-4xl text-2xl mr-2 font-extrabold">
@@ -56,12 +64,11 @@ const ProductDetails = () => {
           </p>
         </div>
 
-        {/* Main Content Grid */}
         <div className="grid grid-cols-2 sm:grid-cols-3 gap-6">
           {repairOptions.map((option) => (
             <Link
               key={option.type}
-              to={`/appointment/${model}/${option.type}`}  // Navigate to the appointment page with category, model, and service
+              to={`/appointment/${model}/${option.type}`}
               className="bg-red-100 flex flex-col items-center shadow-lg rounded-lg p-6 transform transition duration-300 hover:scale-105 hover:shadow-xl"
             >
               <div className="text-4xl mb-4">{option.icon}</div>
@@ -76,7 +83,6 @@ const ProductDetails = () => {
         </div>
       </div>
 
-      {/* Footer Component */}
       <Footer />
     </>
   );
