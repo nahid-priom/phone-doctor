@@ -7,7 +7,6 @@ import axios from "axios";
 const Appointment = () => {
   const { model, service } = useParams();
 
-  // Utility function to capitalize model and service names
   const capitalizeWords = (str) =>
     str.replace(/\b\w/g, (char) => char.toUpperCase());
 
@@ -21,12 +20,9 @@ const Appointment = () => {
   });
 
   const [showModal, setShowModal] = useState(false);
-
   const [error, setError] = useState(null);
-
   const [loading, setLoading] = useState(false);
 
-  // Handle form input changes
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
@@ -35,11 +31,17 @@ const Appointment = () => {
     }));
   };
 
-  // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+   
+    if (!/^\d{10}$/.test(formData.phone)) {
+      setError("Please enter a valid 10-digit phone number.");
+      return;
+    }
+
     setLoading(true);
+    setError(null);
 
     const postData = {
       service_name: service,
@@ -54,14 +56,12 @@ const Appointment = () => {
     };
 
     try {
-      // Post the data to the API
       const response = await axios.post(
         "https://phonespotbackend.blacktechcorp.com/api/repair-submit",
         postData
       );
 
       console.log("API Response:", response.data);
-
       setShowModal(true);
 
       setTimeout(() => {
@@ -82,7 +82,6 @@ const Appointment = () => {
       <Navbar />
 
       <div className="max-w-3xl pt-32 mx-auto p-6">
-        {/* Header Section */}
         <div className="bg-gradient-to-r from-red-500 to-red-600 p-2 lg:p-6 rounded-lg shadow-lg mb-2 lg:mb-8">
           <h1 className="text-xl lg:text-4xl font-bold text-white text-center lg:mb-4 flex flex-col gap-2">
             <span>
@@ -95,7 +94,6 @@ const Appointment = () => {
           </h1>
         </div>
 
-        {/* Appointment Form */}
         <form
           onSubmit={handleSubmit}
           className="bg-white shadow-lg rounded-lg p-6 space-y-4"
@@ -105,7 +103,6 @@ const Appointment = () => {
             { label: "Email", type: "email", name: "email" },
             { label: "Phone Number", type: "tel", name: "phone" },
             { label: "Address", type: "textarea", name: "address" },
-
             {
               label: "Appointment Date",
               type: "date",
@@ -141,14 +138,12 @@ const Appointment = () => {
             </div>
           ))}
 
-          {/* Loader */}
           {loading && (
             <div className="flex justify-center">
               <div className="loader ease-linear rounded-full border-4 border-t-4 border-gray-200 h-10 w-10 mb-4"></div>
             </div>
           )}
 
-          {/* Submit Button */}
           <button
             type="submit"
             className="w-full bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition duration-200"
@@ -161,7 +156,6 @@ const Appointment = () => {
         </form>
       </div>
 
-      {/* Thank You Modal */}
       {showModal && (
         <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 z-50">
           <div className="bg-white p-6 rounded-lg shadow-lg flex flex-col items-center">

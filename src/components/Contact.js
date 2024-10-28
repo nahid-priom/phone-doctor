@@ -10,7 +10,7 @@ const Contact = () => {
     phoneIssue: '',
     message: '',
   });
-
+  const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
   
 
@@ -23,6 +23,11 @@ const Contact = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!/^\d{10}$/.test(formData.phone)) {
+      setError("Please enter a valid 10-digit phone number.");
+      return;
+    }
+
     setLoading(true);
    
 
@@ -188,6 +193,7 @@ const Contact = () => {
               >
                 {loading ? 'Sending...' : 'Send Message'}
               </button>
+              {error && <p className="text-red-500 mt-4">{error}</p>}
             </div>
           </form>
         </div>
