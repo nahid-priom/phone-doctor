@@ -5,8 +5,7 @@ import App from './App';
 import "./index.css";
 
 
-const container = document.getElementById('root'); // Make sure this ID matches your HTML
-const root = createRoot(container);
+const container = document.getElementById('root'); 
 
 root.render(
   <React.StrictMode>
