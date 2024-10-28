@@ -205,7 +205,7 @@ const Navbar = () => {
                             className="flex items-center py-2 border-b border-red-400 cursor-pointer"
                           >
                             <Link
-                              to={`/services/${category.slug}`}
+                              to={`/service/${category.slug}`}
                               className="flex items-center w-full"
                               onClick={() => {
                                 setToggle(false);
