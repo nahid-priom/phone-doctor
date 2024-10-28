@@ -15,64 +15,45 @@ const Subcategory = lazy(() => import("./components/Subcategory"));
 const ProductDetails = lazy(() => import("./components/ProductDetails"));
 const Appointment = lazy(() => import("./components/Appoinment"));
 const ChildCategory = lazy(() => import("./components/ChildCategory"));
-const ClearCache = lazy(() => import("./components/ClearCache")); // Import ClearCache
+const ClearCache = lazy(() => import("./components/ClearCache"));
 
-const ErrorBoundary = ({ children }) => {
-  return (
-    <React.Suspense
-      fallback={
-        <div className="flex justify-center items-center w-full h-screen">
-          <div className="spinner-border animate-spin inline-block w-8 h-8 border-4 rounded-full text-red-600"></div>
-          <p className="ml-4 text-red-600">Loading...</p>
-        </div>
-      }
-    >
-      {children}
-    </React.Suspense>
-  );
-};
+const LoadingFallback = ({ children }) => (
+  <Suspense
+    fallback={
+      <div className="flex justify-center items-center w-full h-screen">
+        <div className="spinner-border animate-spin inline-block w-8 h-8 border-4 rounded-full text-red-600"></div>
+        <p className="ml-4 text-red-600">Loading...</p>
+      </div>
+    }
+  >
+    {children}
+  </Suspense>
+);
 
 const App = () => (
   <HelmetProvider>
     <Router>
       <ScrollToTop />
-      <Suspense
-        fallback={
-          <div className="flex justify-center items-center w-full h-screen">
-            <div className="spinner-border animate-spin inline-block w-8 h-8 border-4 rounded-full text-red-600"></div>
-            <p className="ml-4 text-red-600">Loading...</p>
-          </div>
-        }
-      >
-        <ErrorBoundary>
-          <Routes>
-            {/* Main Pages */}
-            <Route path="/" element={<Home />} />
-            <Route path="/blog" element={<Blog />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/bodyoils" element={<BodyOils />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/service" element={<Service />} />
+      <LoadingFallback>
+        <Routes>
+          {/* Main Pages */}
+          <Route path="/" element={<Home />} />
+          <Route path="/blog" element={<Blog />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/bodyoils" element={<BodyOils />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/service" element={<Service />} />
 
-            {/* Dynamic Routes */}
-            <Route path="/blog/:slug" element={<BlogDetails />} />
-            <Route path="/service/:category" element={<Subcategory />} />
+          {/* Dynamic Routes */}
+          <Route path="/blog/:slug" element={<BlogDetails />} />
+          <Route path="/service/:category" element={<Subcategory />} />
+          <Route path="/product/:category/:model" element={<ProductDetails />} />
+          <Route path="/appointment/:model/:service" element={<Appointment />} />
+          <Route path="/subcategory/:category/:subcategorySlug" element={<ChildCategory />} />
 
-           
-            <Route
-              path="/product/:category/:model"
-              element={<ProductDetails />}
-              key={Date.now()} 
-            />
-
-            <Route path="/appointment/:model/:service" element={<Appointment />} />
-            <Route path="/subcategory/:category/:subcategorySlug" element={<ChildCategory />} />
-
-          
-            <Route path="/clear-cache" element={<ClearCache />} />
-          </Routes>
-        </ErrorBoundary>
-      </Suspense>
+          <Route path="/clear-cache" element={<ClearCache />} />
+        </Routes>
+      </LoadingFallback>
     </Router>
   </HelmetProvider>
 );
