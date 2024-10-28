@@ -16,15 +16,15 @@ const Subcategory = () => {
     const fetchSubcategories = async () => {
       setLoading(true);
   
-      // Check if data is in local storage
+      
       const cachedData = localStorage.getItem(`subcategories_${category}`);
       const cachedTime = localStorage.getItem(`subcategories_time_${category}`);
   
       if (cachedData && cachedTime && (Date.now() - cachedTime < cacheExpiry)) {
-        // Use cached data if it's not expired
+       
         const cachedSubcategories = JSON.parse(cachedData);
         
-        // Sort by serial before setting the state
+        
         const sortedSubcategories = cachedSubcategories.sort((a, b) => a.serial - b.serial);
         setSubcategories(sortedSubcategories);
         setFormattedCategory(category.charAt(0).toUpperCase() + category.slice(1));
@@ -33,20 +33,20 @@ const Subcategory = () => {
       }
   
       try {
-        // Fetch subcategories for the selected category from the API
+        
         const subcategoryRes = await axios.get(
           `https://phonespotbackend.blacktechcorp.com/api/category/subcategory/${category}`
         );
         const subcategoryData = subcategoryRes.data.categories || [];
   
-        // Sort the subcategories by serial
+        
         const sortedSubcategories = subcategoryData.sort((a, b) => a.serial - b.serial);
   
-        // Save the sorted data to state
+       
         setSubcategories(sortedSubcategories);
         setFormattedCategory(category.charAt(0).toUpperCase() + category.slice(1));
   
-        // Cache the sorted data in local storage
+       
         localStorage.setItem(`subcategories_${category}`, JSON.stringify(sortedSubcategories));
         localStorage.setItem(`subcategories_time_${category}`, Date.now());
       } catch (error) {
@@ -90,7 +90,7 @@ const Subcategory = () => {
                   key={subcategory.name}
                   className="bg-white p-4 flex flex-col items-center shadow-lg rounded-lg overflow-hidden transform transition duration-300 hover:scale-105 hover:shadow-xl"
                 >
-                  {/* Link to the ChildCategory page when a subcategory is clicked */}
+                  
                   <Link to={`/subcategory/${category}/${subcategory.slug}`}>
                     <img
                       src={`https://phonespotbackend.blacktechcorp.com/${subcategory.image}`}

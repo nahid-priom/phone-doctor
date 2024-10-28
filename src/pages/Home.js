@@ -13,7 +13,7 @@ import CategorySection from '../components/CategorySection';
 
 const Home = () => {
   const [seoData, setSeoData] = useState({
-    seo_title: "Phone Spot Repair - Home", // Fallback title
+    seo_title: "Phone Spot Repair - Home",
     seo_description: "Welcome to the Phone Repair Center. We offer high-quality phone repair services for iPhones, Samsung, and other smartphones. Quick and reliable services." // Fallback description
   });
   const [loading, setLoading] = useState(true);

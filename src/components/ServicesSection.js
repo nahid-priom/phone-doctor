@@ -7,33 +7,30 @@ import axios from "axios";
 const OurServices = () => {
   const controls = useAnimation();
   const [ref, inView] = useInView({ triggerOnce: false, threshold: 0.2 });
-  
-  // State to store services from API or localStorage
+
   const [services, setServices] = useState([]);
   const [error, setError] = useState("");
 
   useEffect(() => {
     const localData = localStorage.getItem("services");
-    
-    // Check if services data is available in localStorage
+
     if (localData) {
-      setServices(JSON.parse(localData)); // Use data from localStorage
+      setServices(JSON.parse(localData));
     } else {
-      // If not in localStorage, fetch from the API
-      axios.get("https://phonespotbackend.blacktechcorp.com/api")
-        .then(response => {
+      axios
+        .get("https://phonespotbackend.blacktechcorp.com/api")
+        .then((response) => {
           const fetchedServices = response.data.products;
-          setServices(fetchedServices); // Set fetched data to state
-          localStorage.setItem("services", JSON.stringify(fetchedServices)); // Store data in localStorage
+          setServices(fetchedServices); 
+          localStorage.setItem("services", JSON.stringify(fetchedServices)); 
         })
-        .catch(error => {
+        .catch((error) => {
           console.error("Error fetching services:", error);
           setError("Failed to load services.");
         });
     }
-  }, []); // Empty dependency array to run only once on mount
+  }, []);
 
-  // Scroll animation when the section comes into view
   useEffect(() => {
     if (inView) {
       controls.start("visible");
@@ -58,13 +55,16 @@ const OurServices = () => {
       >
         <h2 className="text-4xl font-extrabold text-gray-900">Our Services</h2>
         <p className="mt-4 text-lg text-gray-600">
-          We specialize in high-quality repairs for all major brands. Choose your device category below to learn more about our services.
+          We specialize in high-quality repairs for all major brands. Choose
+          your device category below to learn more about our services.
         </p>
       </motion.div>
 
       <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {services.map((service, index) => (
-          <Link to={"/contact"} key={service.id}>  {/* Dynamically set the link to each service */}
+          <Link to={"/contact"} key={service.id}>
+            {" "}
+           
             <motion.div
               className="p-6 bg-white border rounded-lg shadow-md"
               initial="hidden"
@@ -77,14 +77,15 @@ const OurServices = () => {
               whileHover={{ scale: 1.05 }}
             >
               <img
-                src={`https://phonespotbackend.blacktechcorp.com/${service.thumb_image}`}  // Use thumb_image from API
+                src={`https://phonespotbackend.blacktechcorp.com/${service.thumb_image}`} // Use thumb_image from API
                 alt={service.name}
                 className="w-full h-60 object-cover object-center rounded-lg mb-4"
               />
               <h3 className="text-xl font-medium text-gray-800">
                 {service.name} {/* Use service name */}
               </h3>
-              <p className="text-gray-600">{service.short_description}</p> {/* Use short description */}
+              <p className="text-gray-600">{service.short_description}</p>{" "}
+              {/* Use short description */}
               <div className="mt-4 flex items-center">
                 <div className="text-yellow-400">
                   <svg

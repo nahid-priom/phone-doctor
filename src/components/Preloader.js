@@ -13,7 +13,7 @@ const Preloader = () => {
   }, []);
 
   if (!loading) {
-    return null; // Hide the preloader once loading is complete
+    return null; 
   }
 
   return (

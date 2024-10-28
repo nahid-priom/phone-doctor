@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import ScrollToTop from "./components/ScrollToTop";
 import { HelmetProvider } from "react-helmet-async";
 
-// Lazy load pages for performance optimization
 const Home = lazy(() => import("./pages/Home"));
 const Blog = lazy(() => import("./pages/Blog"));
 const About = lazy(() => import("./pages/About"));
@@ -14,7 +13,7 @@ const BodyOils = lazy(() => import("./pages/BodyOils"));
 const BlogDetails = lazy(() => import("./components/BlogDetails"));
 const Subcategory = lazy(() => import("./components/Subcategory"));
 const ProductDetails = lazy(() => import("./components/ProductDetails"));
-const Appointment = lazy(() => import("./components/Appoinment")); // Corrected spelling
+const Appointment = lazy(() => import("./components/Appoinment"));
 const ChildCategory = lazy(() => import("./components/ChildCategory"));
 
 // Error Boundary Component (optional for catching lazy load errors)
@@ -58,7 +57,7 @@ const App = () => (
             {/* Dynamic Routes */}
             <Route path="/blog/:slug" element={<BlogDetails />} />
 
-            <Route path="/services/:category" element={<Subcategory />} />
+            {/* <Route path="/services/:category" element={<Subcategory />} /> */}
             <Route path="/service/:category" element={<Subcategory />} />
 
             <Route

@@ -1,17 +1,17 @@
 import React, { useState } from 'react';
-import axios from 'axios'; // Import axios
+import axios from 'axios';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     phone: '',
-    phoneModel: '', // Phone Model
-    phoneIssue: '', // Phone Issue
+    phoneModel: '',
+    phoneIssue: '',
     message: '',
   });
 
-  const [loading, setLoading] = useState(false); // Loading state
+  const [loading, setLoading] = useState(false);
   
 
   const handleChange = (e) => {
@@ -28,15 +28,15 @@ const Contact = () => {
 
     try {
       const response = await axios.post(
-        'https://phonespotbackend.blacktechcorp.com/api/message', // API endpoint
+        'https://phonespotbackend.blacktechcorp.com/api/message', 
         {
           name: formData.name,
           email: formData.email,
           phone: formData.phone,
-          phone_model: formData.phoneModel, // Mapping to API key
-          phone_issue: formData.phoneIssue, // Mapping to API key
-          address: '', // You can add an address field if needed
-          subject: 'Contact Form Inquiry', // You can customize the subject
+          phone_model: formData.phoneModel, 
+          phone_issue: formData.phoneIssue, 
+          address: '', 
+          subject: 'Contact Form Inquiry',
           message: formData.message,
         },
         {
@@ -58,7 +58,6 @@ const Contact = () => {
           message: '',
         });
 
-        // Automatically close modal after 2 seconds
         setTimeout(() => {
           
         }, 2000);

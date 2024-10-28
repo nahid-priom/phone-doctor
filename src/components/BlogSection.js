@@ -14,27 +14,27 @@ const BlogSection = () => {
       
       const cacheKey = 'blogData';
       const cacheTimeKey = 'blogDataTimestamp';
-      const cacheDuration = 24 * 60 * 60 * 1000; // 1 day in milliseconds
+      const cacheDuration = 24 * 60 * 60 * 1000; 
       
-      // Check if cached data exists and is still valid
+     
       const cachedBlogs = localStorage.getItem(cacheKey);
       const cachedTime = localStorage.getItem(cacheTimeKey);
       const currentTime = new Date().getTime();
 
       if (cachedBlogs && cachedTime && (currentTime - cachedTime < cacheDuration)) {
-        // Parse and set cached blogs
+        
         setBlogs(JSON.parse(cachedBlogs));
         setLoading(false);
-        return; // Exit early if using cache
+        return; 
       }
 
       try {
         const response = await axios.get('https://phonespotbackend.blacktechcorp.com/api/blog');
-        const blogData = response.data.blog; // Access the nested blog array
+        const blogData = response.data.blog;
         
         if (Array.isArray(blogData)) {
           setBlogs(blogData);
-          // Cache the blogs and the current timestamp
+          
           localStorage.setItem(cacheKey, JSON.stringify(blogData));
           localStorage.setItem(cacheTimeKey, currentTime);
         } else {
@@ -52,18 +52,18 @@ const BlogSection = () => {
     fetchBlogs();
   }, []);
 
-  // Function to truncate HTML to 100 words
+ 
   const truncateHtml = (html, maxWords) => {
     const tempDiv = document.createElement('div');
-    tempDiv.innerHTML = html; // Set the HTML content
+    tempDiv.innerHTML = html; 
 
-    const textContent = tempDiv.textContent || tempDiv.innerText || ''; // Get text content
-    const words = textContent.split(/\s+/); // Split by whitespace
+    const textContent = tempDiv.textContent || tempDiv.innerText || ''; 
+    const words = textContent.split(/\s+/); 
 
-    // Get the first 'maxWords' words and join back into a string
+  
     const truncatedText = words.slice(0, maxWords).join(' ') + (words.length > maxWords ? ' ...' : '');
 
-    // Return sanitized HTML with truncated text
+    
     return DOMPurify.sanitize(truncatedText);
   };
 
@@ -91,7 +91,7 @@ const BlogSection = () => {
                 <h3 className="text-xl font-semibold mb-2">{blog.title}</h3>
                 <div 
                   className="text-gray-700 mb-4 flex-grow" 
-                  dangerouslySetInnerHTML={{ __html: truncateHtml(blog.description, 20) }} // Truncate HTML to 100 words
+                  dangerouslySetInnerHTML={{ __html: truncateHtml(blog.description, 20) }} 
                 />
                 <div className="mt-auto">
                   <Link 

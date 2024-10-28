@@ -2,16 +2,16 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 const HeroSection = () => {
-  const [sliderData, setSliderData] = useState(null); // State to store the slider data
+  const [sliderData, setSliderData] = useState(null); 
   const leftContentRef = useRef(null);
   const imageRef = useRef(null);
 
-  // Fetch slider data from the API or localStorage
+  
   useEffect(() => {
     const fetchSliderData = async () => {
       const cachedSliderData = localStorage.getItem('sliderData');
       
-      // If cached data is available, use it
+      
       if (cachedSliderData) {
         setSliderData(JSON.parse(cachedSliderData));
         
@@ -21,7 +21,7 @@ const HeroSection = () => {
           const data = await response.json();
           setSliderData(data.slider);
           
-          // Cache the fetched data
+         
           localStorage.setItem('sliderData', JSON.stringify(data.slider));
           
         } catch (error) {
@@ -67,7 +67,7 @@ const HeroSection = () => {
         observer.unobserve(imageElement);
       }
     };
-  }, []); // No dependencies needed
+  }, []);
   
 
   return (

@@ -7,7 +7,7 @@ import { Helmet } from 'react-helmet-async';
 
 const About = () => {
   const [seoData, setSeoData] = useState({
-    seo_title: "Phone Spot Repair", // Fallback title
+    seo_title: "Phone Spot Repair",
     seo_description: "Learn more about Phone Spot Repair, your trusted source for fast and reliable mobile repair services." // Fallback description
   });
   const [loading, setLoading] = useState(true);
@@ -22,7 +22,7 @@ const About = () => {
         }
         const data = await response.json();
         setSeoData({
-          seo_title: data.aboutSEO.seo_title, // Assuming the API returns an aboutSEO object
+          seo_title: data.aboutSEO.seo_title,
           seo_description: data.aboutSEO.seo_description
         });
       } catch (err) {

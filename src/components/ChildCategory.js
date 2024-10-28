@@ -5,59 +5,69 @@ import Footer from "./Footer";
 import axios from "axios";
 
 const ChildCategory = () => {
-  const { category, subcategorySlug } = useParams(); // Extract the category and subcategory from the URL parameters
+  const { category, subcategorySlug } = useParams(); 
   const [childCategories, setChildCategories] = useState([]);
   const [formattedSubcategory, setFormattedSubcategory] = useState("");
   const [loading, setLoading] = useState(true);
   useEffect(() => {
-    const cacheExpiry = 60 * 60 * 1000; // Cache expiry time (24 hours)
-  
+    const cacheExpiry = 60 * 60 * 1000; 
+
     const fetchChildCategories = async () => {
       setLoading(true);
-  
-      // Check if data is in local storage
-      const cachedData = localStorage.getItem(`childcategories_${subcategorySlug}`);
-      const cachedTime = localStorage.getItem(`childcategories_time_${subcategorySlug}`);
-  
-      if (cachedData && cachedTime && (Date.now() - cachedTime < cacheExpiry)) {
-        // Use cached data if it's not expired
+
+      const cachedData = localStorage.getItem(
+        `childcategories_${subcategorySlug}`
+      );
+      const cachedTime = localStorage.getItem(
+        `childcategories_time_${subcategorySlug}`
+      );
+
+      if (cachedData && cachedTime && Date.now() - cachedTime < cacheExpiry) {
         const cachedChildCategories = JSON.parse(cachedData);
-  
-        // Sort by serial before setting the state
-        const sortedChildCategories = cachedChildCategories.sort((a, b) => a.serial - b.serial);
+
+        const sortedChildCategories = cachedChildCategories.sort(
+          (a, b) => a.serial - b.serial
+        );
         setChildCategories(sortedChildCategories);
-        setFormattedSubcategory(subcategorySlug.replace(/-/g, " ").toUpperCase());
+        setFormattedSubcategory(
+          subcategorySlug.replace(/-/g, " ").toUpperCase()
+        );
         setLoading(false);
         return;
       }
-  
+
       try {
-        // Fetch child categories for the selected subcategory from the API
         const childCategoryRes = await axios.get(
           `https://phonespotbackend.blacktechcorp.com/api/category/childcategory/${subcategorySlug}`
         );
         const childCategoriesData = childCategoryRes.data.categories || [];
-  
-        // Sort the child categories by serial
-        const sortedChildCategories = childCategoriesData.sort((a, b) => a.serial - b.serial);
-  
-        // Save the sorted data to state
+
+        const sortedChildCategories = childCategoriesData.sort(
+          (a, b) => a.serial - b.serial
+        );
+
         setChildCategories(sortedChildCategories);
-        setFormattedSubcategory(subcategorySlug.replace(/-/g, " ").toUpperCase());
-  
-        // Cache the sorted data in local storage
-        localStorage.setItem(`childcategories_${subcategorySlug}`, JSON.stringify(sortedChildCategories));
-        localStorage.setItem(`childcategories_time_${subcategorySlug}`, Date.now());
+        setFormattedSubcategory(
+          subcategorySlug.replace(/-/g, " ").toUpperCase()
+        );
+
+        localStorage.setItem(
+          `childcategories_${subcategorySlug}`,
+          JSON.stringify(sortedChildCategories)
+        );
+        localStorage.setItem(
+          `childcategories_time_${subcategorySlug}`,
+          Date.now()
+        );
       } catch (error) {
         console.error("Error fetching child categories:", error);
       } finally {
         setLoading(false);
       }
     };
-  
+
     fetchChildCategories();
   }, [subcategorySlug]);
-  
 
   return (
     <>
@@ -69,7 +79,8 @@ const ChildCategory = () => {
             {`${formattedSubcategory} Models`}
           </h1>
           <p className="text-white hidden lg:block text-center max-w-xl mx-auto">
-            Browse through all available models in the {formattedSubcategory} series.
+            Browse through all available models in the {formattedSubcategory}{" "}
+            series.
           </p>
         </div>
 
@@ -90,7 +101,11 @@ const ChildCategory = () => {
                   key={model.name}
                   className="bg-white p-4 flex flex-col items-center shadow-lg rounded-lg overflow-hidden transform transition duration-300 hover:scale-105 hover:shadow-xl"
                 >
-                  <Link to={`/product/${category}/${encodeURIComponent(model.slug)}`}>
+                  <Link
+                    to={`/product/${category}/${encodeURIComponent(
+                      model.slug
+                    )}`}
+                  >
                     <img
                       src={`https://phonespotbackend.blacktechcorp.com/${model.image}`}
                       alt={model.name}
@@ -101,7 +116,9 @@ const ChildCategory = () => {
                         {model.name}
                       </h3>
                       <Link
-                        to={`/product/${category}/${encodeURIComponent(model.slug)}`}
+                        to={`/product/${category}/${encodeURIComponent(
+                          model.slug
+                        )}`}
                         className="bg-red-500 text-sm lg:text-base font-bold text-white px-2 py-1 rounded-full hover:bg-red-600 transition duration-200"
                       >
                         View Details

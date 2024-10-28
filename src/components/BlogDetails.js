@@ -5,7 +5,7 @@ import Footer from "./Footer";
 import DOMPurify from "dompurify";
 
 const BlogDetails = () => {
-  const { slug } = useParams(); // Fetch slug from URL params
+  const { slug } = useParams(); 
   const [blog, setBlog] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -33,11 +33,11 @@ const BlogDetails = () => {
   }, [slug]);
 
   const formatDateToUS = (dateString) => {
-    if (!dateString) return "Date not available"; // Handle missing or invalid date
+    if (!dateString) return "Date not available"; 
     const date = new Date(dateString);
 
     if (isNaN(date)) {
-      return "Invalid date"; // Handle invalid date formats
+      return "Invalid date"; 
     }
 
     return new Intl.DateTimeFormat("en-US", {

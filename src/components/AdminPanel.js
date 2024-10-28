@@ -13,7 +13,7 @@ const AdminPanel = () => {
   const [errorMessage, setErrorMessage] = useState('');
 
   useEffect(() => {
-    // Fetch existing hero content
+   
     axios.get('/api/hero-content')
       .then(response => {
         if (response.data) {
@@ -36,7 +36,7 @@ const AdminPanel = () => {
     setSuccessMessage('');
     setErrorMessage('');
 
-    // Update hero content via API
+   
     axios.put('/api/hero-content', heroContent)
       .then(response => {
         console.log('Hero content updated:', response.data);

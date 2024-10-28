@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 
 const AboutSection = () => {
   const [aboutData, setAboutData] = useState({
-    about_us: '', // To store the fetched about us HTML content
-    banner_image: '', // To store the banner image URL
+    about_us: '', 
+    banner_image: '',
   });
   const [error, setError] = useState(null);
 
@@ -32,7 +32,7 @@ const AboutSection = () => {
       <div className="about-text w-full p-4">
         <h2 className="text-3xl font-bold mb-4 text-center">About Us</h2>
         {error && <p>Error loading about us data: {error}</p>}
-        {/* Only display the content once it's fully loaded */}
+       
         {aboutData.about_us && (
           <div
             className="text-lg mb-4"

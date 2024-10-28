@@ -5,28 +5,28 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios"; 
 
 const CategorySection = () => {
-  const controls = useAnimation(); // Controls for animations
-  const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.2 }); // Intersection Observer for triggering animations
-  const navigate = useNavigate(); // Hook for navigation
+  const controls = useAnimation(); 
+  const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.2 }); 
+  const navigate = useNavigate(); 
 
-  const [categories, setCategories] = useState([]); // State to store categories
-  const [loading, setLoading] = useState(true); // State to handle loading status
+  const [categories, setCategories] = useState([]); 
+  const [loading, setLoading] = useState(true); 
 
   useEffect(() => {
     const fetchCategories = async () => {
-      const cachedData = localStorage.getItem("cachedCategories"); // Use a different key name
+      const cachedData = localStorage.getItem("cachedCategories"); 
   
       if (cachedData) {
-        // If cached data exists, use it
+       
         const parsedData = JSON.parse(cachedData);
         if (parsedData.length > 0) {
           setCategories(parsedData);
-          setLoading(false); // Stop loading as data is available
+          setLoading(false);
         } else {
-          fetchFromApi(); // If cache is empty, fetch from API
+          fetchFromApi();
         }
       } else {
-        fetchFromApi(); // If no cached data, fetch from API
+        fetchFromApi();
       }
     };
 
@@ -35,25 +35,25 @@ const CategorySection = () => {
         const response = await axios.get("https://phonespotbackend.blacktechcorp.com/api");
         const fetchedCategories = response.data.categories.map((category) => ({
           name: category.name,
-          slug: `/services/${category.slug}`, // Include the slug here
-          image: `https://phonespotbackend.blacktechcorp.com/${category.image}`, // Construct the image URL
+          slug: `/service/${category.slug}`, 
+          image: `https://phonespotbackend.blacktechcorp.com/${category.image}`, 
           shortDescription: category.short_description,
         }));
 
-        // Cache the fetched categories in localStorage
+      
         localStorage.setItem("cachedCategories", JSON.stringify(fetchedCategories));
-        setCategories(fetchedCategories); // Set the categories in state
+        setCategories(fetchedCategories);
       } catch (error) {
         console.error("Error fetching categories:", error);
       } finally {
-        setLoading(false); // Stop loading regardless of success or error
+        setLoading(false); 
       }
     };
   
-    fetchCategories(); // Call the function to fetch categories
+    fetchCategories(); 
   }, []);
 
-  // Start animation when the section is in view
+  
   useEffect(() => {
     if (inView) {
       controls.start("visible");
@@ -107,7 +107,7 @@ const CategorySection = () => {
                 onClick={() => navigate(category.slug)}
               >
                 <img
-                  src={category.image} // Use the full URL directly here
+                  src={category.image} 
                   alt={category.name}
                   className="w-32 h-32 mx-auto mb-6"
                 />

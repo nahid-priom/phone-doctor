@@ -2,16 +2,15 @@ import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
-import axios from "axios"; // Import axios for API calls
+import axios from "axios";
 
 const Appointment = () => {
-  const { model, service } = useParams(); // Get the phone model and service from the URL parameters
+  const { model, service } = useParams();
 
   // Utility function to capitalize model and service names
   const capitalizeWords = (str) =>
     str.replace(/\b\w/g, (char) => char.toUpperCase());
 
-  // State to handle form inputs
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -21,13 +20,10 @@ const Appointment = () => {
     appointmentTime: "",
   });
 
-  // State to control the visibility of the thank you modal
   const [showModal, setShowModal] = useState(false);
 
-  // State to handle errors
   const [error, setError] = useState(null);
 
-  // State for loading
   const [loading, setLoading] = useState(false);
 
   // Handle form input changes
@@ -43,19 +39,18 @@ const Appointment = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    setLoading(true); // Start loading when the form is submitted
+    setLoading(true);
 
-    // Format the data according to the API requirements
     const postData = {
-      service_name: service, // Pass service from the URL
+      service_name: service,
       name: formData.name,
       email: formData.email,
       phone: formData.phone,
       address: formData.address,
-      short_notes: model, // short_notes is phoneModel
+      short_notes: model,
       appoinment_date: formData.appointmentDate,
       appoinment_time: formData.appointmentTime,
-      storeName: capitalizeWords(model), // Assuming storeName is the phone model
+      storeName: capitalizeWords(model),
     };
 
     try {
@@ -67,18 +62,18 @@ const Appointment = () => {
 
       console.log("API Response:", response.data);
 
-      // Show the thank you modal upon success
       setShowModal(true);
 
-      // Hide the modal after 2 seconds
       setTimeout(() => {
         setShowModal(false);
       }, 2000);
     } catch (error) {
       console.error("Error submitting form:", error);
-      setError("There was a problem submitting your appointment. Please try again.");
+      setError(
+        "There was a problem submitting your appointment. Please try again."
+      );
     } finally {
-      setLoading(false); // Stop loading once the API call is finished
+      setLoading(false);
     }
   };
 
@@ -105,11 +100,12 @@ const Appointment = () => {
           onSubmit={handleSubmit}
           className="bg-white shadow-lg rounded-lg p-6 space-y-4"
         >
-          {[{ label: "Name", type: "text", name: "name" },
+          {[
+            { label: "Name", type: "text", name: "name" },
             { label: "Email", type: "email", name: "email" },
             { label: "Phone Number", type: "tel", name: "phone" },
             { label: "Address", type: "textarea", name: "address" },
-            
+
             {
               label: "Appointment Date",
               type: "date",
@@ -156,9 +152,9 @@ const Appointment = () => {
           <button
             type="submit"
             className="w-full bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition duration-200"
-            disabled={loading} // Disable button when loading
+            disabled={loading}
           >
-            {loading ? "Submitting..." : "Submit"} {/* Change button text during loading */}
+            {loading ? "Submitting..." : "Submit"}
           </button>
 
           {error && <p className="text-red-500 mt-4">{error}</p>}

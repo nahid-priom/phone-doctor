@@ -2,43 +2,43 @@ import React, { useState, useEffect } from "react";
 import { motion, useAnimation } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { useNavigate } from "react-router-dom";
-import axios from "axios"; // Import axios for API calls
+import axios from "axios";
 
 const FeaturedCategorySection = () => {
   const controls = useAnimation();
   const [ref, inView] = useInView({ triggerOnce: false, threshold: 0.2 });
-  const navigate = useNavigate(); // Initialize navigate hook
+  const navigate = useNavigate(); 
 
-  const [featuredCategories, setFeaturedCategories] = useState([]); // State to store fetched categories
-  const [isLoading, setIsLoading] = useState(true); // Loading state to show loading indicator if needed
+  const [featuredCategories, setFeaturedCategories] = useState([]); 
+  const [isLoading, setIsLoading] = useState(true);
 
-  // Fetch categories from the API or cache
+ 
   useEffect(() => {
     const fetchCategories = async () => {
       const cachedCategories = localStorage.getItem("featured-categories");
 
       if (cachedCategories) {
-        // If categories are found in localStorage, use them
+        
         setFeaturedCategories(JSON.parse(cachedCategories));
         setIsLoading(false);
       } else {
         try {
           const response = await axios.get(
             "https://phonespotbackend.blacktechcorp.com/api"
-          ); // Replace with your API URL
+          ); 
 
           const fetchedCategories = response.data.feateuredCategories.map(
             (item) => ({
               title: item.category.name,
               description: item.category.short_description,
               image: item.category.image,
-              path: `/services/${item.category.slug}`, // Construct path using the slug
+              path: `/services/${item.category.slug}`,
             })
           );
 
-          // Save the fetched categories in localStorage
+          
           localStorage.setItem("featured-categories", JSON.stringify(fetchedCategories));
-          setFeaturedCategories(fetchedCategories); // Set fetched categories
+          setFeaturedCategories(fetchedCategories); 
           setIsLoading(false);
         } catch (error) {
           console.error("Error fetching categories:", error);
@@ -47,10 +47,10 @@ const FeaturedCategorySection = () => {
       }
     };
 
-    fetchCategories(); // Call the function to fetch categories or load from cache
+    fetchCategories(); 
   }, []);
 
-  // Start animation when the section is in view
+  
   useEffect(() => {
     if (inView) {
       controls.start("visible");

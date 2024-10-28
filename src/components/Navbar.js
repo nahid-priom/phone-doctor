@@ -32,21 +32,21 @@ const Navbar = () => {
       try {
         const response = await axios.get("https://phonespotbackend.blacktechcorp.com/api");
   
-        // Map the fetched categories to match the structure you need, including 'slug'
+       
         const fetchedCategories = response.data.categories.map((category) => ({
           name: category.name,
-          slug: category.slug, // Include the slug here
-          image: `https://phonespotbackend.blacktechcorp.com/${category.image}`, // Construct the image URL
-          shortDescription: category.short_description, // Optional: include other properties if needed
+          slug: category.slug, 
+          image: `https://phonespotbackend.blacktechcorp.com/${category.image}`, 
+          shortDescription: category.short_description, 
         }));
   
-        setCategories(fetchedCategories); // Set the categories in state
+        setCategories(fetchedCategories); 
       } catch (error) {
         console.error("Error fetching categories:", error);
       }
     };
   
-    fetchCategories(); // Call the function to fetch categories
+    fetchCategories(); 
   }, []);
   
 

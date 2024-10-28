@@ -3,7 +3,6 @@ import { Link, useParams } from "react-router-dom";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 
-// Define the repair options for each category
 const mobileRepairOptions = [
   { type: "Screen Repair", icon: "🔧" },
   { type: "Camera Repair", icon: "📷" },
@@ -31,16 +30,16 @@ const gamingConsoleRepairOptions = [
 const ProductDetails = () => {
   const { category, model } = useParams(); 
 
-  // Utility function for title case
+  
   const capitalizeWords = (str) => {
     return str.replace(/\b\w/g, (char) => char.toUpperCase());
   };
 
-  // Determine the appropriate repair options based on the category
+  
   let repairOptions;
   if (category.toLowerCase() === "computer") {
     repairOptions = computerRepairOptions;
-  } else if (category.toLowerCase() === "gaming-console") {
+  } else if (category.toLowerCase() === "gaming-console-") {
     repairOptions = gamingConsoleRepairOptions;
   } else {
     repairOptions = mobileRepairOptions;
