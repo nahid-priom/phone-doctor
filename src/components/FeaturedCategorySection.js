@@ -32,7 +32,7 @@ const FeaturedCategorySection = () => {
               title: item.category.name,
               description: item.category.short_description,
               image: item.category.image,
-              path: `/services/${item.category.slug}`,
+              path: `/service/${item.category.slug}`,
             })
           );
 

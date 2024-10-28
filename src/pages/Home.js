@@ -9,7 +9,8 @@ import ClientTestimonials from "../components/ClientTestmonials";
 import Footer from "../components/Footer";
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import CategorySection from '../components/CategorySection';
+// import CategorySection from '../components/CategorySection';
+import FeaturedCategorySection from '../components/FeaturedCategorySection';
 
 const Home = () => {
   const [seoData, setSeoData] = useState({
@@ -56,7 +57,8 @@ const Home = () => {
       {/* Page Content */}
       <Navbar />
       <HeroSection />
-      <CategorySection />
+      <FeaturedCategorySection/>
+      {/* <CategorySection /> */}
       <ServiceSection />
       <RecentWorkSection />
       <ClientTestimonials />

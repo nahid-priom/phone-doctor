@@ -3,19 +3,19 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import ScrollToTop from "./components/ScrollToTop";
 import { HelmetProvider } from "react-helmet-async";
 
+// Lazy load other components
 const Home = lazy(() => import("./pages/Home"));
 const Blog = lazy(() => import("./pages/Blog"));
 const About = lazy(() => import("./pages/About"));
 const Service = lazy(() => import("./pages/Service"));
 const Contact = lazy(() => import("./pages/Contact"));
 const BodyOils = lazy(() => import("./pages/BodyOils"));
-
 const BlogDetails = lazy(() => import("./components/BlogDetails"));
 const Subcategory = lazy(() => import("./components/Subcategory"));
 const ProductDetails = lazy(() => import("./components/ProductDetails"));
 const Appointment = lazy(() => import("./components/Appoinment"));
 const ChildCategory = lazy(() => import("./components/ChildCategory"));
-
+const ClearCache = lazy(() => import("./components/ClearCache")); // Import ClearCache
 
 const ErrorBoundary = ({ children }) => {
   return (
@@ -56,18 +56,20 @@ const App = () => (
 
             {/* Dynamic Routes */}
             <Route path="/blog/:slug" element={<BlogDetails />} />
-
-            
             <Route path="/service/:category" element={<Subcategory />} />
 
+           
             <Route
               path="/product/:category/:model"
               element={<ProductDetails />}
+              key={Date.now()} 
             />
-           
+
             <Route path="/appointment/:model/:service" element={<Appointment />} />
             <Route path="/subcategory/:category/:subcategorySlug" element={<ChildCategory />} />
 
+          
+            <Route path="/clear-cache" element={<ClearCache />} />
           </Routes>
         </ErrorBoundary>
       </Suspense>

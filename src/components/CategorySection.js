@@ -96,7 +96,6 @@ const CategorySection = () => {
               <motion.div
                 key={index}
                 className="relative bg-white shadow-md rounded-xl p-6 text-center cursor-pointer"
-                initial="hidden"
                 animate={controls}
                 variants={{
                   hidden: { opacity: 0, y: 50 },
