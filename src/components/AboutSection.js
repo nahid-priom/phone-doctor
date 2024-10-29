@@ -28,7 +28,7 @@ const AboutSection = () => {
   }, []);
 
   return (
-    <div className="max-w-7xl pt-28 lg:pt-44 mx-auto flex flex-col md:flex-row items-center justify-between py-8 bg-white">
+    <div className="max-w-7xl pt-28 lg:pt-44 mx-auto flex flex-col md:flex-row items-center justify-between py-8 ">
       <div className="about-text w-full p-4">
         <h2 className="text-3xl font-bold mb-4 text-center">About Us</h2>
         {error && <p>Error loading about us data: {error}</p>}

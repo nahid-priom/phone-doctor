@@ -68,7 +68,7 @@ const BlogDetails = () => {
     <div>
       <Navbar />
       <div className="blog-details-container pt-28 lg:pt-44 py-12 px-4 md:px-8 lg:px-16 bg-gray-50">
-        <div className="max-w-4xl mx-auto bg-white shadow-lg rounded-lg overflow-hidden">
+        <div className="max-w-4xl mx-auto bg-red-50 shadow-lg rounded-lg overflow-hidden">
           <img
             src={`https://phonespotbackend.blacktechcorp.com/${blog.blog.image}`} 
             alt={blog.blog.title}

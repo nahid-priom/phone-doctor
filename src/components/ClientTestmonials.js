@@ -5,24 +5,29 @@ import { motion } from 'framer-motion';
 const ClientTestimonialsCarousel = () => {
   const testimonials = [
     {
-      name: 'John Doe',
-      feedback: 'Amazing service! My iPhone was fixed in no time and works like new.',
+      name: 'Bonnie Skipwith',
+      feedback: 'Rony was very good repairing my phone. This store is amazing. He did good work and was professional and fast. I agree everyone should use this store.  Im a happy customer! 😀😀',
       image: 'https://randomuser.me/api/portraits/men/32.jpg',
     },
     {
-      name: 'Jane Smith',
-      feedback: 'Professional and quick. Highly recommend for any tech repairs.',
+      name: 'Adenike Oshinaike',
+      feedback: 'I was amazed how quickly they fix my phone.the staff was friendly had a great experience!',
       image: 'https://randomuser.me/api/portraits/women/44.jpg',
     },
     {
-      name: 'Michael Johnson',
-      feedback: 'My MacBook Air sounds perfect after the speaker replacement. Thanks!',
+      name: 'Max C',
+      feedback: 'I had a fantastic experience at Phone Spot! They fixed my phone in just 15 minutes. The staff was friendly, professional, and efficient. Highly recommend their service!',
       image: 'https://randomuser.me/api/portraits/men/65.jpg',
     },
     {
-      name: 'Emily Davis',
-      feedback: 'Recovered my iPad from water damage like magic!',
+      name: 'Arunav Bordoloi',
+      feedback: 'The experience has been very good. They replaced the screen on our Samsung S9 and changed the tempered glass on my iphone.',
       image: 'https://randomuser.me/api/portraits/women/68.jpg',
+    },
+    {
+      name: 'Antionette Miller (Nette)',
+      feedback: 'Fixed my phone. I thought it was a bigger problem and it wasn’t. Tech was Super Nice , Fast & Efficient. Customer Service was beyond expected',
+      image: 'https://m.media-amazon.com/images/M/MV5BOTUxNzcwMTgtMzUwMy00ZTg0LWIyMGEtODBiMjY2YzRkMmNjXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg',
     },
   ];
 
@@ -79,7 +84,7 @@ const ClientTestimonialsCarousel = () => {
                   className="w-24 h-24 object-cover object-center rounded-full mb-4 border-4 border-gray-300"
                 />
                 <h3 className="text-xl font-semibold text-gray-900">{testimonial.name}</h3>
-                <p className="mt-4 text-base text-gray-700 max-w-xs h-20 overflow-hidden">
+                <p className="mt-4 text-base text-gray-700 max-w-xs overflow-hidden">
                   "{testimonial.feedback}"
                 </p>
               </div>

@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faTimes, faPhoneAlt, faChevronDown } from "@fortawesome/free-solid-svg-icons";
-import { faFacebook, faTwitter, faInstagram } from "@fortawesome/free-brands-svg-icons";
+import { faFacebook} from "@fortawesome/free-brands-svg-icons";
 import axios from "axios";
 
 import logo from "../assets/logo.jpeg";
@@ -87,18 +87,13 @@ const Navbar = () => {
         <div className="bg-red-600 py-1 pt-2">
         <div className="max-w-7xl mx-auto px-4 lg:px-0 flex justify-between items-center">
           <div className="flex space-x-4">
-            <Link to="https://facebook.com" target="_blank" rel="noopener noreferrer">
+            <Link to="https://www.facebook.com/phonespotshop" target="_blank" rel="noopener noreferrer">
               <FontAwesomeIcon icon={faFacebook} className="text-white text-lg" />
             </Link>
-            <Link to="https://twitter.com" target="_blank" rel="noopener noreferrer">
-              <FontAwesomeIcon icon={faTwitter} className="text-white text-lg" />
-            </Link>
-            <Link to="https://instagram.com" target="_blank" rel="noopener noreferrer">
-              <FontAwesomeIcon icon={faInstagram} className="text-white text-lg" />
-            </Link>
+           
           </div>
-          <div className="flex space-x-12 justify-center items-center text-white text-sm">
-            <span className="hidden md:block">Mon-Fri: 9:00 AM - 6:00 PM</span>
+          <div className="flex gap-4 lg:space-x-12 justify-center items-center text-white text-sm">
+            <span className="">Mon-Sat: 10:00 AM - 9:00 PM</span>
             <Link to="tel:+1(240)-696-5671" className="flex items-center space-x-2">
               <FontAwesomeIcon icon={faPhoneAlt} className="text-xl font-bold animate-bounce" />
               <span className="text-base lg:text-xl font-bold">+1 (240)-696-5671</span>

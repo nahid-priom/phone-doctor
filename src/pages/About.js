@@ -36,7 +36,7 @@ const About = () => {
   }, []);
 
   return (
-    <div>
+    <div className='bg-red-50'>
       <Helmet>
         <title>{seoData.seo_title}</title>
         <meta name="description" content={seoData.seo_description} />

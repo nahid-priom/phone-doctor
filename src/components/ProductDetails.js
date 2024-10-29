@@ -5,37 +5,46 @@ import Footer from "./Footer";
 
 const mobileRepairOptions = [
   { type: "Screen Repair", icon: "🔧" },
-  { type: "Camera Repair", icon: "📷" },
   { type: "Battery Replacement", icon: "🔋" },
-  { type: "Charger Port Repair", icon: "⚡" },
-  { type: "Speaker Repair", icon: "🔊" },
+  { type: "Front Camera", icon: "📸" },
+  { type: "Rear Camera", icon: "📷" },
+  { type: "Rear Camera Glass", icon: "🔍" },
+  { type: "Charging Port Repair", icon: "⚡" },
   { type: "Water Damage Repair", icon: "💧" },
+  { type: "Software Update", icon: "💻" },
+  { type: "Not Turning On", icon: "❌" },
+  { type: "Back Glass Replacement", icon: "🔲" },
+  { type: "Other", icon: "❓" },
 ];
 
 const computerRepairOptions = [
   { type: "Broken Screen Repair", icon: "💻" },
   { type: "Battery Fix", icon: "🔋" },
   { type: "Computer Virus Removal", icon: "🛡️" },
+  { type: "Water Damage Repair", icon: "💧" },
+  { type: "Data Recovery", icon: "💾" },
+  { type: "Hard Drive Repair", icon: "🖴" },
+  { type: "Overheating Issue", icon: "🔥" },
+  { type: "Password Reset", icon: "🔐" },
+  { type: "Software Update", icon: "💻" },
+  { type: "Other", icon: "❓" },
 ];
 
 const gamingConsoleRepairOptions = [
-  { type: "PS5 Problem You Don't Know?", icon: "❓" },
-  { type: "PS5 Wifi Issue", icon: "📶" },
-  { type: "PS5 HDMI Port Issue", icon: "🔌" },
-  { type: "PS5 Hard Drive Issue", icon: "💽" },
-  { type: "PS5 Controller Issue", icon: "🎮" },
-  { type: "PS5 Cleaning", icon: "🧼" },
+  { type: "Not Turning On", icon: "❌" },
+  { type: "Video Input Issue", icon: "📺" },
+  { type: "Overheating Issue", icon: "🔥" },
+  { type: "Software Update", icon: "💻" },
+  { type: "Other", icon: "❓" },
 ];
 
 const ProductDetails = () => {
-  const { category, model } = useParams(); 
+  const { category, model } = useParams();
 
-  
   const capitalizeWords = (str) => {
     return str.replace(/\b\w/g, (char) => char.toUpperCase());
   };
 
-  
   let repairOptions;
   if (category.toLowerCase() === "computer") {
     repairOptions = computerRepairOptions;
@@ -63,7 +72,7 @@ const ProductDetails = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-3 gap-6">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-6">
           {repairOptions.map((option) => (
             <Link
               key={option.type}
