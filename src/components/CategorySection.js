@@ -61,7 +61,7 @@ const CategorySection = () => {
   }, [controls, inView]);
 
   return (
-    <section ref={ref} id="categorySection" className="py-16 bg-red-100">
+    <section ref={ref} id="categorySection" className="lg:py-16 py-6 bg-red-100">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Title and Description */}
         <motion.div

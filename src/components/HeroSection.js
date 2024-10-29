@@ -120,7 +120,7 @@ const HeroSection = () => {
             {/* Image Content */}
             <div
               ref={imageRef}
-              className="flex-none my-6 md:mt-0 md:max-w-xl opacity-0 transform translate-x-20 transition-all duration-1000"
+              className="flex-none my-6 md:mt-0 mx-auto md:max-w-xl opacity-0 transform translate-x-20 transition-all duration-1000"
             >
               {sliderData && (
                 <img
