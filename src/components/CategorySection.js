@@ -91,11 +91,11 @@ const CategorySection = () => {
           </div>
         ) : (
           /* Category Cards */
-          <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="grid grid-cols-3 gap-1 lg:gap-8 sm:grid-cols-3 lg:grid-cols-4">
             {categories.map((category, index) => (
               <motion.div
                 key={index}
-                className="relative bg-white shadow-md rounded-xl p-6 text-center cursor-pointer"
+                className="relative bg-white shadow-md rounded-xl p-2 lg:p-2 text-center cursor-pointer"
                 animate={controls}
                 variants={{
                   hidden: { opacity: 0, y: 50 },
@@ -108,9 +108,9 @@ const CategorySection = () => {
                 <img
                   src={category.image} 
                   alt={category.name}
-                  className="w-32 h-32 mx-auto mb-6"
+                  className="lg:w-32 w-16  mx-auto"
                 />
-                <h3 className="text-xl font-semibold text-gray-900">
+                <h3 className="text-sm lg:text-xl font-semibold text-gray-700">
                   {category.name}
                 </h3>
                 <p className="mt-4 text-base text-gray-600">

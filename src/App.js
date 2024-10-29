@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import ScrollToTop from "./components/ScrollToTop";
 import { HelmetProvider } from "react-helmet-async";
 
-// Lazy load other components
 const Home = lazy(() => import("./pages/Home"));
 const Blog = lazy(() => import("./pages/Blog"));
 const About = lazy(() => import("./pages/About"));
