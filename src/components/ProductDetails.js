@@ -3,6 +3,7 @@ import { Link, useParams } from "react-router-dom";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 
+
 const mobileRepairOptions = [
   { type: "Screen Repair", icon: "🔧" },
   { type: "Battery Replacement", icon: "🔋" },

@@ -2,6 +2,7 @@ import React, { Suspense, lazy } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import ScrollToTop from "./components/ScrollToTop";
 import { HelmetProvider } from "react-helmet-async";
+import FloatingCallButton from "./components/FloatingCall";
 
 const Home = lazy(() => import("./pages/Home"));
 const Blog = lazy(() => import("./pages/Blog"));
@@ -54,6 +55,7 @@ const App = () => (
         </Routes>
       </LoadingFallback>
     </Router>
+    <FloatingCallButton />
   </HelmetProvider>
 );
 
