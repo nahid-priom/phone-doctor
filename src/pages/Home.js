@@ -10,6 +10,7 @@ import Footer from "../components/Footer";
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import CategorySection from '../components/CategorySection';
+import GoogleMap from "../components/GoogleMap"
 
 
 const Home = () => {
@@ -62,6 +63,7 @@ const Home = () => {
       <ServiceSection />
       <RecentWorkSection />
       <ClientTestimonials />
+      <GoogleMap />
       <Footer />
     </div>
   );
