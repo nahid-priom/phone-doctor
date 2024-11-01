@@ -2,20 +2,39 @@ import React from "react";
 import { Link, useParams } from "react-router-dom";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
+import ScreenRepairIcon from "../assets/service icons/screeen repai.png";
+import BackGlassIcon from "../assets/service icons/back cover glass repair.png";
+
+import FrontCameraIcon from "../assets/service icons/front camera.png";
+
+import RearCameraIcon from "../assets/service icons/rear camera.png";
+import BatterReplacement from "../assets/service icons/battery replacement.png";
+import chargerPort from "../assets/service icons/charging port.png";
+import waterDamage from "../assets/service icons/waterdamage.png";
+import SoftwareUpdate from "../assets/service icons/software update.png";
+import NotTurningOn from "../assets/service icons/not turning on.png";
+import Other from "../assets/service icons/others.png";
+
+import GC1 from "../assets/service icons/gaming-console/not turning on (1).png"
+import GC2 from "../assets/service icons/gaming-console/over heating.png"
+import GC3 from "../assets/service icons/gaming-console/software update (1).png"
+import GC4 from "../assets/service icons/gaming-console/video input.png"
+import GC5 from "../assets/service icons/gaming-console/others (1).png"
 
 
 const mobileRepairOptions = [
-  { type: "Screen Repair", icon: "🔧" },
-  { type: "Battery Replacement", icon: "🔋" },
-  { type: "Front Camera", icon: "📸" },
-  { type: "Rear Camera", icon: "📷" },
-  { type: "Rear Camera Glass", icon: "🔍" },
-  { type: "Charging Port Repair", icon: "⚡" },
-  { type: "Water Damage Repair", icon: "💧" },
-  { type: "Software Update", icon: "💻" },
-  { type: "Not Turning On", icon: "❌" },
-  { type: "Back Glass Replacement", icon: "🔲" },
-  { type: "Other", icon: "❓" },
+  { type: "Screen Repair", icon: ScreenRepairIcon },
+  { type: "Battery Replacement", icon: BatterReplacement },
+  { type: "Charger Port Repair", icon: chargerPort },
+  { type: "Water Damage", icon: waterDamage },
+  { type: "Software Update", icon: SoftwareUpdate },
+
+  { type: "Front Camera", icon: FrontCameraIcon },
+  { type: "Rear Camera", icon: RearCameraIcon },
+
+  { type: "Back Glass Replacement", icon: BackGlassIcon },
+  { type: "Not Turning On", icon: NotTurningOn },
+  { type: "Other", icon: Other },
 ];
 
 const computerRepairOptions = [
@@ -32,11 +51,11 @@ const computerRepairOptions = [
 ];
 
 const gamingConsoleRepairOptions = [
-  { type: "Not Turning On", icon: "❌" },
-  { type: "Video Input Issue", icon: "📺" },
-  { type: "Overheating Issue", icon: "🔥" },
-  { type: "Software Update", icon: "💻" },
-  { type: "Other", icon: "❓" },
+  { type: "Not Turning On", icon: GC1 },
+  { type: "Video Input Issue", icon: GC4 },
+  { type: "Overheating Issue", icon: GC2 },
+  { type: "Software Update", icon: GC3 },
+  { type: "Other", icon: GC5 },
 ];
 
 const ProductDetails = () => {
@@ -73,14 +92,16 @@ const ProductDetails = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-6">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-6">
           {repairOptions.map((option) => (
             <Link
               key={option.type}
               to={`/appointment/${model}/${option.type}`}
               className="bg-red-100 flex flex-col items-center shadow-lg rounded-lg p-6 transform transition duration-300 hover:scale-105 hover:shadow-xl"
             >
-              <div className="text-4xl mb-4">{option.icon}</div>
+              <div className="text-4xl mb-4">
+                <img className="w-20" src={option.icon} alt={option.type}></img>
+              </div>
               <h3 className="text-base font-semibold text-gray-800 text-center">
                 {option.type}
               </h3>
