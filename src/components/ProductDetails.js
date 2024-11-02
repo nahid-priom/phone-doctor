@@ -21,6 +21,26 @@ import GC3 from "../assets/service icons/gaming-console/software update (1).png"
 import GC4 from "../assets/service icons/gaming-console/video input.png"
 import GC5 from "../assets/service icons/gaming-console/others (1).png"
 
+import CM1 from "../assets/service icons/computer/broken screen.png"
+import CM2 from "../assets/service icons/computer/battery.png"
+import CM3 from "../assets/service icons/computer/Virus.png"
+import CM4 from "../assets/service icons/computer/Water Damage.png"
+import CM5 from "../assets/service icons/computer/Data Recovery.png"
+import CM6 from "../assets/service icons/computer/hard drive.png"
+import CM7 from "../assets/service icons/computer/oveerheat.png"
+import CM8 from "../assets/service icons/computer/Password reset.png"
+import CM9 from "../assets/service icons/computer/software.png"
+import CM10 from "../assets/service icons/computer/other.png"
+
+
+
+
+
+
+
+
+
+
 
 const mobileRepairOptions = [
   { type: "Screen Repair", icon: ScreenRepairIcon },
@@ -38,16 +58,16 @@ const mobileRepairOptions = [
 ];
 
 const computerRepairOptions = [
-  { type: "Broken Screen Repair", icon: "💻" },
-  { type: "Battery Fix", icon: "🔋" },
-  { type: "Computer Virus Removal", icon: "🛡️" },
-  { type: "Water Damage Repair", icon: "💧" },
-  { type: "Data Recovery", icon: "💾" },
-  { type: "Hard Drive Repair", icon: "🖴" },
-  { type: "Overheating Issue", icon: "🔥" },
-  { type: "Password Reset", icon: "🔐" },
-  { type: "Software Update", icon: "💻" },
-  { type: "Other", icon: "❓" },
+  { type: "Broken Screen Repair", icon: CM1 },
+  { type: "Battery Fix", icon: CM2 },
+  { type: "Computer Virus Removal", icon: CM3 },
+  { type: "Water Damage Repair", icon: CM4 },
+  { type: "Data Recovery", icon: CM5 },
+  { type: "Hard Drive Repair", icon: CM6 },
+  { type: "Overheating Issue", icon: CM7 },
+  { type: "Password Reset", icon: CM8 },
+  { type: "Software Update", icon: CM9 },
+  { type: "Other", icon: CM10 },
 ];
 
 const gamingConsoleRepairOptions = [
