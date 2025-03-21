@@ -18,7 +18,7 @@ const OurServices = () => {
       setServices(JSON.parse(localData));
     } else {
       axios
-        .get("https://phonespotbackend.blacktechcorp.com/api")
+        .get("https://backend.phonespotmd.com/api")
         .then((response) => {
           const fetchedServices = response.data.products;
           setServices(fetchedServices); 
@@ -77,7 +77,7 @@ const OurServices = () => {
               whileHover={{ scale: 1.05 }}
             >
               <img
-                src={`https://phonespotbackend.blacktechcorp.com/${service.thumb_image}`} // Use thumb_image from API
+                src={`https://backend.phonespotmd.com/${service.thumb_image}`} // Use thumb_image from API
                 alt={service.name}
                 className="w-full h-60 object-cover object-center rounded-lg mb-4"
               />

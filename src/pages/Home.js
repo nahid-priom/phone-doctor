@@ -59,11 +59,11 @@ const Home = () => {
       <Navbar />
       <HeroSection />
       
-      <CategorySection />
+      {/* <CategorySection />
       <ServiceSection />
       <RecentWorkSection />
       <ClientTestimonials />
-      <GoogleMap />
+      <GoogleMap /> */}
       <Footer />
     </div>
   );

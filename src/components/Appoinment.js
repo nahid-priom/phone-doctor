@@ -57,7 +57,7 @@ const Appointment = () => {
 
     try {
       const response = await axios.post(
-        "https://phonespotbackend.blacktechcorp.com/api/repair-submit",
+        "https://backend.phonespotmd.com/api/repair-submit",
         postData
       );
 

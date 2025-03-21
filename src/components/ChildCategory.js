@@ -38,7 +38,7 @@ const ChildCategory = () => {
 
       try {
         const childCategoryRes = await axios.get(
-          `https://phonespotbackend.blacktechcorp.com/api/category/childcategory/${subcategorySlug}`
+          `https://backend.phonespotmd.com/api/category/childcategory/${subcategorySlug}`
         );
         const childCategoriesData = childCategoryRes.data.categories || [];
 
@@ -107,7 +107,7 @@ const ChildCategory = () => {
                     )}`}
                   >
                     <img
-                      src={`https://phonespotbackend.blacktechcorp.com/${model.image}`}
+                      src={`https://backend.phonespotmd.com/${model.image}`}
                       alt={model.name}
                       className="w-full my-3 flex justify-center h-36 object-contain"
                     />

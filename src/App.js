@@ -22,7 +22,7 @@ const LoadingFallback = ({ children }) => (
     fallback={
       <div className="flex justify-center items-center w-full h-screen">
         <div className="spinner-border animate-spin inline-block w-8 h-8 border-4 rounded-full text-red-600"></div>
-        <p className="ml-4 text-red-600">Loading...</p>
+        <p className="ml-4 text-blue-600">Loading...</p>
       </div>
     }
   >

@@ -24,7 +24,7 @@ const FeaturedCategorySection = () => {
       } else {
         try {
           const response = await axios.get(
-            "https://phonespotbackend.blacktechcorp.com/api"
+            "https://backend.phonespotmd.com/api"
           ); 
 
           const fetchedCategories = response.data.feateuredCategories.map(
@@ -106,7 +106,7 @@ const FeaturedCategorySection = () => {
               onClick={() => navigate(category.path)}
             >
               <img
-                src={`https://phonespotbackend.blacktechcorp.com/${category.image}`}
+                src={`https://backend.phonespotmd.com/${category.image}`}
                 alt={category.title}
                 className="w-32 h-32 mx-auto mb-6"
               />

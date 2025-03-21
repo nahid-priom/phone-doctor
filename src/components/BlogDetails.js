@@ -14,7 +14,7 @@ const BlogDetails = () => {
     const fetchBlogDetails = async () => {
       try {
         const response = await fetch(
-          `https://phonespotbackend.blacktechcorp.com/api/blog-details/${slug}`
+          `https://backend.phonespotmd.com/api/blog-details/${slug}`
         );
         if (!response.ok) {
           throw new Error("Blog not found");
@@ -70,7 +70,7 @@ const BlogDetails = () => {
       <div className="blog-details-container pt-28 lg:pt-44 py-12 px-4 md:px-8 lg:px-16 bg-gray-50">
         <div className="max-w-4xl mx-auto bg-red-50 shadow-lg rounded-lg overflow-hidden">
           <img
-            src={`https://phonespotbackend.blacktechcorp.com/${blog.blog.image}`} 
+            src={`https://backend.phonespotmd.com/${blog.blog.image}`} 
             alt={blog.blog.title}
             className="w-full h-60 lg:h-96  lg:object-cover object-fill lg:mb-8"
           />

@@ -10,7 +10,7 @@ const AboutSection = () => {
   useEffect(() => {
     const fetchAboutData = async () => {
       try {
-        const response = await fetch('https://phonespotbackend.blacktechcorp.com/api/about-us');
+        const response = await fetch('https://backend.phonespotmd.com/api/about-us');
         if (!response.ok) {
           throw new Error('Failed to fetch about us data');
         }

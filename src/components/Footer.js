@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
-    <div className="lg:pt-16 bg-red-600">
+    <div className="lg:pt-16 bg-blue-100">
       <div className="px-4 pt-12 mx-auto sm:max-w-xl md:max-w-full lg:max-w-7xl rounded-t-xl md:px-24 lg:px-8">
         <div className="grid gap-16 row-gap-10 mb-8 lg:grid-cols-6">
           <div className="md:max-w-md lg:col-span-2">
@@ -11,10 +11,10 @@ const Footer = () => {
               to="/"
               aria-label="Go home"
               title="Company"
-              className="text-white inline-flex items-center"
+              className=" inline-flex items-center"
             >
               <svg
-                className="w-8 text-white"
+                className="w-8 "
                 viewBox="0 0 24 24"
                 strokeLinejoin="round"
                 strokeWidth="2"
@@ -28,12 +28,12 @@ const Footer = () => {
                 <rect x="14" y="1" width="7" height="6"></rect>
                 <rect x="14" y="11" width="7" height="12"></rect>
               </svg>
-              <span className="ml-2 text-xl font-bold tracking-wide text-gray-100 uppercase">
-                Phone Repair Spot
+              <span className="ml-2 text-xl font-bold tracking-wide  uppercase">
+                Phone Doctor
               </span>
             </Link>
             <div className="mt-4 lg:max-w-sm">
-              <p className="text-sm text-white">
+              <p className="text-sm ">
                 Your trusted partner for all your mobile repair needs! Our
                 expert team is committed to providing fast, reliable service,
                 ensuring your phone is back in perfect working condition.
@@ -44,12 +44,12 @@ const Footer = () => {
           </div>
           <div className="grid grid-cols-2 gap-5 row-gap-8 lg:col-span-4 md:grid-cols-3">
             <div>
-              <p className="font-semibold tracking-wide text-white">Category</p>
+              <p className="font-semibold tracking-wide ">Category</p>
               <ul className="mt-2 space-y-2">
                 <li>
                   <Link
                     to="/service/iphone"
-                    className="transition-colors duration-300 text-white hover:text-gray-900"
+                    className="transition-colors duration-300  hover:text-gray-900"
                   >
                     iPhone
                   </Link>
@@ -57,7 +57,7 @@ const Footer = () => {
                 <li>
                   <Link
                     to="/service/samsung"
-                    className="transition-colors duration-300 text-white hover:text-gray-900"
+                    className="transition-colors duration-300  hover:text-gray-900"
                   >
                     Samsung
                   </Link>
@@ -65,7 +65,7 @@ const Footer = () => {
                 <li>
                   <Link
                     to="/service/ipad"
-                    className="transition-colors duration-300 text-white hover:text-gray-900"
+                    className="transition-colors duration-300  hover:text-gray-900"
                   >
                     iPad
                   </Link>
@@ -73,7 +73,7 @@ const Footer = () => {
                 <li>
                   <Link
                     to="/service/other-android"
-                    className="transition-colors duration-300 text-white hover:text-gray-900"
+                    className="transition-colors duration-300  hover:text-gray-900"
                   >
                     Other Android
                   </Link>
@@ -81,12 +81,12 @@ const Footer = () => {
               </ul>
             </div>
             <div>
-              <p className="font-semibold tracking-wide text-white">Services</p>
+              <p className="font-semibold tracking-wide ">Services</p>
               <ul className="mt-2 space-y-2">
                 <li>
                   <Link
                     to="/contact"
-                    className="transition-colors duration-300 text-white hover:text-gray-900"
+                    className="transition-colors duration-300  hover:text-gray-900"
                   >
                     Screen Repair
                   </Link>
@@ -94,7 +94,7 @@ const Footer = () => {
                 <li>
                   <Link
                     to="/contact"
-                    className="transition-colors duration-300 text-white hover:text-gray-900"
+                    className="transition-colors duration-300  hover:text-gray-900"
                   >
                     Battery Replacement
                   </Link>
@@ -102,7 +102,7 @@ const Footer = () => {
                 <li>
                   <Link
                     to="/contact"
-                    className="transition-colors duration-300 text-white hover:text-gray-900"
+                    className="transition-colors duration-300  hover:text-gray-900"
                   >
                     Water Damage Repair
                   </Link>
@@ -110,7 +110,7 @@ const Footer = () => {
                 <li>
                   <Link
                     to="/contact"
-                    className="transition-colors duration-300 text-white hover:text-gray-900"
+                    className="transition-colors duration-300  hover:text-gray-900"
                   >
                     Charging Issues
                   </Link>
@@ -119,12 +119,12 @@ const Footer = () => {
             </div>
 
             <div>
-              <p className="font-semibold tracking-wide text-white">Business</p>
+              <p className="font-semibold tracking-wide ">Business</p>
               <ul className="mt-2 space-y-2">
                 <li>
                   <Link
                     to="/blog"
-                    className="transition-colors duration-300 text-white hover:text-gray-900"
+                    className="transition-colors duration-300  hover:text-gray-900"
                   >
                     Blogs
                   </Link>
@@ -132,7 +132,7 @@ const Footer = () => {
                 <li>
                   <Link
                     to="/about"
-                    className="transition-colors duration-300 text-white hover:text-gray-900"
+                    className="transition-colors duration-300  hover:text-gray-900"
                   >
                     About
                   </Link>
@@ -140,7 +140,7 @@ const Footer = () => {
                 <li>
                   <Link
                     to="/contact"
-                    className="transition-colors duration-300 text-white hover:text-gray-900"
+                    className="transition-colors duration-300  hover:text-gray-900"
                   >
                     Contact
                   </Link>
@@ -148,7 +148,7 @@ const Footer = () => {
                 <li>
                   <Link
                     to="/"
-                    className="transition-colors duration-300 text-white hover:text-gray-900"
+                    className="transition-colors duration-300  hover:text-gray-900"
                   >
                     Body Oils
                   </Link>
@@ -158,13 +158,13 @@ const Footer = () => {
           </div>
         </div>
         <div className="flex flex-col justify-between pt-5 pb-10 border-t border-gray-200 sm:flex-row">
-          <p className="text-sm text-gray-100">
+          <p className="text-sm ">
             © Copyright 2024 Blacktech Consultancy. All rights reserved.
           </p>
           <div className="flex items-center mt-4 space-x-4 sm:mt-0">
             <Link
               to="/"
-              className="transition-colors duration-300 text-white hover:text-gray-900"
+              className="transition-colors duration-300  hover:text-gray-900"
             >
               <svg viewBox="0 0 24 24" fill="currentColor" className="h-5">
                 <path
@@ -178,7 +178,7 @@ const Footer = () => {
             </Link>
             <Link
               to="/"
-              className="transition-colors duration-300 text-white hover:text-gray-900"
+              className="transition-colors duration-300  hover:text-gray-900"
             >
               <svg viewBox="0 0 30 30" fill="currentColor" className="h-6">
                 <circle cx="15" cy="15" r="4"></circle>
@@ -191,7 +191,7 @@ const Footer = () => {
             </Link>
             <Link
               to="/"
-              className="transition-colors duration-300 text-white hover:text-gray-900"
+              className="transition-colors duration-300  hover:text-gray-900"
             >
               <svg viewBox="0 0 24 24" fill="currentColor" className="h-5">
                 <path

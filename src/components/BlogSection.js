@@ -29,7 +29,7 @@ const BlogSection = () => {
       }
 
       try {
-        const response = await axios.get('https://phonespotbackend.blacktechcorp.com/api/blog');
+        const response = await axios.get('https://backend.phonespotmd.com/api/blog');
         const blogData = response.data.blog;
         
         if (Array.isArray(blogData)) {
@@ -83,7 +83,7 @@ const BlogSection = () => {
           blogs.map((blog) => (
             <div key={blog.id} className="blog-card bg-gray-100 rounded-lg shadow-lg overflow-hidden flex flex-col">
               <img 
-                src={`https://phonespotbackend.blacktechcorp.com/${blog.image}`} 
+                src={`https://backend.phonespotmd.com/${blog.image}`} 
                 alt={blog.title} 
                 className="w-full h-48 object-cover" 
               />

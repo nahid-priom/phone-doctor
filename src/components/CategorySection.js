@@ -32,11 +32,11 @@ const CategorySection = () => {
 
     const fetchFromApi = async () => {
       try {
-        const response = await axios.get("https://phonespotbackend.blacktechcorp.com/api");
+        const response = await axios.get("https://backend.phonespotmd.com/api");
         const fetchedCategories = response.data.categories.map((category) => ({
           name: category.name,
           slug: `/service/${category.slug}`, 
-          image: `https://phonespotbackend.blacktechcorp.com/${category.image}`, 
+          image: `https://backend.phonespotmd.com/${category.image}`, 
           shortDescription: category.short_description,
         }));
 

@@ -35,7 +35,7 @@ const Subcategory = () => {
       try {
         
         const subcategoryRes = await axios.get(
-          `https://phonespotbackend.blacktechcorp.com/api/category/subcategory/${category}`
+          `https://backend.phonespotmd.com/api/category/subcategory/${category}`
         );
         const subcategoryData = subcategoryRes.data.categories || [];
   
@@ -93,7 +93,7 @@ const Subcategory = () => {
                   
                   <Link to={`/subcategory/${category}/${subcategory.slug}`}>
                     <img
-                      src={`https://phonespotbackend.blacktechcorp.com/${subcategory.image}`}
+                      src={`https://backend.phonespotmd.com/${subcategory.image}`}
                       alt={subcategory.name}
                       className="w-full my-3 flex justify-center h-36 object-contain"
                     />

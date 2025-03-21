@@ -1,23 +1,22 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBars, faTimes, faPhoneAlt, faChevronDown } from "@fortawesome/free-solid-svg-icons";
-import { faFacebook} from "@fortawesome/free-brands-svg-icons";
+import {
+  faBars,
+  faTimes,
+  faChevronDown,
+} from "@fortawesome/free-solid-svg-icons";
+
 import axios from "axios";
 
-import logo from "../assets/logo.jpeg";
-
+import logo from "../assets/logo.png";
 
 export const navLinks = [
- 
   { id: "service", title: "Services" },
   { id: "about", title: "About" },
   { id: "blog", title: "Blogs" },
   { id: "contact", title: "Contact" },
-  {id: "bodyoils", title: "Body Oils"}
 ];
-
-
 
 const Navbar = () => {
   const [categories, setCategories] = useState([]);
@@ -30,25 +29,23 @@ const Navbar = () => {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await axios.get("https://phonespotbackend.blacktechcorp.com/api");
-  
-       
+        const response = await axios.get("https://backend.phonespotmd.com/api");
+
         const fetchedCategories = response.data.categories.map((category) => ({
           name: category.name,
-          slug: category.slug, 
-          image: `https://phonespotbackend.blacktechcorp.com/${category.image}`, 
-          shortDescription: category.short_description, 
+          slug: category.slug,
+          image: `https://backend.phonespotmd.com/${category.image}`,
+          shortDescription: category.short_description,
         }));
-  
-        setCategories(fetchedCategories); 
+
+        setCategories(fetchedCategories);
       } catch (error) {
         console.error("Error fetching categories:", error);
       }
     };
-  
-    fetchCategories(); 
+
+    fetchCategories();
   }, []);
-  
 
   useEffect(() => {
     const handleScroll = () => {
@@ -74,64 +71,71 @@ const Navbar = () => {
   }, [location]);
 
   return (
-    <section className="bg-white">
-      
-      
-
+    <section>
       {/* Main Navbar */}
       <nav
-        className={`fixed top-0 left-0 right-0 z-50 bg-white transition-shadow ${
-          navbarShadow ? "shadow-lg" : ""
+        className={`fixed top-0 left-0 right-0 z-50  transition-all duration-300 ${
+          navbarShadow ? "pt-4 lg:pt-0 shadow-2xl bg-[#003649]" : ""
         }`}
       >
-        <div className="bg-red-600 py-1 pt-2">
-        <div className="max-w-7xl mx-auto px-4 lg:px-0 flex justify-between items-center">
-          <div className="flex space-x-4">
-            <Link to="https://www.facebook.com/phonespotshop" target="_blank" rel="noopener noreferrer">
-              <FontAwesomeIcon icon={faFacebook} className="text-white text-lg" />
-            </Link>
-           
-          </div>
-          <div className="flex gap-4 lg:space-x-12 justify-center items-center text-white text-sm">
-            <span className="hidden md:block">Mon-Sat: 10:00 AM - 9:00 PM</span>
-            <Link to="tel:+1(240)-696-5671" className="flex items-center space-x-2">
-              <FontAwesomeIcon icon={faPhoneAlt} className="text-xl font-bold animate-bounce" />
-              <span className="text-base lg:text-xl font-bold">+1 (240)-696-5671</span>
-            </Link>
-          </div>
-        </div>
-      </div>
-        <div className="max-w-7xl px-4 lg:px-0 mx-auto flex py-3 justify-between items-center">
+        <div className="container bg-transparent px-4 lg:px-0 mx-auto flex py-3 justify-between items-center">
           <Link to={"/"}>
-            <img src={logo} alt="Logo" className="w-[120px] h-[60px] lg:w-[140px] lg:h-[70px]" />
+            <img
+              src={logo}
+              alt="Logo"
+              className="w-[120px] h-[60px] lg:w-[200px] lg:h-[100px]"
+            />
           </Link>
 
           <ul className="list-none sm:flex hidden justify-center items-center">
             {navLinks.map((nav, index) => (
               <li
                 key={nav.id}
-                className={`font-poppins font-normal cursor-pointer text-[16px] relative ${
-                  active === nav.title ? "text-red-500" : "text-black"
+                className={`font-poppins font-bold cursor-pointer text-[16px] relative ${
+                  active === nav.title ? "text-purple-600" : "text-gray-100"
                 } ${index === navLinks.length - 1 ? "mr-0" : "mr-10"}`}
-                onMouseEnter={() => nav.id === "service" && setServiceDropdownOpen(true)}
-                onMouseLeave={() => nav.id === "service" && setServiceDropdownOpen(false)}
+                onMouseEnter={() =>
+                  nav.id === "service" && setServiceDropdownOpen(true)
+                }
+                onMouseLeave={() =>
+                  nav.id === "service" && setServiceDropdownOpen(false)
+                }
                 onClick={() => setActive(nav.title)}
               >
-                <Link className="text-lg relative" to={`/${nav.id}`}>
+                <Link
+                  className="text-lg relative hover:text-purple-600 transition-all duration-300"
+                  to={`/${nav.id}`}
+                >
                   {nav.title}
-                  {nav.id === "service" && <FontAwesomeIcon icon={faChevronDown} className="ml-2" />}
-                  {active === nav.title && <span className="absolute bottom-[-2px] left-0 w-full h-[2px] bg-red-600"></span>}
+                  {nav.id === "service" && (
+                    <FontAwesomeIcon
+                      icon={faChevronDown}
+                      className="ml-2 transition-transform duration-300"
+                    />
+                  )}
+                  {active === nav.title && (
+                    <span className="absolute bottom-[-2px] left-0 w-full h-[2px] bg-purple-600 animate-underline"></span>
+                  )}
                 </Link>
                 {nav.id === "service" && serviceDropdownOpen && (
-                  <ul className="absolute top-full left-0 w-48 bg-white shadow-lg rounded-md z-10">
+                  <ul className="absolute top-full left-0 w-48 bg-white shadow-lg rounded-md z-10 overflow-hidden">
                     {categories.map((category) => (
                       <li
                         key={category.name}
-                        className="relative hover:bg-red-600 border-b border-red-400 p-4 hover:text-white items-center py-2"
+                        className="relative hover:bg-purple-600 border-b border-purple-100 p-4 hover:text-white transition-all duration-300"
                       >
-                        <Link to={`/service/${category.slug}`} className="flex items-center w-full">
-                          <img src={category.image} alt={category.name} className="w-8 h-8 mr-2" />
-                          <span className="text-black hover:text-white w-full p-1 rounded">{category.name}</span>
+                        <Link
+                          to={`/service/${category.slug}`}
+                          className="flex items-center w-full"
+                        >
+                          <img
+                            src={category.image}
+                            alt={category.name}
+                            className="w-8 h-8 mr-2 rounded-full"
+                          />
+                          <span className="text-gray-800 hover:text-white transition-all duration-300">
+                            {category.name}
+                          </span>
                         </Link>
                       </li>
                     ))}
@@ -140,10 +144,12 @@ const Navbar = () => {
               </li>
             ))}
           </ul>
-          <Link to="/service" className="bg-red-600 text-white px-4 py-1 rounded-md text-lg font-bold hover:bg-red-600">
+          <Link
+            to="/service"
+            className="bg-[#FFAB5B] px-6 py-2 rounded-lg text-lg font-bold hover:text-black hover:bg-[#F6F8D5] transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
+          >
             Repair Now
           </Link>
-
           {/* Sidebar for mobile */}
           <div className="sm:hidden flex justify-end items-center">
             <FontAwesomeIcon
@@ -186,7 +192,10 @@ const Navbar = () => {
                     >
                       {nav.title}
                       {nav.id === "service" && (
-                        <FontAwesomeIcon icon={faChevronDown} className="ml-2" />
+                        <FontAwesomeIcon
+                          icon={faChevronDown}
+                          className="ml-2"
+                        />
                       )}
                       {active === nav.title && (
                         <span className="absolute -bottom-2 left-0 w-full h-[3px] bg-white"></span>

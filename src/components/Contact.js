@@ -33,7 +33,7 @@ const Contact = () => {
 
     try {
       const response = await axios.post(
-        'https://phonespotbackend.blacktechcorp.com/api/message', 
+        'https://backend.phonespotmd.com/api/message', 
         {
           name: formData.name,
           email: formData.email,
