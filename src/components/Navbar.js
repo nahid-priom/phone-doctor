@@ -5,10 +5,10 @@ import {
   faBars,
   faTimes,
   faChevronDown,
+  faTools,
+  faPhoneAlt,
 } from "@fortawesome/free-solid-svg-icons";
-
 import axios from "axios";
-
 import logo from "../assets/logo.png";
 
 export const navLinks = [
@@ -24,38 +24,30 @@ const Navbar = () => {
   const [active, setActive] = useState("");
   const [toggle, setToggle] = useState(false);
   const [serviceDropdownOpen, setServiceDropdownOpen] = useState(false);
-  const [navbarShadow, setNavbarShadow] = useState(false);
+  const [navbarScrolled, setNavbarScrolled] = useState(false);
 
   useEffect(() => {
     const fetchCategories = async () => {
       try {
         const response = await axios.get("https://backend.phonespotmd.com/api");
-
         const fetchedCategories = response.data.categories.map((category) => ({
           name: category.name,
           slug: category.slug,
           image: `https://backend.phonespotmd.com/${category.image}`,
           shortDescription: category.short_description,
         }));
-
         setCategories(fetchedCategories);
       } catch (error) {
         console.error("Error fetching categories:", error);
       }
     };
-
     fetchCategories();
   }, []);
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 50) {
-        setNavbarShadow(true);
-      } else {
-        setNavbarShadow(false);
-      }
+      setNavbarScrolled(window.scrollY > 50);
     };
-
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -63,180 +55,236 @@ const Navbar = () => {
   useEffect(() => {
     const currentPath = location.pathname.split("/")[1];
     const currentNav = navLinks.find((nav) => nav.id === currentPath);
-    if (currentNav) {
-      setActive(currentNav.title);
-    } else {
-      setActive("Home");
-    }
+    setActive(currentNav ? currentNav.title : "Home");
   }, [location]);
 
   return (
-    <section>
+    <header className="fixed w-full z-50">
+      {/* Top Contact Bar */}
+      <div className="bg-red-900 text-white text-sm py-2 px-4 hidden sm:block">
+        <div className="container mx-auto flex justify-between items-center">
+          <div className="flex items-center space-x-4">
+            <span className="flex items-center">
+              <FontAwesomeIcon icon={faPhoneAlt} className="mr-2" />
+              <a href="tel:+1234567890">Call: +1 (234) 567-890</a>
+            </span>
+            <span>Mon-Fri: 9AM - 6PM | Sat-Sun: 10AM - 4PM</span>
+          </div>
+          <div className="flex space-x-4">
+            <a href="#" className="hover:text-gray-300 transition">FAQ</a>
+            <a href="#" className="hover:text-gray-300 transition">Track Repair</a>
+          </div>
+        </div>
+      </div>
+
       {/* Main Navbar */}
       <nav
-        className={`fixed top-0 left-0 right-0 z-50  transition-all duration-300 ${
-          navbarShadow ? "pt-4 lg:pt-0 shadow-2xl bg-[#003649]" : ""
+        className={`transition-all duration-300 ${
+          navbarScrolled
+            ? "bg-red-50 shadow-lg py-2"
+            : "bg-transparent py-4"
         }`}
       >
-        <div className="container bg-transparent px-4 lg:px-0 mx-auto flex py-3 justify-between items-center">
-          <Link to={"/"}>
+        <div className="container mx-auto px-6 lg:px-0 flex justify-between items-center">
+          <Link to="/" className="flex items-center">
             <img
               src={logo}
-              alt="Logo"
-              className="w-[120px] h-[60px] lg:w-[200px] lg:h-[100px]"
+              alt="Phone Doctor Logo"
+              className={`transition-all duration-300 ${
+                navbarScrolled ? "h-16" : "h-20"
+              }`}
             />
+           
           </Link>
 
-          <ul className="list-none sm:flex hidden justify-center items-center">
-            {navLinks.map((nav, index) => (
-              <li
-                key={nav.id}
-                className={`font-poppins font-bold cursor-pointer text-[16px] relative ${
-                  active === nav.title ? "text-purple-600" : "text-gray-100"
-                } ${index === navLinks.length - 1 ? "mr-0" : "mr-10"}`}
-                onMouseEnter={() =>
-                  nav.id === "service" && setServiceDropdownOpen(true)
-                }
-                onMouseLeave={() =>
-                  nav.id === "service" && setServiceDropdownOpen(false)
-                }
-                onClick={() => setActive(nav.title)}
-              >
-                <Link
-                  className="text-lg relative hover:text-purple-600 transition-all duration-300"
-                  to={`/${nav.id}`}
+          {/* Desktop Navigation */}
+          <div className="hidden md:flex items-center space-x-8">
+            <ul className="flex space-x-8">
+              {navLinks.map((nav) => (
+                <li
+                  key={nav.id}
+                  className="relative group"
+                  onMouseEnter={() =>
+                    nav.id === "service" && setServiceDropdownOpen(true)
+                  }
+                  onMouseLeave={() =>
+                    nav.id === "service" && setServiceDropdownOpen(false)
+                  }
                 >
-                  {nav.title}
-                  {nav.id === "service" && (
-                    <FontAwesomeIcon
-                      icon={faChevronDown}
-                      className="ml-2 transition-transform duration-300"
-                    />
-                  )}
-                  {active === nav.title && (
-                    <span className="absolute bottom-[-2px] left-0 w-full h-[2px] bg-purple-600 animate-underline"></span>
-                  )}
-                </Link>
-                {nav.id === "service" && serviceDropdownOpen && (
-                  <ul className="absolute top-full left-0 w-48 bg-white shadow-lg rounded-md z-10 overflow-hidden">
-                    {categories.map((category) => (
-                      <li
-                        key={category.name}
-                        className="relative hover:bg-purple-600 border-b border-purple-100 p-4 hover:text-white transition-all duration-300"
-                      >
+                  <Link
+                    to={`/${nav.id}`}
+                    className={`flex items-center py-2 px-1 font-medium transition ${
+                      active === nav.title
+                        ? "text-red-600"
+                        : navbarScrolled
+                        ? "text-gray-800 hover:text-red-800"
+                        : "text-gray-800 hover:text-red-800"
+                    }`}
+                    onClick={() => setActive(nav.title)}
+                  >
+                    {nav.title}
+                    {nav.id === "service" && (
+                      <FontAwesomeIcon
+                        icon={faChevronDown}
+                        className="ml-2 text-xs transition-transform"
+                      />
+                    )}
+                  </Link>
+                  {nav.id === "service" && serviceDropdownOpen && (
+                    <div className="absolute left-0 mt-0 w-56 bg-white shadow-xl rounded-md z-50 overflow-hidden">
+                      {categories.map((category) => (
                         <Link
+                          key={category.name}
                           to={`/service/${category.slug}`}
-                          className="flex items-center w-full"
+                          className="flex items-center px-4 py-3 border-b border-red-700 hover:bg-red-800 hover:text-white transition"
                         >
                           <img
                             src={category.image}
                             alt={category.name}
-                            className="w-8 h-8 mr-2 rounded-full"
+                            className="w-8 h-8 mr-3 rounded-full object-contain"
                           />
-                          <span className="text-gray-800 hover:text-white transition-all duration-300">
-                            {category.name}
-                          </span>
+                          <div>
+                            <p className="font-medium">{category.name}</p>
+                            
+                          </div>
                         </Link>
-                      </li>
-                    ))}
-                  </ul>
-                )}
-              </li>
-            ))}
-          </ul>
-          <Link
-            to="/service"
-            className="bg-[#FFAB5B] px-6 py-2 rounded-lg text-lg font-bold hover:text-black hover:bg-[#F6F8D5] transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
-          >
-            Repair Now
-          </Link>
-          {/* Sidebar for mobile */}
-          <div className="sm:hidden flex justify-end items-center">
-            <FontAwesomeIcon
-              icon={toggle ? faTimes : faBars}
-              className="w-[28px] h-[28px] pr-4 text-black cursor-pointer"
-              onClick={() => setToggle((prev) => !prev)}
-            />
-            <div
-              className={`fixed top-0 right-0 h-full w-[250px] rounded-bl-2xl bg-black p-6 z-50 transition-transform duration-300 ${
-                toggle ? "translate-x-0" : "translate-x-full"
+                      ))}
+                    </div>
+                  )}
+                </li>
+              ))}
+            </ul>
+
+            <Link
+              to="/service"
+              className={`flex items-center px-6 py-3 rounded-lg font-bold transition-all duration-300 ${
+                navbarScrolled
+                  ? "bg-red-900 text-white hover:bg-red-100 hover:text-red-800"
+                  : "bg-red-800 text-white hover:bg-red-100 hover:text-red-800"
               }`}
             >
-              <div className="absolute top-6 right-6">
-                <FontAwesomeIcon
-                  icon={faTimes}
-                  className="w-[32px] h-[32px] text-white cursor-pointer"
-                  onClick={() => setToggle(false)}
+              <FontAwesomeIcon icon={faTools} className="mr-2" />
+              Repair Now
+            </Link>
+          </div>
+
+          {/* Mobile Navigation */}
+          <div className="md:hidden flex items-center">
+            <button
+              onClick={() => setToggle(!toggle)}
+              className="flex items-center text-red-950 focus:outline-none"
+            >
+              <FontAwesomeIcon
+                icon={toggle ? faTimes : faBars}
+                className="w-6 h-6 mr-2"
+              />
+              <span className="font-medium">MENU</span>
+            </button>
+          </div>
+        </div>
+
+        {/* Mobile Menu */}
+        <div
+          className={`md:hidden fixed inset-0 bg-black bg-opacity-75 z-40 transition-opacity duration-300 ${
+            toggle ? "opacity-100 visible" : "opacity-0 invisible"
+          }`}
+          onClick={() => setToggle(false)}
+        >
+          <div
+            className={`absolute top-0 right-0 h-full w-4/5 max-w-sm bg-white transform transition-transform duration-300 ${
+              toggle ? "translate-x-0" : "translate-x-full"
+            }`}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="flex flex-col h-full">
+              <div className="flex justify-between items-center p-4 border-b">
+                <img
+                  src={logo}
+                  alt="Phone Doctor Logo"
+                  className="h-12"
                 />
+                <button
+                  onClick={() => setToggle(false)}
+                  className="text-gray-500 hover:text-red-700"
+                >
+                  <FontAwesomeIcon icon={faTimes} className="w-6 h-6" />
+                </button>
               </div>
-              <ul className="list-none flex flex-col justify-start items-center h-auto space-y-6 mt-20">
-                {navLinks.map((nav) => (
-                  <li
-                    key={nav.id}
-                    className={`font-poppins font-medium cursor-pointer text-[18px] relative ${
-                      active === nav.title ? "text-red-500" : "text-dimWhite"
-                    }`}
-                    onClick={() => {
-                      if (nav.id === "service") {
-                        setServiceDropdownOpen((prev) => !prev);
-                      } else {
-                        setActive(nav.title);
-                        setToggle(false);
-                      }
-                    }}
-                  >
-                    <Link
-                      to={nav.id === "service" ? "#" : `/${nav.id}`}
-                      className="relative text-xl flex items-center"
-                      onClick={() => nav.id !== "service" && setToggle(false)}
-                    >
-                      {nav.title}
-                      {nav.id === "service" && (
-                        <FontAwesomeIcon
-                          icon={faChevronDown}
-                          className="ml-2"
-                        />
+
+              <div className="flex-grow overflow-y-auto p-4">
+                <ul className="space-y-4">
+                  {navLinks.map((nav) => (
+                    <li key={nav.id}>
+                      <div
+                        className={`flex justify-between items-center p-3 rounded-lg ${
+                          active === nav.title
+                            ? "bg-red-100 text-red-700"
+                            : "text-gray-800 hover:bg-gray-100"
+                        }`}
+                        onClick={() => {
+                          if (nav.id !== "service") {
+                            setActive(nav.title);
+                            setToggle(false);
+                          } else {
+                            setServiceDropdownOpen(!serviceDropdownOpen);
+                          }
+                        }}
+                      >
+                        <Link
+                          to={nav.id === "service" ? "#" : `/${nav.id}`}
+                          className="font-medium"
+                        >
+                          {nav.title}
+                        </Link>
+                        {nav.id === "service" && (
+                          <FontAwesomeIcon
+                            icon={faChevronDown}
+                            className={`transition-transform ${
+                              serviceDropdownOpen ? "transform rotate-180" : ""
+                            }`}
+                          />
+                        )}
+                      </div>
+                      {nav.id === "service" && serviceDropdownOpen && (
+                        <ul className="ml-4 mt-2 space-y-2">
+                          {categories.map((category) => (
+                            <li key={category.name}>
+                              <Link
+                                to={`/service/${category.slug}`}
+                                className="flex items-center p-2 rounded hover:bg-red-50"
+                                onClick={() => setToggle(false)}
+                              >
+                                <img
+                                  src={category.image}
+                                  alt={category.name}
+                                  className="w-8 h-8 mr-3 rounded-full"
+                                />
+                                <span>{category.name}</span>
+                              </Link>
+                            </li>
+                          ))}
+                        </ul>
                       )}
-                      {active === nav.title && (
-                        <span className="absolute -bottom-2 left-0 w-full h-[3px] bg-white"></span>
-                      )}
-                    </Link>
-                    {nav.id === "service" && serviceDropdownOpen && (
-                      <ul className="ml-4 bg-white p-2 rounded-xl hover:bg-red-500 mt-2">
-                        {categories.map((category) => (
-                          <li
-                            key={category.name}
-                            className="flex items-center py-2 border-b border-red-400 cursor-pointer"
-                          >
-                            <Link
-                              to={`/service/${category.slug}`}
-                              className="flex items-center w-full"
-                              onClick={() => {
-                                setToggle(false);
-                                setServiceDropdownOpen(false);
-                              }}
-                            >
-                              <img
-                                src={category.image}
-                                alt={category.name}
-                                className="w-8 h-8 mr-2"
-                              />
-                              <span className="text-black hover:text-white w-full p-1 rounded">
-                                {category.name}
-                              </span>
-                            </Link>
-                          </li>
-                        ))}
-                      </ul>
-                    )}
-                  </li>
-                ))}
-              </ul>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <div className="p-4 border-t">
+                <Link
+                  to="/service"
+                  className="flex items-center justify-center bg-red-700 text-white py-3 px-6 rounded-lg font-bold"
+                  onClick={() => setToggle(false)}
+                >
+                  <FontAwesomeIcon icon={faTools} className="mr-2" />
+                  Repair Now
+                </Link>
+              </div>
             </div>
           </div>
         </div>
       </nav>
-    </section>
+    </header>
   );
 };
 

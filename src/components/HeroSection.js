@@ -1,142 +1,226 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
-import bgImage from "../assets/bgImage.png"; 
-import device from "../assets/device.png"; 
-
+import { motion, AnimatePresence } from "framer-motion";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faMobileScreen, faBatteryFull, faPlug } from "@fortawesome/free-solid-svg-icons";
+import bgImage from "../assets/bgImage.png";
+import screenRepair from "../assets/screen.jpg";
+import batteryReplacement from "../assets/battery.webp";
+import chargingPort from "../assets/charger.webp";
 
 const HeroSection = () => {
-  const [sliderData, setSliderData] = useState(null);
-  const leftContentRef = useRef(null);
-  const imageRef = useRef(null);
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [touchStart, setTouchStart] = useState(null);
+  const [touchEnd, setTouchEnd] = useState(null);
+  const [isAnimating, setIsAnimating] = useState(false);
+  const sliderRef = useRef(null);
+  
+  const minSwipeDistance = 50;
+
+  const services = [
+    {
+      id: 1,
+      title: "Cracked Screen Repair",
+      subtitle: "Fast & Professional Service",
+      description: "We replace damaged screens with high-quality parts and offer same-day service for most devices",
+      image: screenRepair,
+      icon: faMobileScreen,
+      cta: "Get a Quote",
+      link: "/screen-repair",
+      bgColor: "bg-red-700"
+    },
+    {
+      id: 2,
+      title: "Battery Replacement",
+      subtitle: "Restore Your Battery Life",
+      description: "Is your phone dying too quickly? We use premium batteries with warranty to get you back to full power",
+      image: batteryReplacement,
+      icon: faBatteryFull,
+      cta: "Check Prices",
+      link: "/battery-replacement",
+      bgColor: "bg-red-700"
+    },
+    {
+      id: 3,
+      title: "Charging Port Repair",
+      subtitle: "Fix Your Charging Issues",
+      description: "Struggling with loose connections or slow charging? Our experts can repair or replace your charging port",
+      image: chargingPort,
+      icon: faPlug,
+      cta: "Book Repair",
+      link: "/charging-port-repair",
+      bgColor: "bg-red-700"
+    }
+  ];
+
+  const goToNextSlide = () => {
+    if (isAnimating) return;
+    setIsAnimating(true);
+    setCurrentSlide((prev) => (prev + 1) % services.length);
+  };
+
+  const goToPrevSlide = () => {
+    if (isAnimating) return;
+    setIsAnimating(true);
+    setCurrentSlide((prev) => (prev - 1 + services.length) % services.length);
+  };
+
+  const goToSlide = (index) => {
+    if (isAnimating || currentSlide === index) return;
+    setIsAnimating(true);
+    setCurrentSlide(index);
+  };
+
+  const onTouchStart = (e) => {
+    if (isAnimating) return;
+    setTouchEnd(null);
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const onTouchMove = (e) => {
+    if (!touchStart || isAnimating) return;
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
+
+  const onTouchEnd = () => {
+    if (!touchStart || !touchEnd || isAnimating) return;
+    const distance = touchStart - touchEnd;
+    const isLeftSwipe = distance > minSwipeDistance;
+    const isRightSwipe = distance < -minSwipeDistance;
+
+    if (isLeftSwipe) {
+      goToNextSlide();
+    } else if (isRightSwipe) {
+      goToPrevSlide();
+    }
+  };
 
   useEffect(() => {
-    const fetchSliderData = async () => {
-      const cachedSliderData = localStorage.getItem("sliderData");
-
-      if (cachedSliderData) {
-        setSliderData(JSON.parse(cachedSliderData));
-      } else {
-        try {
-          const response = await fetch("https://backend.phonespotmd.com/api");
-          const data = await response.json();
-          setSliderData(data.slider);
-          localStorage.setItem("sliderData", JSON.stringify(data.slider));
-        } catch (error) {
-          console.error("Error fetching slider data:", error);
-        }
-      }
-    };
-
-    fetchSliderData();
-  }, []);
-
-  useEffect(() => {
-    const handleScrollAnimation = (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.style.transform = "translateX(0)";
-          entry.target.style.opacity = "1";
-        }
-      });
-    };
-
-    const observer = new IntersectionObserver(handleScrollAnimation, {
-      threshold: 0.5,
-    });
-
-    const leftContentElement = leftContentRef.current;
-    const imageElement = imageRef.current;
-
-    if (leftContentElement) {
-      observer.observe(leftContentElement);
-    }
-
-    if (imageElement) {
-      observer.observe(imageElement);
-    }
-
-    return () => {
-      if (leftContentElement) {
-        observer.unobserve(leftContentElement);
-      }
-      if (imageElement) {
-        observer.unobserve(imageElement);
-      }
-    };
-  }, []);
+    const interval = setInterval(() => {
+      goToNextSlide();
+    }, 5000);
+    return () => clearInterval(interval);
+  }, [isAnimating]);
 
   return (
-    <section
-      className="relative py-10 pt-36 lg:pt-24 pb-6 lg:pb-32"
+    <section 
+      className="relative pt-24 overflow-hidden min-h-[650px] md:min-h-[700px] flex items-center"
       style={{
-        backgroundImage: `url(${bgImage})`, // Apply the background image
+        backgroundImage: `url(${bgImage})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
       }}
     >
-      <div className="container mx-auto text-gray-600 gap-x-12 items-center justify-center overflow-hidden flex flex-col lg:flex-row">
-        {/* Left Content */}
-        <div
-          ref={leftContentRef}
-          className="flex-none space-y-8 px-4 sm:max-w-lg md:px-0 lg:max-w-xl opacity-0 transform -translate-x-20 transition-all duration-1000"
-        >
-          <h1 className="text-base text-center md:text-start text-[#F6F8D5] font-medium">
-          Experiencing issues with your device?
-            <br />
-            <span className="text-[#FFAB5B] text-lg font-bold">
-            Your Solution Starts Here!
-            </span>
-          </h1>
-          <h2 className="text-3xl px-2 lg:px-0 lg:text-4xl text-center md:text-start text-[#F6F8D5] font-extrabold md:text-5xl">
-          Your Trusted Repair Experts Nearby
-            {/* {sliderData?.title_one} */}
-          </h2>
-          <p className="text-center md:text-start px-2 lg:px-0 text-gray-300">
-          Quick, dependable repairs for all your devices, big or small.
-            {/* {sliderData?.title_two} */}
-          </p>
-          <div className="items-center gap-x-3 justify-center lg:justify-start flex sm:space-y-0">
-            <Link
-              to="/service"
-              className="block py-2 px-4 text-center text-[#003649] font-medium bg-[#FFAB5B] border border-[#98D2C0] hover:text-black duration-150 hover:bg-[#98D2C0] rounded-lg shadow-lg hover:shadow-none"
+      <div className="container mx-auto px-4 flex flex-col lg:flex-row items-center gap-8 py-12 md:py-16">
+        {/* Text Content */}
+        <div className="lg:w-1/2 space-y-6 text-center lg:text-left">
+          <AnimatePresence mode="wait" onExitComplete={() => setIsAnimating(false)}>
+            <motion.div
+              key={currentSlide}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.5 }}
             >
-              Get Started
+              <div className="flex items-center justify-center lg:justify-start mb-4">
+                <div className={`p-3 rounded-full ${services[currentSlide].bgColor} text-white mr-3`}>
+                  <FontAwesomeIcon icon={services[currentSlide].icon} className="text-xl" />
+                </div>
+                <p className="text-lg md:text-xl text-red-700 font-medium">
+                  {services[currentSlide].subtitle}
+                </p>
+              </div>
+              <h1 className="text-3xl md:text-5xl font-bold text-gray-900 mb-4">
+                {services[currentSlide].title}
+              </h1>
+              <p className="text-gray-600 text-lg mb-6">
+                {services[currentSlide].description}
+              </p>
+            </motion.div>
+          </AnimatePresence>
+
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.3 }}
+            className="flex gap-4 justify-center lg:justify-start"
+          >
+            <Link
+              to={services[currentSlide].link}
+              className="px-6 py-3 bg-red-900 hover:bg-red-700 text-white font-semibold rounded-lg transition duration-300 shadow-lg hover:shadow-red-700/50"
+            >
+              {services[currentSlide].cta}
             </Link>
             <Link
-              to="/contact"
-              className="flex items-center justify-center gap-x-2 py-2 px-4 bg-[#F6F8D5] text-black hover:text-[#F6F8D5] hover:bg-purple-500 font-medium duration-150 active:bg-gray-100 border rounded-lg md:inline-flex"
+              to="/services"
+              className="px-6 py-3 border-2 border-red-700 text-red-800 font-semibold rounded-lg hover:bg-white hover:text-red-800 transition duration-300"
             >
-              Contact now
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 20 20"
-                fill="currentColor"
-                className="w-5 h-5"
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M2 10a.75.75 0 01.75-.75h12.59l-2.1-1.95a.75.75 0 111.02-1.1l3.5 3.25a.75.75 0 010 1.1l-3.5 3.25a.75.75 0 11-1.02-1.1l2.1-1.95H2.75A.75.75 0 012 10z"
-                  clipRule="evenodd"
-                />
-              </svg>
+              All Services
             </Link>
-          </div>
+          </motion.div>
         </div>
 
-        {/* Image Content */}
-        <div
-          ref={imageRef}
-          className="flex-none my-6 md:mt-0 mx-auto md:max-w-xl opacity-0 transform translate-x-20 transition-all duration-1000"
+        {/* Image Slider */}
+        <div 
+          className="lg:w-1/2 relative h-[300px] md:h-[400px] w-full"
+          ref={sliderRef}
+          onTouchStart={onTouchStart}
+          onTouchMove={onTouchMove}
+          onTouchEnd={onTouchEnd}
         >
-          {sliderData && (
-            <img
-              // src={`https://backend.phonespotmd.com/${sliderData.image}`}
-              src={device}
-              className="lg:rounded-2xl"
-              alt={sliderData.title_one}
-            />
-          )}
+          <AnimatePresence mode="wait" onExitComplete={() => setIsAnimating(false)}>
+            <motion.div
+              key={currentSlide}
+              initial={{ opacity: 0, x: 100 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -100 }}
+              transition={{ duration: 0.5 }}
+              className="absolute inset-0 rounded-xl overflow-hidden shadow-2xl border-4 border-white"
+            >
+              <img 
+                src={services[currentSlide].image} 
+                alt={services[currentSlide].title}
+                className="w-full h-full object-cover"
+                loading="lazy"
+              />
+              <div className={`absolute bottom-0 left-0 right-0 ${services[currentSlide].bgColor} bg-opacity-90 text-white p-3 text-center`}>
+                <p className="font-bold">{services[currentSlide].title}</p>
+              </div>
+            </motion.div>
+          </AnimatePresence>
+          
+          {/* Navigation Arrows */}
+          <button 
+            onClick={goToPrevSlide}
+            className="absolute left-2 top-1/2 -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full hover:bg-opacity-70 transition z-10"
+            aria-label="Previous slide"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+            </svg>
+          </button>
+          <button 
+            onClick={goToNextSlide}
+            className="absolute right-2 top-1/2 -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full hover:bg-opacity-70 transition z-10"
+            aria-label="Next slide"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+            </svg>
+          </button>
+          
+          {/* Slide Indicators */}
+          <div className="flex justify-center mt-6 space-x-2 absolute -bottom-8 left-0 right-0">
+            {services.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => goToSlide(index)}
+                className={`w-3 h-3 rounded-full transition-all duration-300 ${currentSlide === index ? 'bg-red-600 w-6' : 'bg-gray-400'}`}
+                aria-label={`Go to slide ${index + 1}`}
+              />
+            ))}
+          </div>
         </div>
       </div>
     </section>
