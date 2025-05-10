@@ -3,14 +3,14 @@ import React from 'react';
 
 import HeroSection from "../components/HeroSection";
 import Navbar from "../components/Navbar";
-// import RecentWorkSection from "../components/RecentWork";
-// import ServiceSection from "../components/ServicesSection";
-// import ClientTestimonials from "../components/ClientTestmonials";
+import RecentWorkSection from "../components/RecentWork";
+import ServiceSection from "../components/ServicesSection";
+import ClientTestimonials from "../components/ClientTestmonials";
 import Footer from "../components/Footer";
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-// import CategorySection from '../components/CategorySection';
-// import GoogleMap from "../components/GoogleMap"
+import CategorySection from '../components/CategorySection';
+import GoogleMap from "../components/GoogleMap"
 
 
 const Home = () => {
@@ -59,11 +59,11 @@ const Home = () => {
       <Navbar />
       <HeroSection />
       
-      {/* <CategorySection />
+      <CategorySection />
       <ServiceSection />
       <RecentWorkSection />
       <ClientTestimonials />
-      <GoogleMap /> */}
+      <GoogleMap />
       <Footer />
     </div>
   );

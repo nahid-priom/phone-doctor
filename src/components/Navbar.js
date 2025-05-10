@@ -59,10 +59,10 @@ const Navbar = () => {
   }, [location]);
 
   return (
-    <header className="fixed w-full z-50">
+    <header className="fixed top-0 left-0 right-0 z-50">
       {/* Top Contact Bar */}
       <div className="bg-red-900 text-white text-sm py-2 px-4 hidden sm:block">
-        <div className="container mx-auto flex justify-between items-center">
+        <div className="max-w-7xl mx-auto flex justify-between items-center">
           <div className="flex items-center space-x-4">
             <span className="flex items-center">
               <FontAwesomeIcon icon={faPhoneAlt} className="mr-2" />
@@ -81,11 +81,11 @@ const Navbar = () => {
       <nav
         className={`transition-all duration-300 ${
           navbarScrolled
-            ? "bg-red-50 shadow-lg py-2"
+            ? "bg-red-50 rounded-3xl mx-4 lg:mx-0 shadow-lg py-2 lg:mt-0 mt-8"
             : "bg-transparent py-4"
         }`}
       >
-        <div className="container mx-auto px-6 lg:px-0 flex justify-between items-center">
+        <div className="max-w-7xl mx-auto px-6 lg:px-0 flex justify-between items-center">
           <Link to="/" className="flex items-center">
             <img
               src={logo}
@@ -113,7 +113,7 @@ const Navbar = () => {
                 >
                   <Link
                     to={`/${nav.id}`}
-                    className={`flex items-center py-2 px-1 font-medium transition ${
+                    className={`flex items-center py-2 px-1 font-bold transition ${
                       active === nav.title
                         ? "text-red-600"
                         : navbarScrolled
@@ -131,7 +131,7 @@ const Navbar = () => {
                     )}
                   </Link>
                   {nav.id === "service" && serviceDropdownOpen && (
-                    <div className="absolute left-0 mt-0 w-56 bg-white shadow-xl rounded-md z-50 overflow-hidden">
+                    <div className="absolute left-0 mt-0 w-56 bg-red-50 shadow-xl rounded-md z-50 overflow-hidden">
                       {categories.map((category) => (
                         <Link
                           key={category.name}
@@ -191,7 +191,7 @@ const Navbar = () => {
           onClick={() => setToggle(false)}
         >
           <div
-            className={`absolute top-0 right-0 h-full w-4/5 max-w-sm bg-white transform transition-transform duration-300 ${
+            className={`absolute top-0 right-0 h-full w-4/5 max-w-sm bg-red-50 transform transition-transform duration-300 ${
               toggle ? "translate-x-0" : "translate-x-full"
             }`}
             onClick={(e) => e.stopPropagation()}
@@ -201,7 +201,7 @@ const Navbar = () => {
                 <img
                   src={logo}
                   alt="Phone Doctor Logo"
-                  className="h-12"
+                  className="h-20"
                 />
                 <button
                   onClick={() => setToggle(false)}
