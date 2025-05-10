@@ -5,33 +5,25 @@ import Footer from "./Footer";
 import axios from "axios";
 
 const ChildCategory = () => {
-  const { category, subcategorySlug } = useParams(); 
+  const { category, subcategorySlug } = useParams();
   const [childCategories, setChildCategories] = useState([]);
   const [formattedSubcategory, setFormattedSubcategory] = useState("");
   const [loading, setLoading] = useState(true);
+
   useEffect(() => {
-    const cacheExpiry = 60 * 60 * 1000; 
+    const cacheExpiry = 60 * 60 * 1000;
 
     const fetchChildCategories = async () => {
       setLoading(true);
 
-      const cachedData = localStorage.getItem(
-        `childcategories_${subcategorySlug}`
-      );
-      const cachedTime = localStorage.getItem(
-        `childcategories_time_${subcategorySlug}`
-      );
+      const cachedData = localStorage.getItem(`childcategories_${subcategorySlug}`);
+      const cachedTime = localStorage.getItem(`childcategories_time_${subcategorySlug}`);
 
       if (cachedData && cachedTime && Date.now() - cachedTime < cacheExpiry) {
         const cachedChildCategories = JSON.parse(cachedData);
-
-        const sortedChildCategories = cachedChildCategories.sort(
-          (a, b) => a.serial - b.serial
-        );
+        const sortedChildCategories = cachedChildCategories.sort((a, b) => a.serial - b.serial);
         setChildCategories(sortedChildCategories);
-        setFormattedSubcategory(
-          subcategorySlug.replace(/-/g, " ").toUpperCase()
-        );
+        setFormattedSubcategory(formatSubcategoryName(subcategorySlug));
         setLoading(false);
         return;
       }
@@ -47,9 +39,7 @@ const ChildCategory = () => {
         );
 
         setChildCategories(sortedChildCategories);
-        setFormattedSubcategory(
-          subcategorySlug.replace(/-/g, " ").toUpperCase()
-        );
+        setFormattedSubcategory(formatSubcategoryName(subcategorySlug));
 
         localStorage.setItem(
           `childcategories_${subcategorySlug}`,
@@ -69,64 +59,100 @@ const ChildCategory = () => {
     fetchChildCategories();
   }, [subcategorySlug]);
 
+  const formatSubcategoryName = (slug) => {
+    return slug
+      .replace(/-/g, " ")
+      .replace(/\b\w/g, (char) => char.toUpperCase());
+  };
+
   return (
     <>
       <Navbar />
 
-      <div className="max-w-7xl pt-32 mx-auto p-6">
-        <div className="bg-gradient-to-r from-red-500 to-red-600 p-2 lg:p-6 rounded-lg shadow-lg mb-2 lg:mb-8">
-          <h1 className="text-xl lg:text-4xl font-bold text-white text-center lg:mb-4">
-            {`${formattedSubcategory} Models`}
+      <div className="max-w-7xl lg:pt-48 pt-40 mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        {/* Page Header */}
+        <div className="mb-12 text-center">
+          <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-3">
+            {formattedSubcategory} Models
           </h1>
-          <p className="text-white hidden lg:block text-center max-w-xl mx-auto">
-            Browse through all available models in the {formattedSubcategory}{" "}
-            series.
+          <p className="text-gray-600 max-w-2xl mx-auto">
+            Browse all available models in our {formattedSubcategory} series
           </p>
+          <div className="w-20 h-1 bg-red-800 mx-auto mt-4"></div>
         </div>
 
+        {/* Content Area */}
         {loading ? (
-          <div className="flex justify-center items-center h-40">
-            <div className="loader ease-linear rounded-full border-4 border-t-4 border-gray-200 h-12 w-12 mb-4"></div>
-            <p className="text-gray-500 ml-4">Loading models...</p>
+          <div className="flex justify-center items-center py-20">
+            <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-red-800"></div>
           </div>
         ) : (
-          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-x-2 gap-y-8">
+          <div className="space-y-8">
             {childCategories.length === 0 ? (
-              <p className="text-center text-gray-500">
-                No models available for this series.
-              </p>
-            ) : (
-              childCategories.map((model) => (
-                <div
-                  key={model.name}
-                  className="bg-white p-4 flex flex-col items-center shadow-lg rounded-lg overflow-hidden transform transition duration-300 hover:scale-105 hover:shadow-xl"
+              <div className="text-center py-16 bg-red-50 rounded-lg shadow-sm">
+                <svg
+                  className="mx-auto h-12 w-12 text-gray-400"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
                 >
-                  <Link
-                    to={`/product/${category}/${encodeURIComponent(
-                      model.slug
-                    )}`}
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={1.5}
+                    d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                  />
+                </svg>
+                <h3 className="mt-2 text-lg font-medium text-gray-900">No models found</h3>
+                <p className="mt-1 text-gray-500">
+                  There are currently no models available in this series.
+                </p>
+              </div>
+            ) : (
+              <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+                {childCategories.map((model) => (
+                  <div
+                    key={model.name}
+                    className="bg-red-50 rounded-lg overflow-hidden shadow-sm border border-gray-100 hover:shadow-md transition-shadow duration-300"
                   >
-                    <img
-                      src={`https://backend.phonespotmd.com/${model.image}`}
-                      alt={model.name}
-                      className="w-full my-3 flex justify-center h-36 object-contain"
-                    />
-                    <div className=" flex flex-col items-center gap-2">
-                      <h3 className="text-sm lg:text-base font-semibold text-gray-800 text-center">
-                        {model.name}
-                      </h3>
-                      <Link
-                        to={`/product/${category}/${encodeURIComponent(
-                          model.slug
-                        )}`}
-                        className="bg-red-500 text-sm lg:text-base font-bold text-white px-2 py-1 rounded-full hover:bg-red-600 transition duration-200"
-                      >
-                        View Details
-                      </Link>
-                    </div>
-                  </Link>
-                </div>
-              ))
+                    <Link
+                      to={`/product/${category}/${encodeURIComponent(model.slug)}`}
+                      className="block h-full"
+                    >
+                      <div className="p-6 flex flex-col h-full">
+                        <div className="flex-grow flex items-center justify-center bg-gray-50 rounded p-4 mb-4">
+                          <img
+                            src={`https://backend.phonespotmd.com/${model.image}`}
+                            alt={model.name}
+                            className="h-40 object-cover"
+                            loading="lazy"
+                          />
+                        </div>
+                        <div className="text-center">
+                          <h3 className="text-lg font-semibold text-gray-900 mb-3">
+                            {model.name}
+                          </h3>
+                          <button className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-red-800 hover:bg-red-900 transition-colors duration-200">
+                            View Details
+                            <svg
+                              className="ml-2 -mr-1 w-4 h-4"
+                              fill="currentColor"
+                              viewBox="0 0 20 20"
+                              xmlns="http://www.w3.org/2000/svg"
+                            >
+                              <path
+                                fillRule="evenodd"
+                                d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z"
+                                clipRule="evenodd"
+                              />
+                            </svg>
+                          </button>
+                        </div>
+                      </div>
+                    </Link>
+                  </div>
+                ))}
+              </div>
             )}
           </div>
         )}

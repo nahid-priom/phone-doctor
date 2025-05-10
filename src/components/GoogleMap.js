@@ -19,7 +19,7 @@ const LeafletMapComponent = () => {
      
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="text-center mb-12">
+        <div className="text-center lg:mb-12">
           <span className="inline-block px-4 py-2 bg-red-800 text-white text-sm font-semibold rounded-full mb-4">
             VISIT US
           </span>

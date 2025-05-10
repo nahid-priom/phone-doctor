@@ -81,8 +81,8 @@ const Navbar = () => {
       <nav
         className={`transition-all duration-300 ${
           navbarScrolled
-            ? "bg-red-50 rounded-3xl mx-4 lg:mx-0 shadow-lg py-2 lg:mt-0 mt-8"
-            : "bg-transparent py-4"
+            ? "bg-white ml-1 rounded-b-3xl mx-4 lg:mx-0 shadow-lg py-2 lg:mt-0 mt-8"
+            : "bg-transparent border-b border-gray-300 shadow-lg py-4"
         }`}
       >
         <div className="max-w-7xl mx-auto px-6 lg:px-0 flex justify-between items-center">

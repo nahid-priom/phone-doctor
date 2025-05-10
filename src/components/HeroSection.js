@@ -26,7 +26,7 @@ const HeroSection = () => {
       image: screenRepair,
       icon: faMobileScreen,
       cta: "Get a Quote",
-      link: "/screen-repair",
+      link: "/service",
       bgColor: "bg-red-700"
     },
     {
@@ -37,7 +37,7 @@ const HeroSection = () => {
       image: batteryReplacement,
       icon: faBatteryFull,
       cta: "Check Prices",
-      link: "/battery-replacement",
+      link: "/service",
       bgColor: "bg-red-700"
     },
     {
@@ -48,7 +48,7 @@ const HeroSection = () => {
       image: chargingPort,
       icon: faPlug,
       cta: "Book Repair",
-      link: "/charging-port-repair",
+      link: "/service",
       bgColor: "bg-red-700"
     }
   ];
@@ -153,7 +153,7 @@ const HeroSection = () => {
               {services[currentSlide].cta}
             </Link>
             <Link
-              to="/services"
+              to="/service"
               className="px-6 py-3 border-2 border-red-700 text-red-800 font-semibold rounded-lg hover:bg-white hover:text-red-800 transition duration-300"
             >
               All Services

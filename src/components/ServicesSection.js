@@ -113,7 +113,7 @@ const OurServices = () => {
 
         {/* Services Grid */}
         {loading ? (
-          <div className="flex justify-center items-center h-64">
+          <div className="flex justify-center items-center h-full">
             <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-red-800"></div>
           </div>
         ) : (
@@ -121,7 +121,7 @@ const OurServices = () => {
             {services.map((service, index) => (
               <motion.div
                 key={service.id}
-                initial="hidden"
+                
                 animate={controls}
                 variants={{
                   hidden: { opacity: 0, y: 50 },
@@ -133,7 +133,7 @@ const OurServices = () => {
                 <Link to={`/service/${service.slug || service.id}`}>
                   <div className={`bg-white rounded-xl shadow-lg overflow-hidden h-full flex flex-col border-l-4 ${service.popular ? 'border-red-800' : 'border-transparent'} hover:shadow-xl transition-all duration-300`}>
                     {/* Service Image */}
-                    <div className="relative h-48 overflow-hidden">
+                    <div className="relative h-72 overflow-hidden">
                       <img
                         src={`https://backend.phonespotmd.com/${service.thumb_image}`}
                         alt={service.name}
@@ -194,6 +194,7 @@ const OurServices = () => {
           </div>
         )}
 
+      </div>
         {/* CTA Section */}
         <motion.div
           
@@ -218,7 +219,7 @@ const OurServices = () => {
                 Contact Us
               </Link>
               <Link 
-                to="/services" 
+                to="/service" 
                 className="bg-transparent border-2 border-white hover:bg-red-700 font-semibold py-3 px-8 rounded-lg transition duration-300"
               >
                 View All Services
@@ -226,7 +227,6 @@ const OurServices = () => {
             </div>
           </div>
         </motion.div>
-      </div>
     </section>
   );
 };

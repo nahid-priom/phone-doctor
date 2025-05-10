@@ -108,7 +108,7 @@ const ClientTestimonialsCarousel = () => {
         >
           <Slider {...settings} className="pb-12">
             {testimonials.map((testimonial, index) => (
-              <div key={index} className="px-3 focus:outline-none h-76">
+              <div key={index} className="px-3 focus:outline-none h-[350px] lg:[300px]">
                 <motion.div
                   whileHover={{ y: -10 }}
                   transition={{ duration: 0.3 }}
@@ -155,7 +155,7 @@ const ClientTestimonialsCarousel = () => {
           transition={{ delay: 0.4 }}
           className="text-center mt-12"
         >
-          <a
+          {/* <a
             href="/reviews"
             className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-red-800 bg-white hover:bg-gray-50 shadow-md hover:shadow-lg transition-all duration-300"
           >
@@ -163,7 +163,7 @@ const ClientTestimonialsCarousel = () => {
             <svg className="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
             </svg>
-          </a>
+          </a> */}
         </motion.div>
       </div>
     </section>

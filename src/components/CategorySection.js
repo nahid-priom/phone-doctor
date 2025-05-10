@@ -57,7 +57,7 @@ const CategorySection = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header Section */}
         <motion.div
-          initial="hidden"
+         
           animate={controls}
           variants={{
             hidden: { opacity: 0, y: -50 },
@@ -156,11 +156,11 @@ const CategorySection = () => {
                         MOST POPULAR
                       </span>
                     )}
-                    <div className="flex justify-center items-center h-32">
+                    <div className="flex justify-center items-center h-48">
                       <img
                         src={category.image}
                         alt={category.name}
-                        className="h-full w-auto object-contain transition-transform duration-300 group-hover:scale-110"
+                        className="h-full w-auto object-cover transition-transform duration-300 group-hover:scale-110"
                         onError={(e) => {
                           e.target.src =
                             "https://via.placeholder.com/150?text=Device+Image";

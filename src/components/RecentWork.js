@@ -1,51 +1,65 @@
-import React from 'react';
-import Slider from 'react-slick';
-import { motion } from 'framer-motion';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTools, faCheckCircle, faArrowRight, faClock } from '@fortawesome/free-solid-svg-icons';
+import React from "react";
+import Slider from "react-slick";
+import { motion } from "framer-motion";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faTools,
+  faCheckCircle,
+  faArrowRight,
+  faClock,
+} from "@fortawesome/free-solid-svg-icons";
 
 const RecentWorkCarousel = () => {
   const recentWorks = [
     {
-      title: 'iPhone 13 Pro Screen Replacement',
-      description: 'Replaced the shattered OLED display with genuine Apple parts, restoring full functionality including True Tone and HDR.',
-      image: 'https://9to5mac.com/wp-content/uploads/sites/6/2022/07/M2-MacBook-Air-iFixit-teardown.jpg?quality=82&strip=all',
+      title: "iPhone 13 Pro Screen Replacement",
+      description:
+        "Replaced the shattered OLED display with genuine Apple parts, restoring full functionality including True Tone and HDR.",
+      image:
+        "https://9to5mac.com/wp-content/uploads/sites/6/2022/07/M2-MacBook-Air-iFixit-teardown.jpg?quality=82&strip=all",
       beforeAfter: true,
-      time: '45 minutes',
-      warranty: '180-day warranty'
+      time: "45 minutes",
+      warranty: "180-day warranty",
     },
     {
-      title: 'Samsung Galaxy S22 Ultra Water Damage Repair',
-      description: 'Completely disassembled, cleaned, and replaced damaged components after liquid exposure, saving all user data.',
-      image: 'https://i.ytimg.com/vi/wBx3yANu1TY/maxresdefault.jpg',
+      title: "Samsung Galaxy S22 Ultra Water Damage Repair",
+      description:
+        "Completely disassembled, cleaned, and replaced damaged components after liquid exposure, saving all user data.",
+      image: "https://i.ytimg.com/vi/wBx3yANu1TY/maxresdefault.jpg",
       beforeAfter: true,
-      time: '2 hours',
-      warranty: '90-day warranty'
+      time: "2 hours",
+      warranty: "90-day warranty",
     },
     {
-      title: 'MacBook Pro M1 Logic Board Repair',
-      description: 'Diagnosed and repaired power delivery issues on the logic board, avoiding costly full-board replacement.',
-      image: 'https://images.ctfassets.net/16nm6vz43ids/4BjYhx6G2ghxtSwCANEvB4/e4224d64dcbf42ed75926d1a3f17b455/Samsung_phone_repair.png',
+      title: "MacBook Pro M1 Logic Board Repair",
+      description:
+        "Diagnosed and repaired power delivery issues on the logic board, avoiding costly full-board replacement.",
+      image:
+        "https://images.ctfassets.net/16nm6vz43ids/4BjYhx6G2ghxtSwCANEvB4/e4224d64dcbf42ed75926d1a3f17b455/Samsung_phone_repair.png",
       beforeAfter: false,
-      time: '3 hours',
-      warranty: '1-year warranty'
+      time: "3 hours",
+      warranty: "1-year warranty",
     },
     {
       title: 'iPad Pro 12.9" Battery Replacement',
-      description: 'Carefully replaced the swollen battery without damaging the delicate display assembly.',
-      image: 'https://www.platinumphonerepair.com.au/upload/page/ipad_water_img3.jpg',
+      description:
+        "Carefully replaced the swollen battery without damaging the delicate display assembly.",
+      image:
+        "https://www.platinumphonerepair.com.au/upload/page/ipad_water_img3.jpg",
       beforeAfter: true,
-      time: '1 hour',
-      warranty: '90-day warranty'
+      time: "1 hour",
+      warranty: "90-day warranty",
     },
     {
-      title: 'Google Pixel 6 Pro Charging Port Repair',
-      description: 'Replaced the faulty USB-C port and reinforced the connection to prevent future issues.',
-      image: 'https://9to5mac.com/wp-content/uploads/sites/6/2022/07/M2-MacBook-Air-iFixit-teardown.jpg?quality=82&strip=all',
+      title: "Google Pixel 6 Pro Charging Port Repair",
+      description:
+        "Replaced the faulty USB-C port and reinforced the connection to prevent future issues.",
+      image:
+        "https://9to5mac.com/wp-content/uploads/sites/6/2022/07/M2-MacBook-Air-iFixit-teardown.jpg?quality=82&strip=all",
       beforeAfter: false,
-      time: '30 minutes',
-      warranty: '90-day warranty'
-    }
+      time: "30 minutes",
+      warranty: "90-day warranty",
+    },
   ];
 
   const settings = {
@@ -62,17 +76,17 @@ const RecentWorkCarousel = () => {
         breakpoint: 1280,
         settings: {
           slidesToShow: 2,
-        }
+        },
       },
       {
         breakpoint: 768,
         settings: {
           slidesToShow: 1,
           centerMode: true,
-          centerPadding: '40px'
-        }
-      }
-    ]
+          centerPadding: "40px",
+        },
+      },
+    ],
   };
 
   return (
@@ -88,10 +102,13 @@ const RecentWorkCarousel = () => {
           <span className="inline-block px-4 py-2 bg-red-800 text-white text-sm font-semibold rounded-full mb-4">
             OUR WORK
           </span>
-          <h2 className="text-4xl font-bold text-gray-900 mb-4">Recent Repair Projects</h2>
+          <h2 className="text-4xl font-bold text-gray-900 mb-4">
+            Recent Repair Projects
+          </h2>
           <div className="w-20 h-1 bg-red-800 mx-auto mb-6"></div>
           <p className="max-w-2xl mx-auto text-lg text-gray-600">
-            See real examples of our expert repairs. We document our work to showcase our attention to detail and quality craftsmanship.
+            See real examples of our expert repairs. We document our work to
+            showcase our attention to detail and quality craftsmanship.
           </p>
         </motion.div>
 
@@ -103,7 +120,7 @@ const RecentWorkCarousel = () => {
         >
           <Slider {...settings} className="pb-12">
             {recentWorks.map((work, index) => (
-              <div key={index} className="px-3 focus:outline-none h-full">
+              <div key={index} className="px-3 focus:outline-none h-[560px] lg:h-[520px]">
                 <motion.div
                   whileHover={{ y: -10 }}
                   transition={{ duration: 0.3 }}
@@ -123,27 +140,40 @@ const RecentWorkCarousel = () => {
                   </div>
                   <div className="p-6 flex-grow flex flex-col">
                     <div className="flex items-center mb-3">
-                      <FontAwesomeIcon icon={faTools} className="text-red-800 mr-2" />
-                      <h3 className="text-xl font-bold text-gray-800">{work.title}</h3>
+                      <FontAwesomeIcon
+                        icon={faTools}
+                        className="text-red-800 mr-2"
+                      />
+                      <h3 className="text-xl font-bold text-gray-800">
+                        {work.title}
+                      </h3>
                     </div>
-                    <p className="text-gray-600 h-20 mb-4 flex-grow">{work.description}</p>
-                    
+                    <p className="text-gray-600 mb-4 flex-grow">
+                    {work.description}
+                    </p>
+
                     <div className="flex flex-wrap gap-3 mb-5">
                       <span className="bg-gray-100 text-gray-800 text-xs px-3 py-1 rounded-full flex items-center">
-                        <FontAwesomeIcon icon={faClock} className="mr-1 text-red-800" />
+                        <FontAwesomeIcon
+                          icon={faClock}
+                          className="mr-1 text-red-800"
+                        />
                         {work.time}
                       </span>
                       <span className="bg-gray-100 text-gray-800 text-xs px-3 py-1 rounded-full flex items-center">
-                        <FontAwesomeIcon icon={faCheckCircle} className="mr-1 text-red-800" />
+                        <FontAwesomeIcon
+                          icon={faCheckCircle}
+                          className="mr-1 text-red-800"
+                        />
                         {work.warranty}
                       </span>
                     </div>
-                    
+
                     <button className="w-full flex items-center justify-center bg-red-800 hover:bg-red-700 text-white font-medium py-2 px-4 rounded-lg transition duration-300 group mt-auto">
                       <span>View Case Study</span>
-                      <FontAwesomeIcon 
-                        icon={faArrowRight} 
-                        className="ml-2 transition-transform duration-300 group-hover:translate-x-1" 
+                      <FontAwesomeIcon
+                        icon={faArrowRight}
+                        className="ml-2 transition-transform duration-300 group-hover:translate-x-1"
                       />
                     </button>
                   </div>
@@ -160,13 +190,13 @@ const RecentWorkCarousel = () => {
           transition={{ delay: 0.4 }}
           className="text-center mt-12"
         >
-          <a
+          {/* <a
             href="/gallery"
             className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-red-800 bg-white hover:bg-gray-50 shadow-md hover:shadow-lg transition-all duration-300"
           >
             View Full Repair Gallery
             <FontAwesomeIcon icon={faArrowRight} className="ml-2" />
-          </a>
+          </a> */}
         </motion.div>
       </div>
     </section>

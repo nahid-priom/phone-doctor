@@ -12,7 +12,7 @@ const Service = () => {
         <meta name="description" content="Welcome to the Phone Repair Center. We offer high-quality phone repair services for iPhones, Samsung, and other smartphones. Quick and reliable services." />
       </Helmet>
       <Navbar/>
-      <div className='pt-24'>
+      <div className='pt-28 lg:pt-36'>
       <CategorySection />
       <ServiceSection/>
       </div>

@@ -34,101 +34,108 @@ import CM10 from "../assets/service icons/computer/other.png"
 
 
 
-
-
-
-
-
-
-
-
-const mobileRepairOptions = [
-  { type: "Screen Repair", icon: ScreenRepairIcon },
-  { type: "Battery Replacement", icon: BatterReplacement },
-  { type: "Charger Port Repair", icon: chargerPort },
-  { type: "Water Damage", icon: waterDamage },
-  { type: "Software Update", icon: SoftwareUpdate },
-
-  { type: "Front Camera", icon: FrontCameraIcon },
-  { type: "Rear Camera", icon: RearCameraIcon },
-
-  { type: "Back Glass Replacement", icon: BackGlassIcon },
-  { type: "Not Turning On", icon: NotTurningOn },
-  { type: "Other", icon: Other },
-];
-
-const computerRepairOptions = [
-  { type: "Broken Screen Repair", icon: CM1 },
-  { type: "Battery Fix", icon: CM2 },
-  { type: "Computer Virus Removal", icon: CM3 },
-  { type: "Water Damage Repair", icon: CM4 },
-  { type: "Data Recovery", icon: CM5 },
-  { type: "Hard Drive Repair", icon: CM6 },
-  { type: "Overheating Issue", icon: CM7 },
-  { type: "Password Reset", icon: CM8 },
-  { type: "Software Update", icon: CM9 },
-  { type: "Other", icon: CM10 },
-];
-
-const gamingConsoleRepairOptions = [
-  { type: "Not Turning On", icon: GC1 },
-  { type: "Video Input Issue", icon: GC4 },
-  { type: "Overheating Issue", icon: GC2 },
-  { type: "Software Update", icon: GC3 },
-  { type: "Other", icon: GC5 },
-];
+const serviceOptions = {
+  mobile: [
+    { type: "Screen Repair", icon: ScreenRepairIcon },
+    { type: "Battery Replacement", icon: BatterReplacement },
+    { type: "Charger Port Repair", icon: chargerPort },
+    { type: "Water Damage", icon: waterDamage },
+    { type: "Software Update", icon: SoftwareUpdate },
+    { type: "Front Camera", icon: FrontCameraIcon },
+    { type: "Rear Camera", icon: RearCameraIcon },
+    { type: "Back Glass Replacement", icon: BackGlassIcon },
+    { type: "Not Turning On", icon: NotTurningOn },
+    { type: "Other", icon: Other }
+  ],
+  computer: [
+    { type: "Broken Screen Repair", icon: CM1 },
+    { type: "Battery Fix", icon: CM2 },
+    { type: "Virus Removal", icon: CM3 },
+    { type: "Water Damage Repair", icon: CM4 },
+    { type: "Data Recovery", icon: CM5 },
+    { type: "Hard Drive Repair", icon: CM6 },
+    { type: "Overheating Issue", icon: CM7 },
+    { type: "Password Reset", icon: CM8 },
+    { type: "Software Update", icon: CM9 },
+    { type: "Other", icon: CM10 }
+  ],
+  gamingConsole: [
+    { type: "Not Turning On", icon: GC1 },
+    { type: "Video Input Issue", icon: GC4 },
+    { type: "Overheating Issue", icon: GC2 },
+    { type: "Software Update", icon: GC3 },
+    { type: "Other", icon: GC5 }
+  ]
+};
 
 const ProductDetails = () => {
   const { category, model } = useParams();
 
-  const capitalizeWords = (str) => {
-    return str.replace(/\b\w/g, (char) => char.toUpperCase());
+  const formatText = (text) => {
+    return text
+      .split('-')
+      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(' ');
   };
 
-  let repairOptions;
-  if (category.toLowerCase() === "computer") {
-    repairOptions = computerRepairOptions;
-  } else if (category.toLowerCase() === "gaming-console-") {
-    repairOptions = gamingConsoleRepairOptions;
-  } else {
-    repairOptions = mobileRepairOptions;
-  }
+  const getServiceOptions = () => {
+    switch (category.toLowerCase()) {
+      case "computer":
+        return serviceOptions.computer;
+      case "gaming-console":
+        return serviceOptions.gamingConsole;
+      default:
+        return serviceOptions.mobile;
+    }
+  };
+
+  const formattedModel = formatText(model);
+  const formattedCategory = formatText(category);
 
   return (
     <>
       <Navbar />
-
-      <div className="max-w-7xl pt-32 mx-auto p-6">
-        <div className="bg-gradient-to-r from-red-500 to-red-600 p-2 lg:p-6 rounded-lg shadow-lg mb-4 lg:mb-8">
-          <h1 className="text-xl lg:text-4xl font-bold text-center lg:mb-4">
-            <span className="text-yellow-400 lg:text-4xl text-2xl mr-2 font-extrabold">
-              {capitalizeWords(model)}
-            </span>
-            <span className="text-white lg:text-3xl"> Repair Services</span>
+      
+      <div className="max-w-7xl lg:pt-48 pt-40 mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        {/* Page Header */}
+        <div className="text-center mb-12">
+          <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-3">
+            {formattedModel} <span className="text-red-800">Repair Services</span>
           </h1>
-          <p className="text-white hidden lg:block text-center max-w-xl mx-auto">
-            Choose from a range of repair services for your{" "}
-            <span className="text-yellow-400">{model}</span>.
+          <p className="text-gray-600 max-w-2xl mx-auto">
+            Professional repair services for your {formattedModel} {formattedCategory}
           </p>
+          <div className="w-20 h-1 bg-red-800 mx-auto mt-4"></div>
         </div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-6">
-          {repairOptions.map((option) => (
-            <Link
-              key={option.type}
-              to={`/appointment/${model}/${option.type}`}
-              className="bg-red-100 flex flex-col items-center shadow-lg rounded-lg p-6 transform transition duration-300 hover:scale-105 hover:shadow-xl"
+        {/* Services Grid */}
+        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+          {getServiceOptions().map((service) => (
+            <div 
+              key={service.type}
+              className="bg-red-50 rounded-xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition-shadow duration-300"
             >
-              <div className="text-4xl mb-4">
-                <img className="w-20" src={option.icon} alt={option.type}></img>
-              </div>
-              <h3 className="text-base font-semibold text-gray-800 text-center">
-                {option.type}
-              </h3>
-              <div className="mt-4 bg-red-500 text-white text-base px-4 py-2 rounded-full hover:bg-red-600 transition duration-200">
-                Book Now
-              </div>
-            </Link>
+              <Link
+                to={`/appointment/${model}/${service.type.replace(/\s+/g, '-').toLowerCase()}`}
+                className="block h-full"
+              >
+                <div className="p-6 flex flex-col items-center h-full">
+                  <div className="bg-gray-50 rounded-full p-4 mb-5">
+                    <img 
+                      src={service.icon} 
+                      alt={service.type} 
+                      className="w-16 h-16 object-contain"
+                    />
+                  </div>
+                  <h3 className="text-lg font-semibold text-gray-900 text-center mb-4">
+                    {service.type}
+                  </h3>
+                  <button className="mt-auto w-full bg-red-800 hover:bg-red-900 text-white font-medium py-2 px-4 rounded-lg transition-colors duration-200">
+                    Book Service
+                  </button>
+                </div>
+              </Link>
+            </div>
           ))}
         </div>
       </div>

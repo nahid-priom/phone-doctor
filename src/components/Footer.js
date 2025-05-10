@@ -69,7 +69,7 @@ const Footer = () => {
                 </Link>
               </li>
               <li>
-                <Link to="/services" className="text-gray-400 hover:text-red-500 transition flex items-center">
+                <Link to="/service" className="text-gray-400 hover:text-red-500 transition flex items-center">
                   <FontAwesomeIcon icon={faTools} className="mr-2 w-4" />
                   Services
                 </Link>
